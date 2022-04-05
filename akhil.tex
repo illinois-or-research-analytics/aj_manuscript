@@ -1,0 +1,84 @@
+\documentclass{article}
+\begin{document}
+
+The kmp-clustering pipeline takes as input a network N and values for parameters $k$ and $p$. It then has 4 steps.
+\begin{itemize}
+\item Step 1: IKC(N,k): producing a set of disjoint clusters, each of which is k-valid.
+\item Step 2 (optional). Divide into smaller clusters
+\item Step 3 (optional): augment for periphery
+\item Step 4 (not optional): parse again, making sure to update for kmp-validity
+\end{itemize}
+
+What we propose to do is add a Step 5 that will achieve overlapping clusters. More generally, the Step 5 will be able to be used with
+any input clustering (even if not disjoint) of a network N. And if given values for k and p, will maintain kmp-validity, if desired.
+Furthermore, we have a variant of this Step 5 that will maintain MCD (minimum core degree).
+
+
+\section{Proposed greedy algorithm}
+
+Suppose we have as input a network $N$, values for $k$ and $p$, and a clustering $\mathcal{C}$, and we want to now allow for nodes to be members in more than one cluster.  Thus we want to enhance $\mathcal{C}$ to create a new clustering, but using $\mathcal{C}$ as a starting point.
+Here is a general technique:
+
+\begin{itemize}
+\item Sort the nodes of $N$ according to some criterion (which is referred to as the candidate selection in Akhil's writeup)
+\item Process the nodes in order of this criterion, from best to worst, until a stopping condition applies (could be the size of the resulting 
+clustering, or amount of time that has passed)
+\begin{itemize}
+\item Given node $v$, add $v$ to any cluster in $C \in \mathcal{C}$ where $v$ has at least $k$ neighbors (alternatively, 
+$v$ has at least $MCD(C)$ neighbors) among the core elements of $C$. Potentially, also require that adding $v$ to  $C$ does not
+undo positive modularity.
+\item Consider a variant where we add nodes to clusters based on how many core members cite the nodes, rather than just number of neighbors.
+\end{itemize}
+\end{itemize}
+
+Note: for the first test of the new algorithm, let's not change the center as we augment in the greedy algorithm. 
+
+
+\section{Proposed study}
+We propose to begin with the output of kmp-clustering, run in two different ways, and follow by this greedy algorithm.
+
+\begin{itemize}
+\item Try $k=10$ and $k=20$, and don't even bother with periphery construction (drop Steps 3 and 4).
+\item Run two variants: one where we optimize MCD entirely (and so omit Step 2) and require maintenance of MCD, and the other where we just maintain kmp-validity, and so allow for Step 2.
+
+\end{itemize}
+
+Two stopping conditions to consider.
+\begin{itemize}
+\item For a specified node that is being processed, how many of the clusters to look at? We look at them all.
+\item For which nodes can be put in more than one cluster?  Try the top 1\% in terms of total degree. 
+\end{itemize}
+
+
+
+
+ALso, what do we want to report?
+\begin{itemize}
+\item Total edge coverage
+\item Node coverage
+\item Number of clusters
+\item Number of singletons
+\item What else?
+\end{itemize}
+\end{document}
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+-- INSERT --
