@@ -1,65 +1,139 @@
 \documentclass{article}
+\usepackage[margin=1in]{geometry}
+
 \begin{document}
+\title{Analyzing Overlapping Clustering Methods on Biological Communities }
+
+\abstract{
+Community detection has become an important task in bibliometrics, where the collection of publications connected through citations and references through networks has become the primary data structure by which such analysis can be framed within. A variety of methods have been proposed in detecting such communities, with a focus on clustering algorithms, but there has yet to be an effort to utilize overlapping clustering methods to detect communities within large citation networks. This paper proposes a scalable, overlapping clustering method designed to detect communities, and compares this method to existing overlapping clustering methods as well as to the existing disjoint clustering method proposed in Wedell et al. 
+}
+
+\section{Introduction}
+
+\textbf{ Introduce the Problem of Clustering for Bibliometrics}
+\begin{itemize}
+	\item Trying to identify specific communities from a larger network of publications within an overarching field
+	\item Attempts to solve this problem within the lense of citation networks which means through the connections of publications based on how they cite/reference other publications within their field
+	\item Focal publications can be part of many separate communities like BLAST can and should be part of many smaller communities but disjoint clustering methods leave out this possibility 
+	\item Price and Beaver, Wedell et al mention the impact of a core and periphery structure, for which can we analyze the impact of overlapping clusters on the core structure
+ \end{itemize}
+
+\section{Related Work}
+\textbf{Price and Beaver}
+\begin{itemize}
+	\item 
+\end{itemize}
+\textbf{Wedell et al.}
+\begin{itemize}
+	\item 
+\end{itemize}
+\textbf{Lambiotte and Evans}
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\section{Materials \& Methods}
+\subsection{Data}
+\textbf{Talk about the Original Wedell et al. Dataset}
+\begin{itemize}
+	\item In order to better understand the impact of overlapping clustering methods compared to their disjoint counterparts, we decided to use the same Exosome Citation Network created and utilized in Wedell et al.
+	\item Important to note the SABPQ expansion used to generate this large network which we can compare in size to Zachary's Karate Club dataset when talking about scalability
+\end{itemize}
+
+\textbf{Mention Retraction Correction}
+\begin{itemize}
+	\item Data cleaning and normalization is important in removing unwanted characteristics of a dataset that may confound future results
+	\item Removing publications from the network that had published retractions are important in removing publications that are no longer judged by the research community they were published to to be accurate or merit in their field
+	\item Talk about impact of the retraction correction using RetractionWatch on the Exosome Citation Network
+\end{itemize}
+
+\textbf{Mention High Referencing Correction (JC)}
+\begin{itemize}
+	\item Many publications pushed have extraordinarily large reference counts
+	\item Mention some statistics regarding the reference count of the network
+	\item Decided to prune all publications with greater than 250 references from the network, many publications with $>250$ references have references misattributed and thus can be consider erroneous in the data generation step
+	\item Talk about the impact of the Jakatdar Correction on the Exosome Citation Network 
+\end{itemize}
+
+\subsection{Clustering Methods}
+
+\subsubsection{Line Graph Method}
+
+From Evans and Lambiotte, a method of overlapping clustering was proposed that involves computing the line graph equivalent of a given network and running a disjoint clustering algorithm like Leiden on the resulting line graph. 
+\begin{itemize}
+	\item Step 1: LG(N): produce a network where edges represent nodes, nodes represents edges
+	\item Step 2 Cluster(LG(N)). Run disjoint clustering algorithm on the line graph
+\end{itemize}
+
+Talk about scalability issues of Method
+
+\subsubsection{New Clustering Method}
+
+\textbf{Talk about Four-Stage KMP-Valid Pipeline briefly}
 
 The kmp-clustering pipeline takes as input a network N and values for parameters $k$ and $p$. It then has 4 steps.
 \begin{itemize}
-\item Step 1: IKC(N,k): producing a set of disjoint clusters, each of which is k-valid.
-\item Step 2 (optional). Divide into smaller clusters
-\item Step 3 (optional): augment for periphery
-\item Step 4 (not optional): parse again, making sure to update for kmp-validity
+	\item Step 1: IKC(N,k): producing a set of disjoint clusters, each of which is k-valid.
+	\item Step 2 (optional). Divide into smaller clusters, Recursive Graclus
+	\item Step 3 (optional): Augment for Periphery
+	\item Step 4 (not optional): parse again, making sure to update for kmp-validity
 \end{itemize}
 
-What we propose to do is add a Step 5 that will achieve overlapping clusters. More generally, the Step 5 will be able to be used with
-any input clustering (even if not disjoint) of a network N. And if given values for k and p, will maintain kmp-validity, if desired.
-Furthermore, we have a variant of this Step 5 that will maintain MCD (minimum core degree).
+\textbf{Talk about New Stage 5}
 
+What we propose to do is add a Step 5 that will achieve overlapping clusters. More generally, the Step 5 will be able to be used with any input clustering (even if not disjoint) of a network N. And if given values for k and p, will maintain kmp-validity, if desired. Furthermore, we have a variant of this Step 5 that will maintain MCD (minimum core degree).
 
-\section{Proposed greedy algorithm}
+\textbf{Proposed greedy algorithm}
 
 Suppose we have as input a network $N$, values for $k$ and $p$, and a clustering $\mathcal{C}$, and we want to now allow for nodes to be members in more than one cluster.  Thus we want to enhance $\mathcal{C}$ to create a new clustering, but using $\mathcal{C}$ as a starting point.
 Here is a general technique:
 
 \begin{itemize}
-\item Sort the nodes of $N$ according to some criterion (which is referred to as the candidate selection in Akhil's writeup)
-\item Process the nodes in order of this criterion, from best to worst, until a stopping condition applies (could be the size of the resulting 
-clustering, or amount of time that has passed)
-\begin{itemize}
-\item Given node $v$, add $v$ to any cluster in $C \in \mathcal{C}$ where $v$ has at least $k$ neighbors (alternatively, 
-$v$ has at least $MCD(C)$ neighbors) among the core elements of $C$. Potentially, also require that adding $v$ to  $C$ does not
-undo positive modularity.
-\item Consider a variant where we add nodes to clusters based on how many core members cite the nodes, rather than just number of neighbors.
-\end{itemize}
+	\item Sort the nodes of $N$ according to some criterion (the studies mention in this paper will sort by total degree of the publication in the network)
+	\item Process the nodes in order of this criterion, from best to worst, until a stopping condition applies (could be the size of the resulting clustering, or amount of time that has passed)
+	\begin{itemize}
+		\item Given node $v$, add $v$ to any cluster in $C \in \mathcal{C}$ where $v$ has at least $k$ neighbors (alternatively, 
+		$v$ has at least $MCD(C)$ neighbors) among the core elements of $C$.
+	\end{itemize}
 \end{itemize}
 
-Note: for the first test of the new algorithm, let's not change the center as we augment in the greedy algorithm. 
+In the current version of this algorithm, when we add a node to a cluster, we do not add the node as a core member and thus we only need to iterate over the cluster once to add all nodes
 
 
-\section{Proposed study}
+\textbf{Proposed study}
 We propose to begin with the output of kmp-clustering, run in two different ways, and follow by this greedy algorithm.
 
 \begin{itemize}
-\item Try $k=10$ and $k=20$, and don't even bother with periphery construction (drop Steps 3 and 4).
-\item Run two variants: one where we optimize MCD entirely (and so omit Step 2) and require maintenance of MCD, and the other where we just maintain kmp-validity, and so allow for Step 2.
-
+	\item Try $k=10$ and $k=20$, and don't even bother with periphery construction (drop Steps 3 and 4).
+	\item Run two variants: one where we optimize MCD entirely (and so omit Step 2) and require maintenance of MCD, and the other where we just maintain kmp-validity, and so allow for Step 2.
+	
 \end{itemize}
 
 Two stopping conditions to consider.
 \begin{itemize}
-\item For a specified node that is being processed, how many of the clusters to look at? We look at them all.
-\item For which nodes can be put in more than one cluster?  Try the top 1\% in terms of total degree. 
+	\item For a specified node that is being processed, how many of the clusters to look at? We look at them all.
+	\item For which nodes can be put in more than one cluster?  Try the top 1\% in terms of total degree. 
 \end{itemize}
 
 
+\section{Results \& Discussion}
+
+\subsection{Properties of the citation network}
+
+\subsection{Results of clustering methods}
+
+\subsubsection{Results of Overlapping KMP-Valid Clustering}
+
+\subsubsection{Comparison between Disjoint and Overlapping Clustering Methods}
+
+\subsection{Marker Node Analysis}
+
+\textbf{Question:} Can we run an MDS analysis similar to what was done in Wedell et al?
 
 
-ALso, what do we want to report?
-\begin{itemize}
-\item Total edge coverage
-\item Node coverage
-\item Number of clusters
-\item Number of singletons
-\item What else?
-\end{itemize}
+\section{Conclusions}
+
+
 \end{document}
 ~                                                                               
 ~                                                                               
