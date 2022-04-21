@@ -2,7 +2,9 @@
 \usepackage[margin=1in]{geometry}
 
 \begin{document}
+\author{Akhil Jakatdar, Tandy Warnow, and George Chacko}
 \title{Analyzing Overlapping Clustering Methods on Biological Communities }
+\maketitle{}
 
 \abstract{
 Community detection has become an important task in bibliometrics, where the collection of publications connected through citations and references through networks has become the primary data structure by which such analysis can be framed within. A variety of methods have been proposed in detecting such communities, with a focus on clustering algorithms, but there has yet to be an effort to utilize overlapping clustering methods to detect communities within large citation networks. This paper proposes a scalable, overlapping clustering method designed to detect communities, and compares this method to existing overlapping clustering methods as well as to the existing disjoint clustering method proposed in Wedell et al. 
@@ -10,29 +12,65 @@ Community detection has become an important task in bibliometrics, where the col
 
 \section{Introduction}
 
+
 \textbf{ Introduce the Problem of Clustering for Bibliometrics}
 \begin{itemize}
 	\item Trying to identify specific communities from a larger network of publications within an overarching field
-	\item Attempts to solve this problem within the lense of citation networks which means through the connections of publications based on how they cite/reference other publications within their field
+	\item Attempts to solve this problem within the lensof citation networks which means through the connections of publications based on how they cite/reference other publications within their field
 	\item Focal publications can be part of many separate communities like BLAST can and should be part of many smaller communities but disjoint clustering methods leave out this possibility 
 	\item Price and Beaver, Wedell et al mention the impact of a core and periphery structure, for which can we analyze the impact of overlapping clusters on the core structure
  \end{itemize}
+ 
+ 
+\subsection{Center-periphery communities}
 
-\section{Related Work}
-\textbf{Price and Beaver}
+Discuss Price \& Beaver \cite{price_1966} and anything else that is related to center-periphery structure in communities.
+
+\subsection{kmp-clustering }
+
+
+
+The method from Wedell et al. \cite{wedell2022center} seeks to  cluster a graph into disjoint clusters, each of which 
+exhibits center-periphery structure, as specified by numeric parameters $k$ and $p$ that are provided by the user.
+Specifically, a cluster is said to be $k$-valid if... and $p$-valid if... and $m$-valid if...
+
+
+The kmp-clustering pipeline developed in \cite{wedell2022center}  performs this clustering, based on the user provided values for $k$ and $p$, and has the following four steps: 
 \begin{itemize}
-	\item 
-\end{itemize}
-\textbf{Wedell et al.}
-\begin{itemize}
-	\item 
-\end{itemize}
-\textbf{Lambiotte and Evans}
-\begin{itemize}
-	\item 
+	\item Step 1: IKC(N,k): producing a set of disjoint clusters, each of which is k-valid.
+	\item Step 2 (optional). Divide into smaller clusters, Recursive Graclus
+	\item Step 3 (optional): Augment for Periphery
+	\item Step 4 (not optional): parse again, making sure to update for kmp-validity
 \end{itemize}
 
-\section{Materials \& Methods}
+
+\subsection{Overlapping clustering methods}
+
+Here we summarize the existing methods for overlapping clusters.
+
+\paragraph{Lambiotte and Evans}
+
+\paragraph{Others?}
+
+\section{Study Design}
+\subsection{Overview}
+We have developed a variant of the kmp-clustering method from Wedell et al. \cite{wedell2022center} that is designed to produce overlapping
+clusters.
+We refer to this as Overlapping kmp-clustering, or OKMP for short\footnote{This is an awful name and we should change it!}
+Like kmp-clustering, the user provides values for the parameters $k$ and $p$ and the method is guaranteed to output
+clusters that are $kmp$-valid.
+However, unlike kmp-clustering, we allow nodes to be members of more than one cluster; as a result, the output is a clustering where
+the clusters can be overlapping.
+
+We study OKMP  in comparison to KMP-clustering (which by design produces disjoint clusters). 
+We also compare OKMP to  other methods that are designed to produce overlapping clusters.
+We evaluate methods on two citation networks that we construct, both developed for the Exosome biology research community.
+We report empirical statistics, such as node coverage and edge coverage, and also explore cluster size.
+We specifically explore the number of clusters that each publication belongs to, and evaluate the correlation between
+citation count and cluster membership.
+We examine pairs of overlapping clusters to understand how allowing for multiple memberships provides more insight into community
+structure.
+
 \subsection{Data}
 \textbf{Talk about the Original Wedell et al. Dataset}
 \begin{itemize}
@@ -56,28 +94,10 @@ Community detection has become an important task in bibliometrics, where the col
 \end{itemize}
 
 \subsection{Clustering Methods}
+The main focus of this paper is the new clustering method that we have developed, Overlapping kmp-clustering, which we refer to as OKMP for short.
+We also compare OKMP to other methods, which we describe below.
 
-\subsubsection{Line Graph Method}
-
-From Evans and Lambiotte, a method of overlapping clustering was proposed that involves computing the line graph equivalent of a given network and running a disjoint clustering algorithm like Leiden on the resulting line graph. 
-\begin{itemize}
-	\item Step 1: LG(N): produce a network where edges represent nodes, nodes represents edges
-	\item Step 2 Cluster(LG(N)). Run disjoint clustering algorithm on the line graph
-\end{itemize}
-
-Talk about scalability issues of Method
-
-\subsubsection{New Clustering Method}
-
-\textbf{Talk about Four-Stage KMP-Valid Pipeline briefly}
-
-The kmp-clustering pipeline takes as input a network N and values for parameters $k$ and $p$. It then has 4 steps.
-\begin{itemize}
-	\item Step 1: IKC(N,k): producing a set of disjoint clusters, each of which is k-valid.
-	\item Step 2 (optional). Divide into smaller clusters, Recursive Graclus
-	\item Step 3 (optional): Augment for Periphery
-	\item Step 4 (not optional): parse again, making sure to update for kmp-validity
-\end{itemize}
+\subsubsection{Overlapping kmp-clustering}
 
 \textbf{Talk about New Stage 5}
 
@@ -100,31 +120,73 @@ Here is a general technique:
 In the current version of this algorithm, when we add a node to a cluster, we do not add the node as a core member and thus we only need to iterate over the cluster once to add all nodes
 
 
-\textbf{Proposed study}
-We propose to begin with the output of kmp-clustering, run in two different ways, and follow by this greedy algorithm.
 
+\subsubsection{Line Graph Method}
+
+From Evans and Lambiotte, a method of overlapping clustering was proposed that involves computing the line graph equivalent of a given network and running a disjoint clustering algorithm like Leiden on the resulting line graph. 
 \begin{itemize}
-	\item Try $k=10$ and $k=20$, and don't even bother with periphery construction (drop Steps 3 and 4).
-	\item Run two variants: one where we optimize MCD entirely (and so omit Step 2) and require maintenance of MCD, and the other where we just maintain kmp-validity, and so allow for Step 2.
-	
+	\item Step 1: LG(N): produce a network where edges represent nodes, nodes represents edges
+	\item Step 2 Cluster(LG(N)). Run disjoint clustering algorithm on the line graph
 \end{itemize}
 
-Two stopping conditions to consider.
+Talk about scalability issues of Method
+
+
+
+\subsection{Experiments}
+
+ 
+Recall that OKMP depends on the values for $k$ and $p$, but in this initial experiment we do not 
+consider periphery membership, and so $p$ is irrelevant.
+It also depends on which publications are allowed to be
+put in more than one cluster; for our algorithm, this is mainly based on modifying $N$ where 
+we order the nodes based on total degree and then only allow the top $N$ nodes to be in multiple clusters.
+However, we also have a variant where we process a user-provided set of nodes, which could be all the nodes in a specific cluster, or  all the marker nodes, etc. 
+Finally, OKMP depends on the rule for allowing a node to join a new cluster: do we only enforce k-validity, or do
+we enforce MCD values (where MCD stands for Minimum Cluster Degree)? Here we note the MCD value of a cluster is
+always (by definition) at least $k$, so that enforcing MCD is a stronger requirement, and may result in a node being added to
+fewer clusters.
+
+
 \begin{itemize}
-	\item For a specified node that is being processed, how many of the clusters to look at? We look at them all.
-	\item For which nodes can be put in more than one cluster?  Try the top 1\% in terms of total degree. 
+\item 
+Experiment 0: Characterize step 1 of kmp-processing (i.e., we only do IKC(k)) for $k$ ranging from $10$ to $50$. These will be used
+in subsequent experiments.
+\item Experiment 1:  Look at OKM-clustering for different values of $k$ and for a specific set of nodes for processing. That set of nodes
+will be the top $N$ nodes based on total degree or something else. For this, we only look at enforcing km-validity (not MCD).  Probably we use the top1\% of the nodes in terms of total degree for this set. 
+\item Experiment 2:  Based on experiment 1, we will fix the value for $k$ (to at most two values), and now vary the set of  nodes for processing.
+Here we make some discoveries about this kind of overlapping clustering.
+\item Experiment 3: vary MCD vs k-m-validity to decide differences in sights.
+\item Experiment 4: Take best settings so far, but break up the largest clusters (i.e., add back in the Stage 2 using Recursive Graclus).
+\item Experiment 5: Allow for periphery.
 \end{itemize}
+
+In each experiment, we report:
+\begin{itemize}
+\item Characteristics of the set of nodes that are only in singleton clusters
+\item Node coverage
+\item Edge coverage
+\item Cluster size distributions
+\item Overlap between clusters
+\end{itemize}
+
 
 
 \section{Results \& Discussion}
 
-\subsection{Properties of the citation network}
 
-\subsection{Results of clustering methods}
 
-\subsubsection{Results of Overlapping KMP-Valid Clustering}
+\subsection{Results of Overlapping KMP-clustering}
+Note that OKMP (Overlapping kmp-clustering) depends only on the values for $k$ and $p$, and also on the stopping rule (i.e., which nodes we process and allow to be in multiple clusters). In this first experiment, we explore the impact of changing the value of $k$ and the set of nodes to process.
+We also then consider the impact of allowing for periphery membership.
 
-\subsubsection{Comparison between Disjoint and Overlapping Clustering Methods}
+
+
+\subsection{Comparison between Overlapping kmp- and Disjoint kmp-clustering}
+
+\subsection{Comparison between Overlapping kmp-clustering and Line Graph Clustering}
+
+
 
 \subsection{Marker Node Analysis}
 
@@ -132,6 +194,9 @@ Two stopping conditions to consider.
 
 
 \section{Conclusions}
+\bibliographystyle{plain}
+\bibliography{references,clustering}
+
 
 
 \end{document}
