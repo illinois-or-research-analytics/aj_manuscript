@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[margin=1in]{geometry}
+\usepackage{multirow}
 
 \begin{document}
 \author{Akhil Jakatdar, Tandy Warnow, and George Chacko}
@@ -174,6 +175,42 @@ In each experiment, we report:
 
 \section{Results \& Discussion}
 
+Shown below are the results for experiment 0. Experiment 0 consists of running the original disjoint IKC clustering method for k-values in the range of $\{10, 20, 30, 40, 50\}\}$ as well as the statistics of the clustering that include the number of non-singleton clusters, the number of singleton clusters, the minimum, median and maximum cluster sizes, as well as node and edge coverage of the network as well as the marker node set. 
+
+\begin{center}
+
+	\begin{tabular}{ |p{0.95cm}||p{1.25cm}|p{1.25cm}||p{1.20cm}|p{1.20cm}|p{1.20cm}||p{1.25cm}|p{1.25cm}|| p{1.25cm}|p{1.25cm}||p{0.95cm}| }
+		\hline
+		\multicolumn{11}{|c|}{Experiment 0} \\
+		\hline
+		Method & Number of Non-Singleton Clusters & Number of Singleton Clusters & Minimum Cluster Size &  Median Cluster Size & Maximum Cluster Size & Node Coverage (\%)& Edge Coverage  (\%)& Marker Node Coverage  (\%)& Marker Edge Coverage  (\%) & Elapsed Time \\
+		\hline
+		IKC (k=10)   &  \textbf{128}    & 13454271 &   14 & 79.0 & \textbf{214877} & \textbf{3.83\%} & \textbf{11.8\% }& \textbf{89.5\% }& \textbf{8.33\% }& 26:46.34\\ \hline
+		IKC (k=20)   &  44    & 13713538 &   60 & 246.5 & 170413 & 1.97\% & 8.24\% & 48.4\% & 6.62\% & 26:11.65\\ \hline
+		IKC (k=30)   &  22    & 13901091 &   73 & 361.5 & 36305 & 0.63\% & 3.33\% & 42.1\% & 6.35\% & 25:22.49\\ \hline
+		IKC (k=40)   &  6    & 13952702 &   124 & 1936.5 & 20076 & 0.26\% & 1.61\% & 41.1\% & 6.29\% & 26:01.65\\ \hline
+		IKC (k=50)   &  1    & \textbf{13987432} &   \textbf{2004} & \textbf{2004.0} & 2004 & 0.01\% & 0.11\% & 0.00\% & 0.00\% & 24:46.88\\ \hline
+		\hline
+	\end{tabular}
+\end{center}
+
+Shown below are the results for experiment 1. Experiment 1 consists of running OKMP on the original disjoint IKC clustering method for k-values in the range of $\{10, 20, 30, 40, 50\}\}$ with a candidate selection method of including all publications that fall in the top one percent of nodes by total degree as well as the statistics of the clustering that include the number of non-singleton clusters, the number of singleton clusters, the minimum, median and maximum cluster sizes, as well as node and edge coverage of the network as well as the marker node set. 
+\begin{center}
+	
+	\begin{tabular}{ |p{0.95cm}||p{1.25cm}|p{1.25cm}||p{1.20cm}|p{1.20cm}|p{1.20cm}||p{1.25cm}|p{1.25cm}|| p{1.25cm}|p{1.25cm}||p{0.95cm}| }
+		\hline
+		\multicolumn{11}{|c|}{Experiment 1} \\
+		\hline
+		Method & Number of Non-Singleton Clusters & Number of Singleton Clusters & Minimum Cluster Size &  Median Cluster Size & Maximum Cluster Size & Node Coverage (\%)& Edge Coverage  (\%)& Marker Node Coverage  (\%)& Marker Edge Coverage  (\%) & Elapsed Time (s)\\
+		\hline
+		IKC (k=10)   &  \textbf{128}    & 13446836 &   14 & 85.0 & \textbf{275688} & \textbf{3.88\%} & \textbf{19.1\% }& \textbf{89.5\% }& \textbf{25.3\% }& 73.74\\ \hline
+		IKC (k=20)   &  44    & 13702335 &   61 & 278.0 & 194798 & 2.05\% & 11.3\% & 53.7\% & 14.0\% & 39.84\\ \hline
+		IKC (k=30)   &  22    & 13894563 &   73 & 388.5 & 38260 & 0.68\% & 3.80\% & 46.3\% & 7.66\% & 21.61\\ \hline
+		IKC (k=40)   &  6    & 13951394 &   130 & 2299.0 & 20488 & 0.27\% & 1.70\% & 44.2\% & 6.82\% & 8.05\\ \hline
+		IKC (k=50)   &  1    & \textbf{13987362} &   \textbf{2074} & \textbf{2074.0} & 2074 & 0.01\% & 0.11\% & 0.00\% & 0.00\% & 1.67\\ \hline
+		\hline
+	\end{tabular}
+\end{center}
 
 
 \subsection{Results of Overlapping KMP-clustering}
@@ -219,5 +256,4 @@ We also then consider the impact of allowing for periphery membership.
 ~                                                                               
 ~                                                                               
 ~                                                                               
-~                                                                               
--- INSERT --
+~                                                                            
