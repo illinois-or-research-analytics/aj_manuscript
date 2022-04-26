@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  25 APR 2022 13:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  26 APR 2022 12:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -52,6 +52,17 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks15
 )
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 147.
+
+(/usr/local/texlive/2019/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
 (/usr/local/texlive/2019/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2019/01/01 v2.4 Span multiple rows of a table
 \multirow@colwidth=\skip43
@@ -62,18 +73,18 @@ Package: multirow 2019/01/01 v2.4 Span multiple rows of a table
 (./akhil.aux)
 \openout1 = `akhil.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -109,527 +120,582 @@ LaTeX Font Info:    ... okay on input line 5.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+(/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count92
+\scratchdimen=\dimen112
+\scratchbox=\box27
+\nofMPsegments=\count93
+\nofMParguments=\count94
+\everyMPshowfont=\toks16
+\MPscratchCnt=\count95
+\MPscratchDim=\dimen113
+\MPnumerator=\count96
+\makeMPintoPDFobject=\count97
+\everyMPtoPDFconversion=\toks17
+)
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 8.
+(Font)              <12> on input line 9.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 8.
+(Font)              <8> on input line 9.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 8.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 19.
-(/usr/local/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
+(Font)              <6> on input line 9.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 20.
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 19.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 20.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 35.
+(Font)              <9> on input line 36.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 35.
+(Font)              <5> on input line 36.
  [1
 
 {/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
 
-Overfull \hbox (4.31905pt too wide) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 183--185
+
+ []
+
+
+Overfull \hbox (4.31905pt too wide) in paragraph at lines 196--196
 []\OT1/cmr/m/n/9 Method| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 []\OT1/cmr/m/n/9 Number
  []
 
 
-Underfull \hbox (badness 3942) in paragraph at lines 186--186
+Underfull \hbox (badness 3942) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 of Non-
  []
 
 
-Overfull \hbox (1.95117pt too wide) in paragraph at lines 186--186
+Overfull \hbox (1.95117pt too wide) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 Singleton
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 []\OT1/cmr/m/n/9 Number
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 of Sin-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 gle-ton
  []
 
 
-Overfull \hbox (4.91068pt too wide) in paragraph at lines 186--186
+Overfull \hbox (4.91068pt too wide) in paragraph at lines 196--196
 []\OT1/cmr/m/n/9 Minimum
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 Clus-ter
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 []\OT1/cmr/m/n/9 Median
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 Clus-ter
  []
 
 
-Overfull \hbox (6.70927pt too wide) in paragraph at lines 186--186
+Overfull \hbox (6.70927pt too wide) in paragraph at lines 196--196
 []\OT1/cmr/m/n/9 Maximum
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 Clus-ter
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 []\OT1/cmr/m/n/9 Node
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 Cov-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 er-age
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 []\OT1/cmr/m/n/9 Edge
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 Cov-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 er-age
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 []\OT1/cmr/m/n/9 Marker
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 Node
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 Cov-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 er-age
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 []\OT1/cmr/m/n/9 Marker
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 Edge
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 Cov-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 196--196
 \OT1/cmr/m/n/9 er-age
  []
 
 
-Overfull \hbox (4.4996pt too wide) in paragraph at lines 186--187
+Overfull \hbox (4.4996pt too wide) in paragraph at lines 196--197
 []\OT1/cmr/m/n/9 Elapsed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--188
-[]\OT1/cmr/m/n/9 IKC
- []
-
-
-Overfull \hbox (1.49062pt too wide) in paragraph at lines 188--188
-\OT1/cmr/m/n/9 (k=10)| 
- []
-
-
-Overfull \hbox (1.43382pt too wide) in paragraph at lines 188--188
-[]\OT1/cmr/m/n/9 13454271| 
- []
-
-
-Overfull \hbox (5.85864pt too wide) in paragraph at lines 188--188
-[]\OT1/cmr/m/n/9 26:46.34| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 189--189
-[]\OT1/cmr/m/n/9 IKC
- []
-
-
-Overfull \hbox (1.49062pt too wide) in paragraph at lines 189--189
-\OT1/cmr/m/n/9 (k=20)| 
- []
-
-
-Overfull \hbox (1.43382pt too wide) in paragraph at lines 189--189
-[]\OT1/cmr/m/n/9 13713538| 
- []
-
-
-Overfull \hbox (5.85864pt too wide) in paragraph at lines 189--189
-[]\OT1/cmr/m/n/9 26:11.65| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 190--190
-[]\OT1/cmr/m/n/9 IKC
- []
-
-
-Overfull \hbox (1.49062pt too wide) in paragraph at lines 190--190
-\OT1/cmr/m/n/9 (k=30)| 
- []
-
-
-Overfull \hbox (1.43382pt too wide) in paragraph at lines 190--190
-[]\OT1/cmr/m/n/9 13901091| 
- []
-
-
-Overfull \hbox (5.85864pt too wide) in paragraph at lines 190--190
-[]\OT1/cmr/m/n/9 25:22.49| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 191--191
-[]\OT1/cmr/m/n/9 IKC
- []
-
-
-Overfull \hbox (1.49062pt too wide) in paragraph at lines 191--191
-\OT1/cmr/m/n/9 (k=40)| 
- []
-
-
-Overfull \hbox (1.43382pt too wide) in paragraph at lines 191--191
-[]\OT1/cmr/m/n/9 13952702| 
- []
-
-
-Overfull \hbox (5.85864pt too wide) in paragraph at lines 191--191
-[]\OT1/cmr/m/n/9 26:01.65| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--192
-[]\OT1/cmr/m/n/9 IKC
- []
-
-
-Overfull \hbox (1.49062pt too wide) in paragraph at lines 192--192
-\OT1/cmr/m/n/9 (k=50)| 
- []
-
-
-Overfull \hbox (7.03355pt too wide) in paragraph at lines 192--192
-[]\OT1/cmr/bx/n/9 13987432| 
- []
-
-
-Overfull \hbox (5.85864pt too wide) in paragraph at lines 192--192
-[]\OT1/cmr/m/n/9 24:46.88| 
- []
-
-
-Overfull \hbox (92.13036pt too wide) in paragraph at lines 182--195
- [] 
- []
-
-
-Overfull \hbox (4.31905pt too wide) in paragraph at lines 204--204
-[]\OT1/cmr/m/n/9 Method| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-[]\OT1/cmr/m/n/9 Number
- []
-
-
-Underfull \hbox (badness 3942) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 of Non-
- []
-
-
-Overfull \hbox (1.95117pt too wide) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 Singleton
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-[]\OT1/cmr/m/n/9 Number
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 of Sin-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 gle-ton
- []
-
-
-Overfull \hbox (4.91068pt too wide) in paragraph at lines 204--204
-[]\OT1/cmr/m/n/9 Minimum
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 Clus-ter
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-[]\OT1/cmr/m/n/9 Median
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 Clus-ter
- []
-
-
-Overfull \hbox (6.70927pt too wide) in paragraph at lines 204--204
-[]\OT1/cmr/m/n/9 Maximum
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 Clus-ter
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-[]\OT1/cmr/m/n/9 Node
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 Cov-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 er-age
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-[]\OT1/cmr/m/n/9 Edge
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 Cov-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 er-age
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-[]\OT1/cmr/m/n/9 Marker
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 Node
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 Cov-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 er-age
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-[]\OT1/cmr/m/n/9 Marker
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 Edge
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 Cov-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--204
-\OT1/cmr/m/n/9 er-age
- []
-
-
-Overfull \hbox (4.4996pt too wide) in paragraph at lines 204--205
-[]\OT1/cmr/m/n/9 Elapsed
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 204--205
+Underfull \hbox (badness 10000) in paragraph at lines 196--197
 \OT1/cmr/m/n/9 Time
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--206
+Overfull \hbox (1.79895pt too wide) in paragraph at lines 196--197
+\OT1/cmr/m/n/9 (min:s)| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--198
 []\OT1/cmr/m/n/9 IKC
  []
 
 
-Overfull \hbox (1.49062pt too wide) in paragraph at lines 206--206
+Overfull \hbox (1.49062pt too wide) in paragraph at lines 198--198
 \OT1/cmr/m/n/9 (k=10)| 
  []
 
 
-Overfull \hbox (1.43382pt too wide) in paragraph at lines 206--206
-[]\OT1/cmr/m/n/9 13446836| 
+Overfull \hbox (1.43382pt too wide) in paragraph at lines 198--198
+[]\OT1/cmr/m/n/9 13454271| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--207
+Underfull \hbox (badness 10000) in paragraph at lines 199--199
 []\OT1/cmr/m/n/9 IKC
  []
 
 
-Overfull \hbox (1.49062pt too wide) in paragraph at lines 207--207
+Overfull \hbox (1.49062pt too wide) in paragraph at lines 199--199
 \OT1/cmr/m/n/9 (k=20)| 
  []
 
 
-Overfull \hbox (1.43382pt too wide) in paragraph at lines 207--207
-[]\OT1/cmr/m/n/9 13702335| 
+Overfull \hbox (1.43382pt too wide) in paragraph at lines 199--199
+[]\OT1/cmr/m/n/9 13713538| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 208--208
+Underfull \hbox (badness 10000) in paragraph at lines 200--200
 []\OT1/cmr/m/n/9 IKC
  []
 
 
-Overfull \hbox (1.49062pt too wide) in paragraph at lines 208--208
+Overfull \hbox (1.49062pt too wide) in paragraph at lines 200--200
 \OT1/cmr/m/n/9 (k=30)| 
  []
 
 
-Overfull \hbox (1.43382pt too wide) in paragraph at lines 208--208
-[]\OT1/cmr/m/n/9 13894563| 
+Overfull \hbox (1.43382pt too wide) in paragraph at lines 200--200
+[]\OT1/cmr/m/n/9 13901091| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 209--209
+Underfull \hbox (badness 10000) in paragraph at lines 201--201
 []\OT1/cmr/m/n/9 IKC
  []
 
 
-Overfull \hbox (1.49062pt too wide) in paragraph at lines 209--209
+Overfull \hbox (1.49062pt too wide) in paragraph at lines 201--201
 \OT1/cmr/m/n/9 (k=40)| 
  []
 
 
-Overfull \hbox (1.43382pt too wide) in paragraph at lines 209--209
-[]\OT1/cmr/m/n/9 13951394| 
+Overfull \hbox (1.43382pt too wide) in paragraph at lines 201--201
+[]\OT1/cmr/m/n/9 13952702| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 210--210
+Underfull \hbox (badness 10000) in paragraph at lines 202--202
 []\OT1/cmr/m/n/9 IKC
  []
 
 
-Overfull \hbox (1.49062pt too wide) in paragraph at lines 210--210
+Overfull \hbox (1.49062pt too wide) in paragraph at lines 202--202
 \OT1/cmr/m/n/9 (k=50)| 
  []
 
 
-Overfull \hbox (7.03355pt too wide) in paragraph at lines 210--210
+Overfull \hbox (7.03355pt too wide) in paragraph at lines 202--202
+[]\OT1/cmr/bx/n/9 13987432| 
+ []
+
+
+Overfull \hbox (42.1303pt too wide) in paragraph at lines 192--207
+ [][] 
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 207.
+
+Overfull \hbox (4.31905pt too wide) in paragraph at lines 218--218
+[]\OT1/cmr/m/n/9 Method| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+[]\OT1/cmr/m/n/9 Number
+ []
+
+
+Underfull \hbox (badness 3942) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 of Non-
+ []
+
+
+Overfull \hbox (1.95117pt too wide) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 Singleton
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+[]\OT1/cmr/m/n/9 Number
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 of Sin-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 gle-ton
+ []
+
+
+Overfull \hbox (4.91068pt too wide) in paragraph at lines 218--218
+[]\OT1/cmr/m/n/9 Minimum
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 Clus-ter
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+[]\OT1/cmr/m/n/9 Median
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 Clus-ter
+ []
+
+
+Overfull \hbox (6.70927pt too wide) in paragraph at lines 218--218
+[]\OT1/cmr/m/n/9 Maximum
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 Clus-ter
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+[]\OT1/cmr/m/n/9 Node
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 Cov-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 er-age
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+[]\OT1/cmr/m/n/9 Edge
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 Cov-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 er-age
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+[]\OT1/cmr/m/n/9 Marker
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 Node
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 Cov-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 er-age
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+[]\OT1/cmr/m/n/9 Marker
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 Edge
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 Cov-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--218
+\OT1/cmr/m/n/9 er-age
+ []
+
+
+Overfull \hbox (4.4996pt too wide) in paragraph at lines 218--219
+[]\OT1/cmr/m/n/9 Elapsed
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 218--219
+\OT1/cmr/m/n/9 Time
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+[]\OT1/cmr/m/n/9 IKC
+ []
+
+
+Overfull \hbox (1.49062pt too wide) in paragraph at lines 220--220
+\OT1/cmr/m/n/9 (k=10)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 220--220
+\OT1/cmr/m/n/9 w/
+ []
+
+
+Overfull \hbox (1.43382pt too wide) in paragraph at lines 220--220
+[]\OT1/cmr/m/n/9 13446836| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
+[]\OT1/cmr/m/n/9 IKC
+ []
+
+
+Overfull \hbox (1.49062pt too wide) in paragraph at lines 221--221
+\OT1/cmr/m/n/9 (k=20)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
+\OT1/cmr/m/n/9 w/
+ []
+
+
+Overfull \hbox (1.43382pt too wide) in paragraph at lines 221--221
+[]\OT1/cmr/m/n/9 13702335| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--222
+[]\OT1/cmr/m/n/9 IKC
+ []
+
+
+Overfull \hbox (1.49062pt too wide) in paragraph at lines 222--222
+\OT1/cmr/m/n/9 (k=30)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--222
+\OT1/cmr/m/n/9 w/
+ []
+
+
+Overfull \hbox (1.43382pt too wide) in paragraph at lines 222--222
+[]\OT1/cmr/m/n/9 13894563| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--223
+[]\OT1/cmr/m/n/9 IKC
+ []
+
+
+Overfull \hbox (1.49062pt too wide) in paragraph at lines 223--223
+\OT1/cmr/m/n/9 (k=40)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--223
+\OT1/cmr/m/n/9 w/
+ []
+
+
+Overfull \hbox (1.43382pt too wide) in paragraph at lines 223--223
+[]\OT1/cmr/m/n/9 13951394| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 224--224
+[]\OT1/cmr/m/n/9 IKC
+ []
+
+
+Overfull \hbox (1.49062pt too wide) in paragraph at lines 224--224
+\OT1/cmr/m/n/9 (k=50)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 224--224
+\OT1/cmr/m/n/9 w/
+ []
+
+
+Overfull \hbox (7.03355pt too wide) in paragraph at lines 224--224
 []\OT1/cmr/bx/n/9 13987362| 
  []
 
 
-Overfull \hbox (92.13036pt too wide) in paragraph at lines 200--213
- [] 
+Overfull \hbox (42.1303pt too wide) in paragraph at lines 214--228
+ [][] 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 236--237
+
  []
 
 [4]
-Overfull \hbox (5.85895pt too wide) in paragraph at lines 222--222
+Underfull \hbox (badness 10000) in paragraph at lines 238--239
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 238--239
+
+ []
+
+[5]
+Overfull \hbox (5.85895pt too wide) in paragraph at lines 250--250
 []\OT1/cmr/bx/n/12 Comparison be-tween Over-lap-ping kmp- and Dis-joint kmp-clu
 stering 
  []
 
-(./akhil.bbl) [5] (./akhil.aux) ) 
+(./akhil.bbl) [6] (./akhil.aux) ) 
 Here is how much of TeX's memory you used:
- 846 strings out of 492616
- 11671 string characters out of 6129482
- 99193 words of memory out of 5000000
- 4806 multiletter control sequences out of 15000+600000
+ 1360 strings out of 492616
+ 18579 string characters out of 6129482
+ 110515 words of memory out of 5000000
+ 5305 multiletter control sequences out of 15000+600000
  9460 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 24i,8n,32p,741b,195s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 24i,10n,32p,1417b,281s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2019/texmf-dist/fonts/type
 1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr17.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmr6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmsy9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ti9.pfb>
-Output written on akhil.pdf (5 pages, 163260 bytes).
+blic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr17.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr6.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy9.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+i9.pfb>
+Output written on akhil.pdf (6 pages, 187019 bytes).
 PDF statistics:
- 68 PDF objects out of 1000 (max. 8388607)
- 48 compressed objects within 1 object stream
+ 75 PDF objects out of 1000 (max. 8388607)
+ 53 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
