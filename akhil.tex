@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[margin=1in]{geometry}
+\usepackage{color}
 \usepackage{multirow}
 
 \begin{document}
@@ -171,17 +172,20 @@ In each experiment, we report:
 \item Overlap between clusters
 \end{itemize}
 
+We show various empirical statistics of the clustering,  including the number of non-singleton clusters, the number of singleton clusters, the minimum, median and maximum cluster sizes,  node and edge coverage of the network, and node and edge coverage of the marker node subnetwork.
 
 
 \section{Results \& Discussion}
 
-Shown below are the results for experiment 0. Experiment 0 consists of running the original disjoint IKC clustering method for k-values in the range of $\{10, 20, 30, 40, 50\}\}$ as well as the statistics of the clustering that include the number of non-singleton clusters, the number of singleton clusters, the minimum, median and maximum cluster sizes, as well as node and edge coverage of the network as well as the marker node set. 
+Results for Experiment 0 are shown in Table \ref{table:expt0}. This experiment runs the original disjoint IKC clustering method for k-values in the range of $\{10, 20, 30, 40, 50\}$. 
+%We show various empirical statistics of the clustering,  including the number of non-singleton clusters, the number of singleton clusters, the minimum, median and maximum cluster sizes,  node and edge coverage of the network, and node and edge coverage of the marker node subnetwork.
 
-\begin{center}
-
+\begin{table}[h!]
+\centering
+\begin{small}
 	\begin{tabular}{ |p{0.95cm}||p{1.25cm}|p{1.25cm}||p{1.20cm}|p{1.20cm}|p{1.20cm}||p{1.25cm}|p{1.25cm}|| p{1.25cm}|p{1.25cm}||p{0.95cm}| }
 		\hline
-		\multicolumn{11}{|c|}{Experiment 0} \\
+		\multicolumn{11}{|r|}{Experiment 0} \\
 		\hline
 		Method & Number of Non-Singleton Clusters & Number of Singleton Clusters & Minimum Cluster Size &  Median Cluster Size & Maximum Cluster Size & Node Coverage (\%)& Edge Coverage  (\%)& Marker Node Coverage  (\%)& Marker Edge Coverage  (\%) & Elapsed Time \\
 		\hline
@@ -192,11 +196,15 @@ Shown below are the results for experiment 0. Experiment 0 consists of running t
 		IKC (k=50)   &  1    & \textbf{13987432} &   \textbf{2004} & \textbf{2004.0} & 2004 & 0.01\% & 0.11\% & 0.00\% & 0.00\% & 24:46.88\\ \hline
 		\hline
 	\end{tabular}
-\end{center}
+	\end{small}
+	\caption{Results for Experiment 0. In this experiment we run IKC on different values for $k$ between $10$ and $50$, and we report different
+	empirical statistics. Note that this experiment produces disjoint clustering, and is equivalent to running Stage 1 of the $kmp$-clustering method of Wedell et al. (2022).}
+		\label{table:expt0}
+\end{table}
 
-Shown below are the results for experiment 1. Experiment 1 consists of running OKMP on the original disjoint IKC clustering method for k-values in the range of $\{10, 20, 30, 40, 50\}\}$ with a candidate selection method of including all publications that fall in the top one percent of nodes by total degree as well as the statistics of the clustering that include the number of non-singleton clusters, the number of singleton clusters, the minimum, median and maximum cluster sizes, as well as node and edge coverage of the network as well as the marker node set. 
-\begin{center}
-	
+\begin{table}[h!]
+\centering
+\begin{small}
 	\begin{tabular}{ |p{0.95cm}||p{1.25cm}|p{1.25cm}||p{1.20cm}|p{1.20cm}|p{1.20cm}||p{1.25cm}|p{1.25cm}|| p{1.25cm}|p{1.25cm}||p{0.95cm}| }
 		\hline
 		\multicolumn{11}{|c|}{Experiment 1} \\
@@ -210,7 +218,15 @@ Shown below are the results for experiment 1. Experiment 1 consists of running O
 		IKC (k=50)   &  1    & \textbf{13987362} &   \textbf{2074} & \textbf{2074.0} & 2074 & 0.01\% & 0.11\% & 0.00\% & 0.00\% & 1.67\\ \hline
 		\hline
 	\end{tabular}
-\end{center}
+	\end{small}
+	\caption{Results for Experiment 1. This is the result of running IKC for different values of $k$ and then allowing some nodes to be members in multiple clusters. The set of nodes that are allowed to belong to multiple clusters is the top 1\% of nodes, by total degree. These are placed independently of each other, and so order does not matter.  Membership in a new cluster requires that the added node be adjacent to at least $k$ other nodes in the IKC cluster (thus, newly added nodes do not vote on membership for other new nodes)..}
+	\label{table:expt1}
+\end{table}
+
+Results for Experiment 1 are shown in Table \ref{table:expt1}. This experiment 1 consists of running OKMP on the original disjoint IKC clustering method for k-values in the range of $\{10, 20, 30, 40, 50\}$ with a candidate selection method of  all publications that fall in the top 1\% by total degree.
+
+\vspace{.1in}
+\textcolor{blue}{Akhil: what do you see? Does increase in node coverage make sense at all? For elapsed time, what are the units? In other words, what does 26:46.34 mean? 26 minutes and 46.34 seconds, or is it 26 hours and 46.34 minutes?  And if it is 26 minutes, do we need to have that much precision? Might be enough to say 26m 46s. Finally, look at how I made this into a table in latex. }
 
 
 \subsection{Results of Overlapping KMP-clustering}
