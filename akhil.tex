@@ -2,6 +2,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{color}
 \usepackage{multirow}
+\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
 
 \begin{document}
 \author{Akhil Jakatdar, Tandy Warnow, and George Chacko}
@@ -183,8 +184,7 @@ We show various empirical statistics of the clustering,  including the number of
 We can begin by giving a description of all metrics evaluated in the following two tables. The Number of Non-Singleton Clusters represents the number of clusters generated with at least 2 nodes in the cluster. The number of Singleton Clusters represents the number of nodes not present in any of the non-singleton clusters. The minimum cluster size represents the size of smallest non-singleton cluster generated. Similarly, the median and maximum cluster size represent the size of the median and largest non-singleton cluster generated respectively. Node Coverage is calculated by finding the percentage of nodes found in a non-singleton cluster compared to the total number of nodes in the network. Similarly, edge coverage is calculated by finding the total number of edges found in non-singleton clusters (both endpoint nodes are found in the cluster) compared to the total number of edges found in the network. We can use the same process to define marker node coverage and marker edge coverage. Marker node coverage represents the percentage of marker nodes found in non-singleton clusters compared to the total amount of marker nodes (n=95). Marker edge coverage represents the percentage of all edges that can be found in non-singleton clusters where both endpoint nodes of the edge are in the cluster (with at least one endpoint being a marker node) compared to the total edges of marker nodes. 
 \newline
 
-Results for Experiment 0 are shown in Table \ref{table:expt0}. This experiment runs the original disjoint IKC clustering method for k-values in the range of $\{10, 20, 30, 40, 50\}$. 
-%We show various empirical statistics of the clustering,  including the number of non-singleton clusters, the number of singleton clusters, the minimum, median and maximum cluster sizes,  node and edge coverage of the network, and node and edge coverage of the marker node subnetwork.
+Results for Experiment 0 are shown in Table \ref{table:expt0}. This experiment runs the original disjoint IKC clustering method for k-values in the range of $\{10, 20, 30, 40, 50\}$. We show various empirical statistics of the clustering,  including the number of non-singleton clusters, the number of singleton clusters, the minimum, median and maximum cluster sizes,  node and edge coverage of the network, and node and edge coverage of the marker node subnetwork.
 
 \begin{table}[h!]
 \centering
@@ -217,19 +217,140 @@ Results for Experiment 0 are shown in Table \ref{table:expt0}. This experiment r
 		\hline
 		Method & Number of Non-Singleton Clusters & Number of Singleton Clusters & Minimum Cluster Size &  Median Cluster Size & Maximum Cluster Size & Node Coverage (\%)& Edge Coverage  (\%)& Marker Node Coverage  (\%)& Marker Edge Coverage  (\%) & Elapsed Time (s)\\
 		\hline
-		IKC (k=10) w/ Step 5   &  \textbf{128}    & 13446836 &   14 & 85.0 & \textbf{275688} & \textbf{3.88\%} & \textbf{19.1\% }& \textbf{89.5\% }& \textbf{25.3\% }& 73.74\\ \hline
-		IKC (k=20)  w/ Step 5 &  44    & 13702335 &   61 & 278.0 & 194798 & 2.05\% & 11.3\% & 53.7\% & 14.0\% & 39.84\\ \hline
-		IKC (k=30)  w/ Step 5 &  22    & 13894563 &   73 & 388.5 & 38260 & 0.68\% & 3.80\% & 46.3\% & 7.66\% & 21.61\\ \hline
-		IKC (k=40)  w/ Step 5 &  6    & 13951394 &   130 & 2299.0 & 20488 & 0.27\% & 1.70\% & 44.2\% & 6.82\% & 8.05\\ \hline
-		IKC (k=50) w/ Step 5  &  1    & \textbf{13987362} &   \textbf{2074} & \textbf{2074.0} & 2074 & 0.01\% & 0.11\% & 0.00\% & 0.00\% & 1.67\\ \hline
+		IKC (k=10) w/ Step 5   &  \textbf{128}    & 13446836 &   14 & 85.0 & \textbf{275688} & \textbf{3.88\%} & \textbf{19.1\% }& \textbf{89.5\% }& \textbf{25.3\%} & 39:43\\ \hline
+		IKC (k=20)  w/ Step 5 &  44    & 13702335 &   61 & 278.0 & 194798 & 2.05\% & 11.3\% & 53.7\% & 14.0\% & 29:25\\ \hline
+		IKC (k=30)  w/ Step 5 &  22    & 13894563 &   73 & 388.5 & 38260 & 0.68\% & 3.80\% & 46.3\% & 7.66\% & 28:26\\ \hline
+		IKC (k=40)  w/ Step 5 &  6    & 13951394 &   130 & 2299.0 & 20488 & 0.27\% & 1.70\% & 44.2\% & 6.82\% & 26:59\\ \hline
+		IKC (k=50) w/ Step 5  &  1    & \textbf{13987362} &   \textbf{2074} & \textbf{2074.0} & 2074 & 0.01\% & 0.11\% & 0.00\% & 0.00\% & 25:16\\ \hline
 		\hline
 	\end{tabular}
 	\end{small}
-	\caption{Results for Experiment 1. This is the result of running IKC for different values of $k$ and then allowing some nodes to be members in multiple clusters. The set of nodes that are allowed to belong to multiple clusters is the top 1\% of nodes, by total degree. These are placed independently of each other, and so order does not matter.  Membership in a new cluster requires that the added node be adjacent to at least $k$ other nodes in the IKC cluster (thus, newly added nodes do not vote on membership for other new nodes)..}
+	\caption{Results for Experiment 1. This is the result of running IKC for different values of $k$ and then allowing some nodes to be members in multiple clusters. The set of nodes that are allowed to belong to multiple clusters is the top 1\% of nodes, by total degree. These are placed independently of each other, and so order does not matter.  Membership in a new cluster requires that the added node be adjacent to at least $k$ other nodes in the IKC cluster (thus, newly added nodes do not vote on membership for other new nodes)}
 	\label{table:expt1}
 \end{table}
 
-Results for Experiment 1 are shown in Table \ref{table:expt1}. This experiment 1 consists of running OKMP on the original disjoint IKC clustering method for k-values in the range of $\{10, 20, 30, 40, 50\}$ with a candidate selection method of  all publications that fall in the top 1\% by total degree.
+
+\begin{table}[h!]
+	\centering
+	\begin{small}
+		\begin{tabular}{ |p{0.95cm}||p{1.25cm}|p{1.25cm}||p{1.20cm}|p{1.20cm}|p{1.20cm}||p{1.25cm}|p{1.25cm}|| p{1.25cm}|p{1.25cm}| }
+			\hline
+			\multicolumn{10}{|c|}{Experiment 2 Indegree} \\
+			\hline
+			Method & Number of Non-Singleton Clusters & Number of Singleton Clusters & Minimum Cluster Size &  Median Cluster Size & Maximum Cluster Size & Node Coverage (\%)& Edge Coverage  (\%)& Marker Node Coverage  (\%)& Marker Edge Coverage  (\%)\\
+			\hline
+			IKC (k=20)  w/ Step 5 In-degree $1\%$ &  44    & \cellcolor{blue!20} 13702262 &   61 & \cellcolor{red!20} 280.5 & \cellcolor{blue!20}192690 & 2.05\% & \cellcolor{blue!20}11.0\% & \cellcolor{blue!20}52.6\% & \cellcolor{blue!20}13.6\% \\ \hline
+
+			IKC (k=40)  w/ Step 5 In-degree $1\%$ &  6    & \cellcolor{red!20}13951603 &   \cellcolor{red!20}131 & \cellcolor{red!20}2235.5 & \cellcolor{blue!20}20462 & 0.27\% & \cellcolor{blue!20}1.69\% & \cellcolor{blue!20}42.1\% & \cellcolor{blue!20}6.52\% \\ \hline
+			
+			IKC (k=20)  w/ Step 5 In-degree $5\%$&  44    & \cellcolor{blue!20}13621558 &   61 & \cellcolor{red!20}450.0 & \cellcolor{red!20}229928 & \cellcolor{red!20}2.63\% & \cellcolor{red!20}14.5\% & \cellcolor{red!20}72.6\% & \cellcolor{red!20}17.7\% \\ \hline
+			
+			IKC (k=40)  w/ Step 5 In-degree $5\%$ &  6    & \cellcolor{blue!20}13949455 &   \cellcolor{red!20}139 & \cellcolor{red!20}2645.0 & \cellcolor{red!20}21002 & \cellcolor{red!20}0.29\% & \cellcolor{red!20}1.80\% & \cellcolor{red!20}47.4\% & \cellcolor{red!20}7.29\% \\ \hline
+
+			 \hline
+			\hline
+					\end{tabular}
+		\end{small}
+	\caption{Results for Experiment 2. We now decide to fix k=20, 40 and vary the input candidate set. We take a look at the following variations:  changing the candidate criterion to in-degree instead of total degree and looking at the top $1\%$ of nodes and top $5\%$ of nodes respectively. }
+	\label{table:expt2indegree}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{small}
+		\begin{tabular}{ |p{0.95cm}||p{1.25cm}|p{1.25cm}||p{1.20cm}|p{1.20cm}|p{1.20cm}||p{1.25cm}|p{1.25cm}|| p{1.25cm}|p{1.25cm}| }
+			\hline
+			\multicolumn{10}{|c|}{Experiment 2 Total Degree} \\
+			\hline
+			Method & Number of Non-Singleton Clusters & Number of Singleton Clusters & Minimum Cluster Size &  Median Cluster Size & Maximum Cluster Size & Node Coverage (\%)& Edge Coverage  (\%)& Marker Node Coverage  (\%)& Marker Edge Coverage  (\%)\\
+			\hline
+			IKC (k=20)  w/ Step 5 Total Degree $5\%$&  44    & \cellcolor{blue!20}13603978 &   \cellcolor{red!20}62 & \cellcolor{red!20}480.5 & \cellcolor{red!20}232822 &\cellcolor{red!20}2.76\% & \cellcolor{red!20}15.7\% & \cellcolor{red!20}77.9\% & \cellcolor{red!20}21.7\%  \\ \hline
+			
+			IKC (k=40)  w/ Step 5 Total Degree $5\%$ &  6    & \cellcolor{blue!20}13948073 &   \cellcolor{red!20}144 & \cellcolor{red!20}2909.0 & \cellcolor{red!20}21345 & \cellcolor{red!20}0.30\% & \cellcolor{red!20}1.87\% & \cellcolor{red!20}48.4\% & \cellcolor{red!20}8.10\% \\
+			\hline
+			\hline
+		\end{tabular}
+	\end{small}
+	\caption{Results for Experiment 2. We now decide to fix k=20, 40 and vary the input candidate set. We take a look at the following variations:  changing the candidate criterion to the  top $5\%$ of nodes by total degree.}
+	\label{table:expt2totaldegree}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{small}
+		\begin{tabular}{ |p{0.95cm}||p{1.25cm}|p{1.25cm}||p{1.20cm}|p{1.20cm}|p{1.20cm}||p{1.25cm}|p{1.25cm}|| p{1.25cm}|p{1.25cm}| }
+			\hline
+			\multicolumn{10}{|c|}{Experiment 2 Random} \\
+			\hline
+			Method & Number of Non-Singleton Clusters & Number of Singleton Clusters & Minimum Cluster Size &  Median Cluster Size & Maximum Cluster Size & Node Coverage (\%)& Edge Coverage  (\%)& Marker Node Coverage  (\%)& Marker Edge Coverage  (\%)\\
+			\hline
+			IKC (k=20)  w/ Step 5 Random &  44    & \cellcolor{red!20}13711657 &   \cellcolor{blue!20}60 & \cellcolor{blue!20}250.0 & \cellcolor{blue!20}171448 & \cellcolor{blue!20}2.00\% & \cellcolor{blue!20}8.32\% & \cellcolor{blue!20}49.5\% & \cellcolor{blue!20}6.72\% \\ \hline
+			
+			IKC (k=40)  w/ Step 5 Random  &  6    & \cellcolor{red!20}13952652 &   \cellcolor{blue!20}124 & \cellcolor{blue!20}1946.0 & \cellcolor{blue!20}20090 & \cellcolor{blue!20}0.26\% & \cellcolor{blue!20}1.61\% & \cellcolor{blue!20}41.1\% & \cellcolor{blue!20}6.31\% \\ \hline
+			\hline
+		\end{tabular}
+	\end{small}
+	\caption{Results for Experiment 2. We now decide to fix k=20, 40 and vary the input candidate set. We take a look at the following variations:  changing the candidate criterion to a random $1\%$ of nodes from the network. }
+	\label{table:expt2random}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{small}
+		\begin{tabular}{ |p{0.95cm}||p{1.25cm}|p{1.25cm}||p{1.20cm}|p{1.20cm}|p{1.20cm}||p{1.25cm}|p{1.25cm}|| p{1.25cm}|p{1.25cm}| }
+			\hline
+			\multicolumn{10}{|c|}{Experiment 2 95th Percentile} \\
+			\hline
+			Method & Number of Non-Singleton Clusters & Number of Singleton Clusters & Minimum Cluster Size &  Median Cluster Size & Maximum Cluster Size & Node Coverage (\%)& Edge Coverage  (\%)& Marker Node Coverage  (\%)& Marker Edge Coverage  (\%)\\
+			\hline
+			IKC (k=20)  w/ Step 5 Total Degree 95 Percentile &  44    & \cellcolor{blue!20}13684128 &   61 & \cellcolor{blue!20}268.5 & \cellcolor{blue!20}180166 & \cellcolor{red!20}2.18\% & \cellcolor{blue!20}9.04\% & \cellcolor{blue!20}49.5\% & \cellcolor{blue!20}6.92\% \\ \hline
+			
+			IKC (k=40)  w/ Step 5 Total Degree 95 Percentile  &  6    & \cellcolor{red!20}13952552 &   \cellcolor{blue!20}124 & \cellcolor{blue!20}1940.0 & \cellcolor{blue!20}20170 & \cellcolor{blue!20}0.26\% & \cellcolor{blue!20}1.62\% & \cellcolor{blue!20}41.1\% & \cellcolor{blue!20}6.29\% \\ \hline
+			\hline
+			IKC (k=20)  w/ Step 5 Indegree 95 Percentile &  44    & \cellcolor{blue!20}13700075 &   \cellcolor{blue!20}60 & \cellcolor{blue!20}253.0 & \cellcolor{blue!20}176775 & \cellcolor{red!20}2.07\% & \cellcolor{blue!20}8.64\% & \cellcolor{blue!20}49.5\% & \cellcolor{blue!20}7.02\% \\ \hline
+			
+			IKC (k=40)  w/ Step 5 Indegree 95 Percentile  &  6    &\cellcolor{red!20}13952523 &   \cellcolor{blue!20}125 & \cellcolor{blue!20}1968.0 & \cellcolor{blue!20}20128 & \cellcolor{blue!20}0.26\% & \cellcolor{blue!20}1.62\% &\cellcolor{blue!20}41.1\% & \cellcolor{blue!20}6.34\% \\ \hline
+			\hline
+		\end{tabular}
+	\end{small}
+	\caption{Results for Experiment 2. We now decide to fix k=20, 40 and vary the input candidate set. We take a look at the following variations:  changing the candidate criterion to the 95th percentile (94.5-95.5) of nodes by either in-degree or total degree. }
+	\label{table:expt2}
+\end{table}
+			 
+\begin{table}[h!]
+	\centering
+	\begin{small}
+		\begin{tabular}{ |p{0.95cm}||p{1.25cm}|p{1.25cm}||p{1.20cm}|p{1.20cm}|p{1.20cm}||p{1.25cm}|p{1.25cm}|| p{1.25cm}|p{1.25cm}| }
+			\hline
+			\multicolumn{10}{|c|}{Experiment 2 Seed} \\
+			\hline
+			Method & Number of Non-Singleton Clusters & Number of Singleton Clusters & Minimum Cluster Size &  Median Cluster Size & Maximum Cluster Size & Node Coverage (\%)& Edge Coverage  (\%)& Marker Node Coverage  (\%)& Marker Edge Coverage  (\%)\\
+			\hline
+			IKC (k=20)  w/ Step 5 Seed &  44    & \cellcolor{blue!20}13526555 &  \cellcolor{red!20} 62 & \cellcolor{red!20}495.0 &\cellcolor{red!20} 270561 & \cellcolor{red!20}3.31\% & \cellcolor{red!20}18.1\% & \cellcolor{red!20}77.9\% & \cellcolor{red!20}22.6\% \\ \hline
+			
+			IKC (k=40)  w/ Step 5 Seed  &  6    & \cellcolor{blue!20}13948032 &   \cellcolor{red!20}144 & \cellcolor{red!20}2910.5 & \cellcolor{red!20}21371 & \cellcolor{red!20}0.30\% &\cellcolor{red!20}1.87\% & \cellcolor{red!20}48.4\% & \cellcolor{red!20}8.10\% \\  \hline
+			\hline
+		\end{tabular}
+	\end{small}
+	\caption{Results for Experiment 2 Seed. We now decide to fix k = 20, 40 and vary the input candidate set. We take a look at the following variations:  changing the candidate criterion to the seed set and the marker nodes.}
+	\label{table:expt2seed}
+\end{table}
+
+	
+Experiment 2:
+\begin{itemize}
+	\item X is a random set of nodes found in clusters \textbf{done}
+	\item X is set of publications with top 5$\%$ in terms of degree \textbf{done}
+	\item X is the same number of publications at the 95th percentile (94.5-95.5%)
+	\item X is the set of publications with top 1$\%$in terms of in-degree \textbf{done}
+	\item X is the set of publications with top 5$\%$ in terms of in-degree  \textbf{done}
+	\item X is the set of publications between 94.5-95.5$\%$ in terms of in-degree
+	\item X is some set of marker nodes. (ALL marker nodes)
+		All 1200 from Wedell et al. 2022
+		The more recent set of 94 marker nodes
+		The set of S nodes
+\end{itemize}
+
 
 \subsection{Observations}
 
@@ -237,8 +358,17 @@ When looking at Experiment 0, which looks at disjoint IKC km-valid clusterings, 
 
 We can then look at Experiment 1, which looks at the OKMP valid clustering based on the same original disjoint IKC km-valid clusterings from Experiment 0. Given that our algorithm only adds candidate nodes to existing clusters from the input disjoint clusterings, the number of non-singleton clusters stays the same. However, we notice the general trends of increases in minimum, median and maximum cluster sizes, and decreases in singleton clusters. These trends continue to show in node and edge coverage which both increase for all k-values. Given that this stage takes the set of the top $1\%$ of nodes by total degree to be considered when adding to existing clusters, we can notice that the maximum increase of node coverage is bounded at $1\%$. We also notice that unlike Experiment 0, the marker edge coverage exceeds the edge coverage for all k-values (except k=50), which gives evidence that points to OKMP valuing these marker nodes in its clustering coverage much greater than the disjoint clustering method did. \newline\newline
 
-\vspace{.1in}
-\textcolor{blue}{Akhil: what do you see? Does increase in node coverage make sense at all? For elapsed time, what are the units? In other words, what does 26:46.34 mean? 26 minutes and 46.34 seconds, or is it 26 hours and 46.34 minutes?  And if it is 26 minutes, do we need to have that much precision? Might be enough to say 26m 46s. Finally, look at how I made this into a table in latex. }
+\subsubsection{Experiment 2 Observations}
+
+Observations:
+\begin{itemize}
+	\item Indegree in general gives lower edge coverage than total degree for both $1\%$ and $5\%$
+	\item Node coverage marginally increases for k=20 indegree however
+	\item k = 20 delta from Experiment 0 to Experiment 1 node coverage: +0.08, edge coverage + 3.06, from Experiment 1 to Experiment 2 node coverage: +0.71, edge coverage: + 4.40
+	\item as we increase threshold to 5 percent, node coverage increases at higher rates than edge coverage
+	\item 95th percentile of nodes sees greater node coverage  than top 1 percent for k=20
+\end{itemize}
+
 
 
 \subsection{Results of Overlapping KMP-clustering}
@@ -257,6 +387,8 @@ We also then consider the impact of allowing for periphery membership.
 
 \textbf{Question:} Can we run an MDS analysis similar to what was done in Wedell et al?
 
+
+Plotting modularity increases and decreases, differences in size of cluster
 
 \section{Conclusions}
 \bibliographystyle{plain}
