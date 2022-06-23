@@ -9,9 +9,18 @@
 \title{Analyzing Overlapping Clustering Methods on Biological Communities }
 \maketitle{}
 
+%The ‘script is taking shape. At a high level,”Disjoint clustering is just not good enough!’. This is what the paper will be remembered for. Below that everything else we’ve thought about.
+ % Equilibration across k-cores
+% Top 1% experiments
+% Singleton reduction
+% Breadth/depth measurements
+% Different classes of highly cited nodes
+% Relatedness between clusters (edges and nodes)
+% Case studies
+% Hand waving and close out
+
 \abstract{
-Community detection has become an important task in bibliometrics, where the collection of publications connected through citations and references through networks has become the primary data structure by which such analysis can be framed within. A variety of methods have been proposed in detecting such communities, with a focus on clustering algorithms, but there has yet to be an effort to utilize overlapping clustering methods to detect communities within large citation networks. This paper proposes a scalable, overlapping clustering method designed to detect communities, and compares this method to existing overlapping clustering methods as well as to the existing disjoint clustering method proposed in Wedell et al. 
-}
+Community detection assists the understanding of complex networks. Unsurprisingly, a rich literature originating from several fields exists on the development and application of community detection. Within this area, we are focused on the problem of community detection in the very large network of scientific literature-- for the purpose of identifying research communities at different scales.  A variety of clustering methods have been developed for community detection However, these largely adopt a disjoint clustering approach where a node is only assigned to one community or cluster. This strict requirement limits the ability to inclusively describe communities. For example, a widely used method could reasonably be assigned to many communities. Whereas, we have previously described a scalable and modular pipeline that discovers disjoint communities, we now present an overlapping community finding approach that builds upon this approach. We report comparative findings from this new approach on a network of over 13 million nodes that captures recent research in the very rapidly growing field of extracellular vesicles in biology.}
 
 \section{Introduction}
 
@@ -30,8 +39,6 @@ Community detection has become an important task in bibliometrics, where the col
 Discuss Price \& Beaver \cite{price_1966} and anything else that is related to center-periphery structure in communities.
 
 \subsection{kmp-clustering }
-
-
 
 The method from Wedell et al. \cite{wedell2022center} seeks to  cluster a graph into disjoint clusters, each of which 
 exhibits center-periphery structure, as specified by numeric parameters $k$ and $p$ that are provided by the user.
