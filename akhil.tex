@@ -1,8 +1,34 @@
-\documentclass{article}
-\usepackage[margin=1in]{geometry}
-\usepackage{color}
-\usepackage{multirow}
-\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{textcomp}
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{caption}
+\usepackage{subcaption}								% TeX will automatically convert eps --> pdf in pdflatex		
+
+\usepackage{amssymb}
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\usepackage{natbib}
+%\bibliographystyle{apalike}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{authblk}
+\hypersetup{
+    colorlinks=false,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdfpagemode=FullScreen,
+}
+\usepackage{float}
+
+% \setlength{\parindent}{0pt}
+%SetFonts
+
 
 \begin{document}
 \author{Akhil Jakatdar, Tandy Warnow, and George Chacko}
@@ -52,6 +78,11 @@ Add description of how AOC works...
 
 \section{Conclusions}
 \section{Acknowledgments etc.}
+
+\bibliographystyle{apalike}
+\bibliography{akhil.bib}
+
+\end{document}
 
 
 \textbf{ Introduce the Problem of Clustering for Bibliometrics}
@@ -406,10 +437,3 @@ We also then consider the impact of allowing for periphery membership.
 
 Plotting modularity increases and decreases, differences in size of cluster
 
-\section{Conclusions}
-\bibliographystyle{plain}
-\bibliography{akhil.bib}
-
-
-
-\end{document}
