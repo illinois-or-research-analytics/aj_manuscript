@@ -55,19 +55,57 @@ One window through which research communities can be examined is the identificat
 
 A considerable amount of literature exists on community finding in graphs and a variety of community finding or clustering approaches are used in scientometrics. The definition of a community varies with perspective and and method but usually describes some group within a complex network that share common properties. Community detection approaches may address vertex similarity or edge density; disjoint, overlapping or hierarchical community structure; and static versus dynamic networks. \textcolor{blue}{This is more or less taken out of Wedell- the points are important but the text needs to be revised to avoid blatant reuse even though we're the authors in both cases}.Thus, the context of the question being asked and the techniques being employed tends to determine the flavor of community detection in a study. In this study, we build upon this literature in focusing on edge density and disjoint communities.
 
-Beyond detection, we are especially interested in substructure (structure within communities), as it reflects roles and dynamics among members. Price and Beaver (1966), in their study of the oxidative phosphorylation community, reported center–periphery substructure (Breiger, 2014): a small core of influential researchers and a much larger transient population. Core–periphery or center–periphery patterns have been reported in other networks using different techniques, such as block modeling and k-core decomposition arguing for generality in their occurrence.
+Beyond detection, we are especially interested in substructure (structure within communities), as it reflects roles and dynamics among members.
+\cite{Price1966}, 
+ in their study of the oxidative phosphorylation community, reported center–periphery substructure \citep{Breiger2014};
+  a small core of influential researchers and a much larger transient population. Core–periphery or center–periphery patterns have been reported in other networks using different techniques, such as block modeling and k-core decomposition arguing for generality in their occurrence.
 
 \section{Materials and Methods}
 
-\subsection{Data} In the present study, we removed retracted and high-referencing articles from a previously generated citation network \cite{Wedell2022} inclusive of the exosome, and more generally the extracellular vesicle, literature \cite{harding1983,raposo2021}. Retracted articles were identified from a database provided by Retraction Watch and matched to the nodes in our network using digital object identifiers (DOIs). Any article that had 250 or more references was also excluded from the network. The resultant network comprised 13,989,436 nodes and 92,051,051 edges (the original network consisted of 14,695,475 nodes and 99,663,372 edges) and, in this article, is referred to as the Curated Exosome Network (CEN).
+\subsection{Data} In the present study, we removed retracted and high-referencing articles from a previously generated citation network \citep{Wedell2022} inclusive of the exosome, and more generally the extracellular vesicle, literature \citep{harding1983,raposo2021}. Retracted articles were identified from a database provided by Retraction Watch and matched to the nodes in our network using digital object identifiers (DOIs). Any article that had 250 or more references was also excluded from the network. The resultant network comprised 13,989,436 nodes and 92,051,051 edges (the original network consisted of 14,695,475 nodes and 99,663,372 edges) and, in this article, is referred to as the Curated Exosome Network (CEN).
 
-\subsection{Methods} We have previously described Iterative K-core Clustering (IKC) in \cite{Wedell2022}. This scalable method recursively extracts k-cores \cite{Giatsidis2011,malliaros2019} from a network as the first stage in a tunable pipeline that subsequently augments these cores with peripheral nodes while enforcing positive modularity for the core as well as two user-defined parameters, \emph{k} and \emph{p} that describe minimum core connectivity and minimum connectivity between periphery and core respectively.
+\subsection{Methods} We have previously described a clustering pipeline we refer to as Iterative K-core Clustering (IKC) in \cite{Wedell2022}, 
+motivated by the graph-theoretic concept of k-cores \citep{Giatsidis2011,malliaros2019}.
+This scalable and tunable method takes as input two parameters $k$ and $p$ with $k > p \geq 1$, and computes a clustering of the given network $N$ into disjoint cluster where each cluster has a ``center" component and a ``periphery".
+This clustering is designed to satisfy several criteria: (1) each center of each cluster is connected,  has positive modularity, and each node in the center  is adjacent to at least $k$ other nodes in the center, and (ii) every node in the periphery of a cluster is adjacent to at least $p$ center nodes in the cluster. 
+Thus, center membership requires a greater degree of connectivity to the other center nodes than periphery membership.
 
-The Accomodate Overlapping Clusters (AOC) method, presented in this article, is an extension of IKC. In AOC, user-specified candidate nodes are assigned to multiple cores extracted by the IKC method while enforcing either of the \emph{k} or \emph{m} parameters. \emph{k} describes minimal connectivity for a node in a cluster, i.e., for it to be assigned to a cluster it must have at least \emph{k} neighbours in it. \emph{m} refers to minimum cluster degree (MCD) which varies between clusters generated by IKC although they all satisfy \emph{k}. Thus \emph{k} is a network level parameter and  \emph{m} is a cluster-level that is at least as stringent as \emph{k} and typically more stringent since the majority of clusters have an MCD that is greater than \emph{k}. \textcolor{blue}{Tandy see if you'd like to state this differently.}
 
- \textcolor{blue}{We may need to finesse why we didn't add any peripheral nodes}.
+The IKC pipeline has three basic steps, where the second and third steps are optional.  The first step (the iterative k-core extraction algorithm) produces  disjoint clusters where each cluster has positive modularity and each node in each cluster is adjacent to at least $k$ other nodes in the cluster; these form centers of the communities.
+The optional second step
+breaks these clusters into smaller clusters, and the optional third step adds peripheries to the clusters. 
+Note that the parameter $k$ is used to define the centers and the parameter $p$ is used to define the periphery.
+If the only objective is centers of communities, then the pipeline can be run using only the first step (or optionally also with the second step if smaller communities are desired).
 
-Add description of how AOC works...
+
+
+
+%recursively extracts k-cores \citep{Giatsidis2011,malliaros2019} from a network as the first stage in a tunable pipeline.
+
+% that subsequently augments these cores with peripheral nodes while enforcing positive modularity for the core. as well as two user-defined parameters, \emph{k} and \emph{p} that describe minimum core connectivity and minimum connectivity between periphery and core respectively.
+
+The Accommodate Overlapping Clusters (AOC) method, presented herein, builds on the first step of this pipeline (the IKC step itself).
+%produces communities containing centers but not peripheries, that have positive modularity,  and where each node in each community is adjacent to at least $k$ other nodes in the community.
+%AOC is run after IKC, and allows a user-specified set of nodes to be members of more than one community.
+% is used to construct the set of clusters, each of which is the center of a community.  
+To run AOC, the user specifies two additional parameters:  
+%k$ and then applies IKC to the network using this parameter; this produces a clustering where all the clusters are connected, have positive modularity, and every node in a given cluster has at least $k$ neighbors in the cluster.  These form the ``core" (or ``centrer" of the community.  A subsequent step can be applied that enables the periphery to be added to each community.
+the set of nodes that can be members of  additional clusters and the criterion for membership.  
+The two criteria for membership in the core of cluster $C$ we consider are: (i) to have at least $k$ neighbors n the core of $C$ or (ii) to have at least $MCD(C)$ neighbors in the center of $C$, where $MCD(C)$ is the minimum center degree (i.e., the minimum number of center neighbors of any node within $C$). 
+We also note that $k$ (the parameter for condition (i)) has been used to construct the IKC clustering; hence, for every cluster $C$,   
+(i) is a weaker condition than (ii).
+
+Thus, running   AOC on the IKC clustering produces a set of potentially overlapping clusters, each of which has positive modularity and has at least $k$ other nodes in the cluster.
+These clusters form ``centers" of communities.  If desired, this clustering could then be subject to the same optional second and third steps from the IKC pipeline, which would
+break up the large clusters and add periphery nodes.
+In this study, we examine the properties of the clusterings produced using IKC+AOC as a function of $k$, the set of nodes to be distributed to additional clusters, and 
+the criterion for inclusion in a cluster.
+
+%user-specified candidate nodes are assigned to multiple cores extracted by the IKC method while enforcing either of the \emph{k} or \emph{m} parameters. \emph{k} describes minimal connectivity for a node in a cluster, i.e., for it to be assigned to a cluster it must have at least \emph{k} neighbours in it. \emph{m} refers to minimum cluster degree (MCD) which varies between clusters generated by IKC although they all satisfy \emph{k}. Thus \emph{k} is a network level parameter and  \emph{m} is a cluster-level that is at least as stringent as \emph{k} and typically more stringent since the majority of clusters have an MCD that is greater than \emph{k}. \textcolor{blue}{Tandy see if you'd like to state this differently.}
+
+% \textcolor{blue}{We may need to finesse why we didn't add any peripheral nodes}.
+
+%Add description of how AOC works...
 
 
 \section{Results and Discussion}
@@ -85,7 +123,8 @@ Add description of how AOC works...
         \includegraphics[width=\linewidth]{fig1b.pdf} 
         %\caption{Generic fig2 b caption} \label{fig:2b}
     	\end{subfigure}
-\caption{Comparison of cluster sizes between disjoint (IKC)  and overlapping (AOC) clusters; cluster size selectively increases after enrichment through AOC. Clusters were generated from CEN data by IKC using values of k ranging from 10-50. These clusters were then enriched through the AOC process enforcing either \emph{k} (left panel) or \emph{mcd} (right panel). The input to AOC was the set of nodes in the IKC clusters. A natural log scale is used for both axes.}
+\caption{Comparison of cluster sizes between disjoint (IKC)  and overlapping (AOC) clusters; cluster size selectively increases after enrichment through AOC. Clusters were generated from CEN data by IKC using values of $k$ ranging from 10 to 50. These clusters were then enriched through the AOC process enforcing either \emph{k} (left panel) or \emph{mcd} (right panel). 
+The input to AOC was the  clustering produced by IKC, the value $k$ used to construct the clustering, and the set of nodes to be distributed to additional clusters was all the nodes in the IKC clusters. A natural log scale is used for both axes.}
 \label{fig:fig1}
 \end{figure}
 
