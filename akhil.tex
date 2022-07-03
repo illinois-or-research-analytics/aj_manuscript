@@ -179,6 +179,29 @@ The input to AOC was the  clustering produced by IKC, the value $k$ used to cons
 \label{tab:tab1}
 \end{table}
 
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrrl}
+  \hline
+cluster\_id & cluster\_no & mcd & modularity & node\_count  \\ 
+  \hline
+shuffled\_CEN\_network-1 &     1 &    15 & 0.0111 & 435,216 \\
+shuffled\_CEN\_network-2 &     1 &    15 & 0.0109 & 425,275 \\
+shuffled\_CEN\_network-3 &     1 &    15 & 0.0112 & 443,254 \\
+shuffled\_CEN\_network-4 &     1 &    15 & 0.0113 & 440,106 \\
+shuffled\_CEN\_network-5 &     1 &    15 & 0.0113 & 448,858 \\
+shuffled\_CEN\_network-6 &     1 &    15 & 0.0113 & 432,842 \\
+shuffled\_CEN\_network-7 &     1 &    15 & 0.0113 & 446,305 \\
+shuffled\_CEN\_network-8 &     1 &    15 & 0.0112 & 436,192 \\
+shuffled\_CEN\_network-9 &     1 &    15 & 0.0111 & 424,074 \\
+shuffled\_CEN\_network-10 &    1 &   15 & 0.0111 & 436,273 \\ 
+   \hline
+\end{tabular}
+\caption{Comparison clustering in configuration null model. Edges of the CEN network were randomly redirected while preserving degree distribution for each node and the year of publication for citing and cited nodes. The resultant network was clustered with IKC with k=10. In the unperturbed network. 128 cores are extracted with minimum core degrees ranging from 10 to 52.  In all 10 cases of randomization, while the size and modularity of these cores vary from each other, they all exhibit a minimum core degree of 15.}
+\label{tab:tab2}
+\end{table}
+
+
 \subsection{Equilibration Across Cores}
 
 \subsection{Nodes of High Degree}
