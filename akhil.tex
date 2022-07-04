@@ -179,7 +179,25 @@ The input to AOC was the  clustering produced by IKC, the value $k$ used to cons
 \label{tab:tab1}
 \end{table}
 
+% > shuffled_df
+%   cluster_no   mcd modularity node_count                cluster_id
+%         <int> <int>      <num>      <int>                    <char>
+% 1:          1    15 0.01110796     435216  shuffled_ikc1.clustering
+% 2:          1    15 0.01094716     425275 shuffled_ikc10.clustering
+% 3:          1    15 0.01119657     443254  shuffled_ikc2.clustering
+% 4:          1    15 0.01125269     440106  shuffled_ikc3.clustering
+% 5:          1    15 0.01132720     448858  shuffled_ikc4.clustering
+% 6:          1    15 0.01126005     432842  shuffled_ikc5.clustering
+% 7:          1    15 0.01131381     446305  shuffled_ikc6.clustering
+% 8:          1    15 0.01122132     436192  shuffled_ikc7.clustering
+% 9:          1    15 0.01106562     424074  shuffled_ikc8.clustering
+%10:          1    15 0.01105279     436273 shuffled_ikc9.clustering
+
+
 \begin{table}[ht]
+% data drawn from xtable product above using
+% collate_shuffled_results.R gc 7/3/2022
+
 \centering
 \begin{tabular}{lrrrl}
   \hline
@@ -200,6 +218,25 @@ shuffled\_CEN\_network-10 &    1 &   15 & 0.0111 & 436,273 \\
 \caption{Comparison clustering in configuration null model. Edges of the CEN network were randomly redirected while preserving degree distribution for each node and the year of publication for citing and cited nodes. The resultant network was clustered with IKC with k=10. In the unperturbed network. 128 cores are extracted with minimum core degrees ranging from 10 to 52.  In all 10 cases of randomization, while the size and modularity of these cores vary from each other, they all exhibit a minimum core degree of 15.}
 \label{tab:tab2}
 \end{table}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[t]{0.48\textwidth}
+	 \centering
+	 \includegraphics[width=\linewidth]{ikc10_k_pw.pdf} 
+	 %\caption{Generic fig2 a caption} \label{fig:2a}
+	 \end{subfigure}
+ \hfill
+	\begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{ikc10_m_pw.pdf} 
+        %\caption{Generic fig2 b caption} \label{fig:2b}
+    	\end{subfigure}
+\caption{Transforming IKC clusterings by AOC.  Clusters were generated from CEN data by IKC using $k=10$. These clusters were then enriched through the AOC process enforcing either \emph{k} (left panel) or \emph{mcd} (right panel). Graph edges were then reconstructed using the Jaccard Coefficient of overlap between clusters. Cluster numbers in both panels retain cluster numbers from the input IKC clustering.}
+\label{fig:fig3}
+\end{figure}
+
+
 
 
 \subsection{Equilibration Across Cores}
