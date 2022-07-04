@@ -7,13 +7,12 @@
 \usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
 \usepackage{caption}
 \usepackage{subcaption}								% TeX will automatically convert eps --> pdf in pdflatex		
-
+\usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
 \usepackage{natbib}
-%\bibliographystyle{apalike}
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{authblk}
@@ -49,16 +48,13 @@
 
 \abstract{[\emph{Rewrite after the rest of the paper is completed.} Community detection assists the understanding of complex networks and a variety of clustering methods have been developed for this purpose. Unsurprisingly, a rich literature exists, originating from several fields, on developing and applying community detection. However, many community finding methods rely on disjoint clustering in which a node is only assigned to one community or cluster. This strict requirement limits the ability to inclusively describe communities since some nodes may reasonably be assigned to many communities. Whereas, we have previously described a scalable and modular pipeline that discovers disjoint communities, we now present a complementary overlapping community approach.  We report comparative findings from this new approach on a network of over 13 million nodes that captures recent research in the very rapidly growing field of extracellular vesicles in biology. We wanly declare relief at not having studied Zachary's Karate Club.}
 
-\section{Introduction} The problem of identifying and describing research communities in the modern scientific enterprise motivates the work presented in this article. Research communities indicate scientific specialization that can span traditional disciplinary definitions. Science, as it exists today, in its environment of expansion, increased funding, globalization, and industrial-scale reorganization will necessarily impact community structure and dynamics. 
+\section{Introduction} The problem of identifying and describing research communities in the modern scientific enterprise motivates the work presented in this article. We argue that a quantitative understanding of the organization of the scientific enterprise can support planning, analysis, and evaluation in the governance of science from the perspective of policy makers, funders, research institutions and the evaluation community. Since research communities are expressions of scientific specialization \citep{Chubin1976,Morris2009} that can span traditional disciplinary definitions \citep{Waltman2012}, an opportunity exists to study them beyond the large scale aggregations of disciplines-- at scale and in the modern research enterprise. Consequently, we are interested in scalable methods for the identification and characterization of research communities. An additional motivation is that, on account of expansion, increased funding, globalization, and industrial-scale reorganization, the community structure of science is unlikely to mirror earlier observations \citep{Kuhn1970,Price1966,small_specialties_1979,crane1972invisible}.
 
-One window through which research communities can be examined is the identification of sets of publications that cite each other more often than they cite other publications. This approach can be reframed as a community finding problem in the network of scientific literature where a community, a citation-dense area, defines an area of research. The authors of such communities of publications can then be assumed to form a research community. Confirmation of the existence and further study of such research communities is then made using qualitative methods. Thus, community finding techniques in graphs are valuable in being able to efficiently search large datasets for putative communities that can be examined qualitatively by domain experts.
+A window through which research communities can be examined is citation analysis. This approach is built on the assumption that members of a research community are more likely to cite each other's work than the work of others. Thus, in the graph (or network) of scientific literature, citation dense areas suggest the existence of communities. The authors of such communities of publications can then be assumed to comprise a research community. Discovering such communities can then be  framed as a community finding problem where a community is defined as a set of vertices in a graph that exhibit greater similarity to each other than vertices outside such a community. This similarity can be defined in various ways- in our case, we measure citation density. A considerable literature exists on community finding in graphs, and a variety of community finding or clustering approaches have been used in scientometrics~\citep{Newman2006,Fortunato2009,Boyack2010,Boyack2019,Traag2019,Ahlgren2020,Chandrasekharan2021,Wedell2022}. It must be stressed that citation density is not a convincing argument for the existence of a community. However, community finding techniques for graphs are valuable in being able to efficiently search large datasets for putative communities that can be qualitatively examined by domain experts using complementary techniques.  
 
-A considerable amount of literature exists on community finding in graphs and a variety of community finding or clustering approaches are used in scientometrics. The definition of a community varies with perspective and and method but usually describes some group within a complex network that share common properties. Community detection approaches may address vertex similarity or edge density; disjoint, overlapping or hierarchical community structure; and static versus dynamic networks. \textcolor{blue}{This is more or less taken out of Wedell- the points are important but the text needs to be revised to avoid blatant reuse even though we're the authors in both cases}.Thus, the context of the question being asked and the techniques being employed tends to determine the flavor of community detection in a study. In this study, we build upon this literature in focusing on edge density and disjoint communities.
+Beyond detection, we are especially interested in substructure (structure within communities), as it reflects roles and dynamics among members. \cite{Price1966}, in their study of the oxidative phosphorylation community, reported center–periphery substructure \citep{Breiger2014}; a small core of influential researchers and a much larger transient population. Core–periphery or center–periphery patterns have been reported in other networks using different techniques, such as block modeling and k-core decomposition arguing for generality in their occurrence [CITE Rombach, Haveman, Gallgher, Sengupta, others].
 
-Beyond detection, we are especially interested in substructure (structure within communities), as it reflects roles and dynamics among members.
-\cite{Price1966}, 
- in their study of the oxidative phosphorylation community, reported center–periphery substructure \citep{Breiger2014};
-  a small core of influential researchers and a much larger transient population. Core–periphery or center–periphery patterns have been reported in other networks using different techniques, such as block modeling and k-core decomposition arguing for generality in their occurrence.
+We have recently reported an algorithm that is implemented in a scalable pipeline for community finding. In this article, we acknowledge the linitations of disjoint clustering. Now we're trying to fix this. Hence AOC...
 
 \section{Materials and Methods}
 
@@ -114,16 +110,16 @@ the criterion for inclusion in a cluster.
 	\centering
 	\begin{subfigure}[t]{0.48\textwidth}
 	 \centering
-	 \includegraphics[width=\linewidth]{fig1a.pdf} 
+	 \includegraphics[width=\linewidth]{fig1b.pdf} 
 	 %\caption{Generic fig2 a caption} \label{fig:2a}
 	 \end{subfigure}
  \hfill
 	\begin{subfigure}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{fig1b.pdf} 
+        \includegraphics[width=\linewidth]{fig1a.pdf} 
         %\caption{Generic fig2 b caption} \label{fig:2b}
     	\end{subfigure}
-\caption{Comparison of cluster sizes between disjoint (IKC)  and overlapping (AOC) clusters; cluster size selectively increases after enrichment through AOC. Clusters were generated from CEN data by IKC using values of $k$ ranging from 10 to 50. These clusters were then enriched through the AOC process enforcing either \emph{k} (left panel) or \emph{mcd} (right panel). 
+\caption{Comparison of cluster sizes between disjoint (IKC)  and overlapping (AOC) clusters; cluster size selectively increases after enrichment through AOC. Clusters were generated from CEN data by IKC using values of $k$ ranging from 10 to 50. These clusters were then enriched through the AOC process enforcing either \emph{mcd} (left panel) or \emph{k} (right panel). 
 The input to AOC was the  clustering produced by IKC, the value $k$ used to construct the clustering, and the set of nodes to be distributed to additional clusters was all the nodes in the IKC clusters. A natural log scale is used for both axes.}
 \label{fig:fig1}
 \end{figure}
@@ -234,6 +230,13 @@ shuffled\_CEN\_network-10 &    1 &   15 & 0.0111 & 436,273 \\
     	\end{subfigure}
 \caption{Transforming IKC clusterings by AOC.  Clusters were generated from CEN data by IKC using $k=10$. These clusters were then enriched through the AOC process enforcing either \emph{k} (left panel) or \emph{mcd} (right panel). Graph edges were then reconstructed using the Jaccard Coefficient of overlap between clusters. Cluster numbers in both panels retain cluster numbers from the input IKC clustering.}
 \label{fig:fig3}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	 \includegraphics[width=0.7\linewidth]{marker_comps_wide.pdf} 
+\caption{AOC increases marker node concentration. Notably, the proportion of 1021 marker nodes in the network, increases from 40.7 in cluster 4 (r1,c4) of IKC clustering to 93.1\% after AOC\_m to 94.6\% after AOC\_k. The proportion of markers in cluster 25 (r4,c1) is the same for IKC and AOC\_m but increases to  69.5\% under the more permissive conditions of AOC\_m. (Data are shown for the 40 clusters with non-zero marker node counts in IKC. Data for all 128 clusters are available in Supplementary Material.}
+\label{fig:fig4}
 \end{figure}
 
 
