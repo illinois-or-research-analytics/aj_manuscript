@@ -25,6 +25,7 @@
 }
 \usepackage{float}
 \usepackage{rotating}
+\usepackage{adjustbox}
 
 % \setlength{\parindent}{0pt}
 %SetFonts
@@ -69,7 +70,7 @@ Several methods have been proposed that can produce overlapping clusters cite re
 
 \subsection{Data} We previously generated a citation network \citep{Wedell2022} representing the exosome \citep{harding1983} and more generally the extracellular vesicle literature \citep{raposo2021}. The network was constructed in mid-2021 from the Dimensions database \citep{hook2018dimensions} in the Google cloud. For the present study, we curated this network to deplete it of both retracted articles and high-referencing articles. Retractions, were identified from a database kindly provided by Retraction Watch and matched to nodes in the network using digital object identifiers (DOIs). Any article with 250 or more references was also removed. Whereas the original network consisted of 14,695,475 nodes and 99,663,372 edges, the network resultant from removing retracted and high-referencing articles comprised 13,989,436 nodes and 92,051,051 edges; we refer to this network as   the Curated Exosome Network (CEN).
 
-\subsection{Methods} Motivated by the graph-theoretic concept of k-cores \citep{Giatsidis2011,malliaros2019}, we constructed a clustering pipeline we refer to as  the Iterative K-core Clustering (IKC) in \cite{Wedell2022}, This scalable and tunable method takes, as input, two parameters $k$ and $p$ with $k > p \geq 1$, and computes a clustering of a given network $N$ into disjoint clusters where each cluster has a ``core'' or ``center" component, and a ``periphery". This clustering is designed to satisfy several criteria: (1) the core of each cluster is connected,  has positive modularity ($m$-validity), and each node in the center  is adjacent to at least $k$ other nodes in the center ($k$-validity), and (ii) every node in the periphery of a cluster is adjacent to at least $p$ center nodes in the cluster ($p$-validity). Thus, membership of the core of a cluster requires a greater degree of connectivity to the other center nodes than membership of the periphery. 
+\subsection{Methods} Motivated by the graph-theoretic concept of k-cores \citep{Giatsidis2011,malliaros2019}, we have previously constructed a clustering pipeline we refer to as  the Iterative K-core Clustering (IKC) in \cite{Wedell2022}, This scalable and tunable method takes, as input, two parameters $k$ and $p$ with $k > p \geq 1$, and computes a clustering of a given network $N$ into disjoint clusters where each cluster has a ``core'' or ``center" component, and a ``periphery". This clustering is designed to satisfy several criteria: (1) the core of each cluster is connected,  has positive modularity ($m$-validity), and each node in the center  is adjacent to at least $k$ other nodes in the center ($k$-validity), and (ii) every node in the periphery of a cluster is adjacent to at least $p$ center nodes in the cluster ($p$-validity). Thus, membership of the core of a cluster requires a greater degree of connectivity to the other center nodes than membership of the periphery. 
 
 The IKC pipeline has three basic steps, where the second and third steps are optional.  The first step (the iterative k-core extraction algorithm) produces disjoint $km$-valid clusters where each cluster has positive modularity and each node in each cluster is adjacent to at least $k$ other nodes in the cluster; these form the centers or cores of the communities. The optional second step breaks these clusters into smaller clusters, and the optional third step adds peripheries to the clusters.  Note that the parameter $k$ is used to define the centers and the parameter $p$ is used to define the periphery. If the only objective is cores or centers of communities, then the pipeline can be run using only the first step (or optionally also with the second step if smaller communities are desired).
 
@@ -82,28 +83,69 @@ Thus, running   AOC on the IKC clustering produces a set of potentially overlapp
 These clusters form the cores of communities.  If desired, this clustering could then be subject to the same optional second and third steps from the IKC pipeline, which would
 break up the large clusters and add periphery nodes. 
 
-We set out to answer the following questions.
-
-
-
-
-
-
-
-\begin{itemize}
-\item Experiment 1:  What is the effect of AOC on IKC clusters?
-\item Experiment 2:  How different are clusterings produced by IKC+AOC on the CEN network compared to two different random graph models?
-\item Experiment 3:  What properties of nodes impact the number of clusters they belong to?
-\item  Experiment 4:  Examining marker node distributions and overlap between clusters produced by IKC+AOC.
-\item  Experiment 5:  What insights can we obtain using AOC into publication influence type and degree within the network?
-\end{itemize}
-
 \section{Results and Discussion}
 
-As we indicate in the preceding sections, AOC is a meta-method for overlapping communities that takes as input, a clustering, a set of candidate nodes for consideration of membership in multiple communities, and a parameter that defines the criterion for membership. In this study, we examine the properties of non-disjoint clusterings produced using IKC and AOC in tandem. 
+As we indicate in the preceding sections, AOC is a meta-method for overlapping communities that takes as input, a k-core based clustering such as IKC, a set of candidate nodes for consideration of membership in multiple communities, and a parameter that defines the criterion for membership. In this study, we examine the properties of non-disjoint clusterings produced using IKC and AOC in tandem. 
 
-\subsection{Experiment 1: Effect of AOC on IKC pipelines}
-We tested AOC for its ability to redistribute nodes from cores generated by IKC to other cores in clusterings of the CEN network generated by IKC. In this experiment, the input clustering was produced by IKC with $k \in \{10, 20, 30, 40, 50\}$; the set of candidate nodes was every node within the cores generated by IKC; and the criterion for membership was either (i) AOC\_m, which requires that any node added must meet the minimum core degree  (see above) within a community in the clustering, or (ii) AOC\_k, which enforces a lower bound for core degree across all communities in the clustering. 
+We set out to answer the following questions.
+
+\begin{itemize}
+\item Experiment 1: How different are clusterings  produced by IKC on the CEN network tcompared to two different random graph models?
+\item Experiment 2:  What is the effect of AOC on IKC clusters?
+\item Experiment 3:  Which node properties impact multiple assignments?
+\item Experiment 4:  What is the effect of AOC on marker node concentration in output clusters? 
+\item Experiment 5:  What insights can we obtain using AOC into publication influence type and degree within the network?
+\end{itemize}
+
+%%%%
+
+\subsection{Experiment 1: Comparison to random networks} In an initial calibration experiment, we clustered the curated exosome network (CEN) with IKC with  $k = {10,20,30,40, 60}$. The distribution of resultant cores is consistent with our observations in \cite{Wedell2022}, with maximum coverage at the lowest value of $k$ used (Supplementary Materials). 
+
+At the value of $k$ with maximum coverage (IKC\_k10), 128 $km$-valid cores, containing a total of 535,165 nodes, are discovered in the CEN network. These cores range in size from 14 to 214,877, with a median core size of 79, and minimum core degree (MCD) varying from 10-53 and median MCD of 16. To examine random effects in IKC clustering that could contribute to observed results, we generated 10 replicates of a configuration null model where the edges of the input clustering were randomized while preserving the total number of nodes, the degree of each node, the total number of nodes, and the publication year of each cited node in a citing-cited node pair. These `shuffled' networks were then clustered using IKC with  $k=10$ (IKC\_k10). In all 10 cases, only a single $km$-valid core with MCD of 15 was extracted, although the number of nodes in each of these cores varied as did modularity of the core (Table~\ref{tab:tab1}). The median size of this cluster across 10 replicates was 435,216. We did not run IKC at higher values for $k$ on the random networks since  the minimum core degree (MCD) of 15 for the single cluster would have been exceeded and not result in any clusters. We also generated 100 replicates of an Erd\H{o}s-Renyi graph with the same number of nodes and edges as the CEN network and clustered them with IKC\_k10 (Supplementary Material). No $km$-valid clusters were generated from the Erd\H{o}s-Renyi graphs. [Insert conclusion statement]
+
+% derived from k_10_totaldegree_1percent_original_cluster_stats.csv in /shared/aj_manuscript_data/experiment_1/. 
+
+% > shuffled_df
+%   cluster_no   mcd modularity node_count                cluster_id
+%         <int> <int>      <num>      <int>                    <char>
+% 1:          1    15 0.01110796     435216  shuffled_ikc1.clustering
+% 2:          1    15 0.01094716     425275 shuffled_ikc10.clustering
+% 3:          1    15 0.01119657     443254  shuffled_ikc2.clustering
+% 4:          1    15 0.01125269     440106  shuffled_ikc3.clustering
+% 5:          1    15 0.01132720     448858  shuffled_ikc4.clustering
+% 6:          1    15 0.01126005     432842  shuffled_ikc5.clustering
+% 7:          1    15 0.01131381     446305  shuffled_ikc6.clustering
+% 8:          1    15 0.01122132     436192  shuffled_ikc7.clustering
+% 9:          1    15 0.01106562     424074  shuffled_ikc8.clustering
+%10:         1    15 0.01105279     436273 shuffled_ikc9.clustering
+
+\begin{table}[ht]
+% data drawn from xtable product above using
+% collate_shuffled_results.R gc 7/3/2022
+\centering
+\begin{tabular}{lcccc}
+  \hline
+cluster\_id & cluster\_no & mcd & modularity & node\_count  \\ 
+  \hline
+shuffled\_CEN\_network-1 &     1 &    15 & 0.0111 & 435,216 \\
+shuffled\_CEN\_network-2 &     1 &    15 & 0.0109 & 425,275 \\
+shuffled\_CEN\_network-3 &     1 &    15 & 0.0112 & 443,254 \\
+shuffled\_CEN\_network-4 &     1 &    15 & 0.0113 & 440,106 \\
+shuffled\_CEN\_network-5 &     1 &    15 & 0.0113 & 448,858 \\
+shuffled\_CEN\_network-6 &     1 &    15 & 0.0113 & 432,842 \\
+shuffled\_CEN\_network-7 &     1 &    15 & 0.0113 & 446,305 \\
+shuffled\_CEN\_network-8 &     1 &    15 & 0.0112 & 436,192 \\
+shuffled\_CEN\_network-9 &     1 &    15 & 0.0111 & 424,074 \\
+shuffled\_CEN\_network-10 &    1 &   15 & 0.0111 & 436,273 \\ 
+   \hline
+\end{tabular}
+\caption{IKC clustering of Configuration Null Model. The edges of the CEN network were randomly redirected while preserving degree distribution for each node and the year of publication for citing and cited nodes. 
+The resultant network was clustered with IKC with k=10.  In all 10 cases, while the size and modularity of these cores vary from each other, they result in a single k-core with minimum core degree of 15. In contrast, the IKC(10) analysis of the original CEN (unperturbed) network produced 128 cores  with minimum core degrees ranging from 10 to 52.}
+\label{tab:tab1}
+\end{table}
+%%%%
+
+\subsection{Experiment 2: Effect of AOC on IKC pipelines} As previously noted, a limitation of disjoint clustering methods is that restricting membership to one community, has the effect of overlooking role and influence in other communities.  Accordingly, we tested AOC for its ability to redistribute nodes from disjoint cores generated by IKC to other cores in the same clustering. In this experiment, the input clustering was produced by IKC with the CEN network as input and $k \in \{10, 20, 30, 40, 50\}$; the set of candidate nodes was every node within the cores generated by IKC; and the criterion for membership was either (i) AOC\_m, which requires that any node added must meet the minimum core degree  (see above) within a community in the clustering, or (ii) AOC\_k, which enforces a lower bound for core degree across all communities in the clustering. 
 Since $MCD(C) \geq k$ for any cluster $C$, 
 it follows that AOC\_k is the more permissive criterion, in that it will allow more nodes to join clusters compared to AOC\_m.
 
@@ -112,10 +154,10 @@ However, core sizes can increase, with increases resulting from AOC\_k at least 
 Of interest, therefore, is how the algorithmic parameters (such as the value for $k$ and the specified subset of nodes) impacts the increase in size, and how node properties (e.g., degree) influence the number of clusters they are added to.
 % and the predicted result of AOC treatment is that while the number of cores does not change, core sizes increase for a subset of the input cores. Second, that the magnitude of the increase would be greater for AOC\_k than for AOC\_m.
 
-Figure~\ref{fig:fig1} shows the distribution of cluster sizes generated by AOC relative to the core sizes from the IKC run at various values for \emph{k}. Table~\ref{tab:tab1} shows the count of clusters that increase in size
-after AOC treatment. Approximately 74\% and 87\% of  128 cores increase in size with AOC\_m and AOC\_k treatment respectively when IKC with k-10 is used as the input clustering. We conclude that AOC treatment of IKC clustering results in an increase in cluster sizes that is is inversely related to the value of \emph{k} used in IKC and is more pronounced with AOC\_k than with AOC\_m. 
+Figure~\ref{fig:fig1} shows the distribution of cluster sizes generated by AOC relative to the core sizes from the IKC run at various values for \emph{k}. For both AOC\_m and AOC\_k a subset of the clusters increases in size (Table~\ref{tab:tab1} ).
+Approximately 74\% and 87\% of  128 cores increase in size with AOC\_m and AOC\_k treatment respectively when IKC with k-10 is used as the input clustering. We conclude that AOC treatment of IKC clustering results in an increase in cluster sizes that is is inversely related to the value of \emph{k} used in IKC and is more pronounced with AOC\_k than with AOC\_m. 
 
-From these data (Figure~\ref{fig:fig1}) we opted to use IKC with  $k=10$  (IKC\_k10) as input clustering to AOC for data shown in the rest of this study. At this setting, 128 cores, containing a total of 535,165 nodes, are discovered in the CEN network. These cores range in size from 14 to 214,877, with median core size of 79, and minimum core degree (MCD) varying from 10-53 and median MCD=16. % derived from k_10_totaldegree_1percent_original_cluster_stats.csv in /shared/aj_manuscript_data/experiment_1/. 
+
 
 \begin{figure}[H]
 	\centering
@@ -135,7 +177,7 @@ The input to AOC was the  clustering produced by IKC, the value $k$ used to cons
 \label{fig:fig1}
 \end{figure}
 
-We then examined the distribution of clusters per candidate node after AOC treatment of clusterings generated by  IKC with $k \in \{10, 20, 30, 40, 50\}$. For AOC\_k treatment of IKC\_k10 clusters, approximately 46\% of the nodes were assigned to a single clusters. The remaining 54\% nodes were assigned to between 2 and 24 clusters in progressively decreasing counts each with roughly 26\% of nodes assigned to 2 clusters and only 1 node being assigned to 24 different clusters (Table~\ref{tab:tab2}). AOC\_m in comparison to AOC\_k, results in fewer multiple cluster assignments because of its more stringent membership criterion (Table~\ref{tab:tab2} and Figure~\ref{fig:fig2}).
+We then examined the distribution of clusters per candidate node after AOC treatment of clusterings generated by  IKC with $k \in \{10, 20, 30, 40, 50\}$. For AOC\_k treatment of IKC\_k10 cluster, approximately 46\% of the nodes were assigned to a single clusters. The remaining 54\% nodes were assigned to between 2 and 24 clusters in progressively decreasing counts each with roughly 26\% of nodes assigned to 2 clusters and only 1 node being assigned to 24 different clusters (Table~\ref{tab:tab2}). AOC\_m in comparison to AOC\_k, results in fewer multiple cluster assignments because of its more stringent membership criterion (Table~\ref{tab:tab2} and Figure~\ref{fig:fig2}).
 
 \begin{figure}[H]
 	\centering
@@ -155,23 +197,6 @@ The single point noted for IKC10\_o indicates that it produced only one non-sing
 \label{fig:fig2}
 \end{figure}
 
-\subsection{Experiment 2: Comparison to random networks}
-
-To examine random effects in clustering, we generated 10 replicates of a configuration model where the edges of the input clustering were randomized while preserving the total number of nodes, the degree of each node, the total number of nodes, and the publication year of each cited node in a citing-cited node pair. These `shuffled' networks were then clustering using IKC\_k10. In all 10 cases, only a single core of MCD 15 was extracted, although the number of nodes in each of these cores was slightly different as was the modularity of the core (Table~\ref{tab:tab3}). We also generated 100 replicates of an Erd\H{o}s-Renyi graph with the same number of nodes and edges as the CEN network and clustered them with IKC\_k10. No  valid clusters were generated. 
-
-% > shuffled_df
-%   cluster_no   mcd modularity node_count                cluster_id
-%         <int> <int>      <num>      <int>                    <char>
-% 1:          1    15 0.01110796     435216  shuffled_ikc1.clustering
-% 2:          1    15 0.01094716     425275 shuffled_ikc10.clustering
-% 3:          1    15 0.01119657     443254  shuffled_ikc2.clustering
-% 4:          1    15 0.01125269     440106  shuffled_ikc3.clustering
-% 5:          1    15 0.01132720     448858  shuffled_ikc4.clustering
-% 6:          1    15 0.01126005     432842  shuffled_ikc5.clustering
-% 7:          1    15 0.01131381     446305  shuffled_ikc6.clustering
-% 8:          1    15 0.01122132     436192  shuffled_ikc7.clustering
-% 9:          1    15 0.01106562     424074  shuffled_ikc8.clustering
-%10:         1    15 0.01105279     436273 shuffled_ikc9.clustering
 
 
 
@@ -271,32 +296,6 @@ for either AOC\_m (left) or AOC\_k (right) treatment for five different values o
 \end{sidewaystable}
 
 \clearpage
-\begin{table}[ht]
-% data drawn from xtable product above using
-% collate_shuffled_results.R gc 7/3/2022
-\centering
-\begin{tabular}{lcccc}
-  \hline
-cluster\_id & cluster\_no & mcd & modularity & node\_count  \\ 
-  \hline
-shuffled\_CEN\_network-1 &     1 &    15 & 0.0111 & 435,216 \\
-shuffled\_CEN\_network-2 &     1 &    15 & 0.0109 & 425,275 \\
-shuffled\_CEN\_network-3 &     1 &    15 & 0.0112 & 443,254 \\
-shuffled\_CEN\_network-4 &     1 &    15 & 0.0113 & 440,106 \\
-shuffled\_CEN\_network-5 &     1 &    15 & 0.0113 & 448,858 \\
-shuffled\_CEN\_network-6 &     1 &    15 & 0.0113 & 432,842 \\
-shuffled\_CEN\_network-7 &     1 &    15 & 0.0113 & 446,305 \\
-shuffled\_CEN\_network-8 &     1 &    15 & 0.0112 & 436,192 \\
-shuffled\_CEN\_network-9 &     1 &    15 & 0.0111 & 424,074 \\
-shuffled\_CEN\_network-10 &    1 &   15 & 0.0111 & 436,273 \\ 
-   \hline
-\end{tabular}
-\caption{Comparison clustering in configuration null model. Edges of the CEN network were randomly redirected while preserving degree distribution for each node and the year of publication for citing and cited nodes. 
-The resultant network was clustered with IKC with k=10.  In all 10 cases of randomization, while the size and modularity of these cores vary from each other, they all exhibit a minimum core degree of 15.
-In contrast, the IKC(10) analysis of the original CEN (unperturbed) network produced 128 cores  with minimum core degrees ranging from 10 to 52. 
-}
-\label{tab:tab3}
-\end{table}
 
 
 
