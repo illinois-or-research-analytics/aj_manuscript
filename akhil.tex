@@ -57,7 +57,7 @@ Core–periphery or center–periphery patterns have also been reported in other
 
 A considerable literature exists on community finding in graphs, and a variety of community finding or clustering approaches have been used in scientometrics~\citep{Newman2006,Fortunato2009,Boyack2010,Boyack2019,Traag2019,Ahlgren2020,Chandrasekharan2021,Wedell2022}. The majority of these approaches focus on disjoint partitioning, where a vertex is only assigned to one community. 
 
-We recently reported Iterative K-core Clustering (IKC) \citep{Wedell2022}, a recursive algorithmic approach based on the k-core property \citep{Giatsidis2011,malliaros2019}. Enumerating k-cores helps identify densely connected parts of a graph.\emph{We need another sentence about the usefulness of k-core based approaches. Giatsidis comments on ``robustness to degeneracy". Leskovec comments that ``the distribution of k-cores shows how quickly the network shrinks as one moves towards its core."} IKC recursively extracts k-cores from a graph beginning with the most dense  core. 
+We recently reported Iterative K-core Clustering or IKC \citep{Wedell2022}, a recursive algorithmic approach based on the k-core property \citep{Giatsidis2011,malliaros2019}. Enumerating k-cores helps identify densely connected parts of a graph.\emph{We need another sentence about the usefulness of k-core based approaches. Giatsidis comments on ``robustness to degeneracy". Leskovec comments that ``the distribution of k-cores shows how quickly the network shrinks as one moves towards its core."} IKC recursively extracts k-cores from a graph beginning with the most dense  core. 
 We used IKC, implemented in a tunable modular pipeline, to identify communities with core-periphery structure from a network of roughly 14 million articles rooted in the rapidly growing field of extracellular vesicle biology. IKC recursively extracts k-cores from a network. Subsequent steps in the pipeline include reducing cluster size and adding peripheral nodes to each core. 
 Using multiple runs of this modular pipelines, we used co-occurence in multiple clusterings to investigated the community structure of research publications in extracellular vesicle biology. 
 
@@ -71,7 +71,11 @@ To address the disjoint cluster problem with IKC, we present Allowing Overlappin
  
 \section{Materials and Methods}
 
-\subsection{Data} We previously generated a citation network \citep{Wedell2022} representing the exosome \citep{harding1983} and more generally the extracellular vesicle literature \citep{raposo2021}. The network was constructed in mid-2021 from the Dimensions database \citep{hook2018dimensions} in the Google cloud. For the present study, we curated this network to deplete it of both retracted articles and high-referencing articles. Retractions, were identified from a database kindly provided by Retraction Watch and matched to nodes in the network using digital object identifiers (DOIs). Any article with 250 or more references was also removed. Whereas the original network consisted of 14,695,475 nodes and 99,663,372 edges, the network resultant from removing retracted and high-referencing articles comprised 13,989,436 nodes and 92,051,051 edges; we refer to this network as   the Curated Exosome Network (CEN).
+\subsection{Data} 
+
+\emph{Citation network} We previously generated a citation network \citep{Wedell2022} representing the exosome \citep{harding1983} and more generally the extracellular vesicle literature \citep{raposo2021}. The network was constructed in mid-2021 from the Dimensions database \citep{hook2018dimensions} in the Google cloud. For the present study, we curated this network to deplete it of both retracted articles and high-referencing articles. Retractions, were identified from a database kindly provided by Retraction Watch and matched to nodes in the network using digital object identifiers (DOIs). Any article with 250 or more references was also removed. Whereas the original network consisted of 14,695,475 nodes and 99,663,372 edges, the network resultant from removing retracted and high-referencing articles comprised 13,989,436 nodes and 92,051,051 edges; we refer to this network as   the Curated Exosome Network (CEN). Its largest connected component consists of 13,988,426 nodes and accounts for 99.99\% of the CEN.
+
+\emph{Marker nodes}. To identify exosome-relevant publications and communities, we re-used a set of marker nodes described in  \citep{Wedell2022}. These are the cited references in 12 different recent review articles on exosomes and extracellular vesicles and consist of 1218 unique nodes. Of these, 1021 are present in the CEN. 
 
 \subsection{Methods} Motivated by the graph-theoretic concept of k-cores \citep{Giatsidis2011,malliaros2019}, we have previously constructed a clustering pipeline we refer to as  the Iterative K-core Clustering (IKC) pipeline in \cite{Wedell2022}, This scalable and tunable method takes, as input, two parameters $k$ and $p$ with $k > p \geq 1$, and computes a clustering of a given network $N$ into disjoint clusters where each cluster has a ``core'' or ``center" component, and a ``periphery". This clustering is designed to satisfy several criteria: (1) the core of each cluster is connected,  has positive modularity ($m$-valid), and each node in the center  is adjacent to at least $k$ other nodes in the center ($k$-valid), and (ii) every node in the periphery of a cluster is adjacent to at least $p$ center nodes in the cluster ($p$-valid). Thus, membership of the core of a cluster requires a greater degree of connectivity to the other center nodes than membership of the periphery. 
 
@@ -105,7 +109,7 @@ We set out to answer the following questions.
 
 \subsection{Experiment 1: Comparison to random networks} In an initial calibration experiment, we clustered the curated exosome network (CEN) with IKC with  $k = {10,20,30,40, 60}$. The distribution of resultant cores is consistent with our observations in \cite{Wedell2022}, with maximum coverage seen at the lowest value of $k$ used (Supplementary Materials). At the value of $k$ with maximum coverage (IKC\_k10), 128 $km$-valid cores, containing a total of 535,165 nodes, are discovered in the CEN network. These cores range in size from 14 to 214,877, with a median core size of 79, and minimum core degree (MCD) varying from 10-53 and median MCD of 16. 
 
-To examine random effects in IKC clustering that could contribute to observed results, we generated 10 replicates of a configuration null model where the edges of the input clustering were randomized while preserving the total number of nodes, the degree of each node, the total number of nodes, and the publication year of each cited node in a citing-cited node pair. These `shuffled' networks were then clustered using IKC with  $k=10$ (IKC\_k10). In all 10 cases, only a single $km$-valid core with MCD of 15 was extracted, although the number of nodes in each of these cores varied as did modularity of the core (Table~\ref{tab:tab1}). The median size of this cluster across 10 replicates was 435,216. We did not run IKC at higher values for $k$ on the random networks since  the minimum core degree (MCD) of 15 for the single cluster would have been exceeded and not result in any clusters. We also generated 100 replicates of an Erd\H{o}s-Renyi graph with the same number of nodes and edges as the CEN network and clustered them with IKC\_k10 (Supplementary Material). No $km$-valid clusters were generated from the Erd\H{o}s-Renyi graphs. Thus, the results seen in IKC clustering on a real world network are unlikely to be the result of random effects. 
+To examine random network effects that could contribute to observed results from IKC, we generated 10 replicates of a configuration null model where the edges of the input clustering were randomized while preserving the total number of nodes, the degree of each node, the total number of nodes, and the publication year of each cited node in a citing-cited node pair. These `shuffled' networks were then clustered using IKC with  $k=10$ (IKC\_k10). In all 10 cases, only a single $km$-valid core with MCD of 15 was extracted, although the number of nodes in each of these cores varied as did modularity of the core (Table~\ref{tab:tab1}). The median size of this cluster across 10 replicates was 435,216. We did not run IKC at higher values for $k$ on the random networks since  the minimum core degree (MCD) of 15 for the single cluster would have been exceeded and not result in any clusters. We also generated 100 replicates of an Erd\H{o}s-Renyi graph with the same number of nodes and edges as the CEN network and clustered them with IKC\_k10 (Supplementary Material). No $km$-valid clusters were generated from the Erd\H{o}s-Renyi graphs. Thus, the results seen in IKC clustering on a real world network are unlikely to be the result of random effects. 
 % derived from k_10_totaldegree_1percent_original_cluster_stats.csv in /shared/aj_manuscript_data/experiment_1/. 
 
 % > shuffled_df
@@ -175,7 +179,7 @@ Approximately 74\% and 87\% of  128 cores increase in size with AOC\_m and AOC\_
 \label{fig:fig1}
 \end{figure}
 
-We then examined the distribution of clusters per candidate node after AOC treatment of clusterings generated by  IKC with $k \in \{10, 20, 30, 40, 50\}$. For AOC\_k treatment of IKC\_k10 cluster, approximately 46\% of the nodes were assigned to a single clusters. The remaining 54\% nodes were assigned to between 2 and 24 clusters in progressively decreasing counts each with roughly 26\% of nodes assigned to 2 clusters and only 1 node being assigned to 24 different clusters (Table~\ref{tab:tab2}). AOC\_m in comparison to AOC\_k, results in fewer multiple cluster assignments because of its more stringent membership criterion (Table~\ref{tab:tab2} and Figure~\ref{fig:fig2}).
+We then examined the distribution of clusters per candidate node after AOC treatment of clusterings generated by  IKC with $k \in \{10, 20, 30, 40, 50\}$. For AOC\_k treatment of IKC\_k10 clusters approximately 46\% of the nodes were assigned to a single cluster. The remaining 54\% nodes were assigned to between 2 and 24 clusters in a progressively decreasing manner with roughly 26\% of nodes assigned to 2 clusters and only 1 node being assigned to 24 different clusters (Table~\ref{tab:tab2}). AOC\_m in comparison to AOC\_k, results in fewer multiple cluster assignments because of its more stringent membership criterion (Table~\ref{tab:tab2} and Figure~\ref{fig:fig2}).
 
 \begin{figure}[H]
 	\centering
@@ -215,31 +219,9 @@ We then examined the distribution of clusters per candidate node after AOC treat
 \label{fig:fig3}
 \end{figure}
 
-\textcolor{blue}{We need something here about total degree correlation with number of clusters, perhaps with number of tier 1 cluster memberships? Something.}
-\textcolor{red}{I'm on it. What about Akhil's new plots?}
+To ask whether node degree is associated with the number of clusters assigned to, we examined all nodes in the network and compared their in-graph citation count to the number of clusters they were assigned to, either in AOC\_m or AOC\_k treatment of IKC\_k10 clustering of the CEN (Figure~\ref{fig:fig3}). It is evident that high in-graph citation count is necessary but not sufficient for multiple cluster assignments since all the nodes assigned to 10 or more communities have at least 10,000 in-graph citations. However, these are a relatively small number and represent \emph{George add some notes about what kinds of papers these are}. More interesting, however, are the highly cited nodes in a small number of clusters.We also note that some nodes of high-degree are singletons that are not assigned to any community in IKC because they do not meet the $k$ criterion. \emph{what does this mean? we should discuss}.
 
-\subsection{Experiment ??: Examining overlap between clusters}
-\textcolor{blue}{George, what experiment does this belong in?}
-\begin{figure}[H]
-	\centering
-	\begin{subfigure}[t]{0.48\textwidth}
-	 \centering
-	 \includegraphics[width=\linewidth]{ikc10_k_pw.pdf} 
-	 %\caption{Generic fig2 a caption} \label{fig:2a}
-	 \end{subfigure}
- \hfill
-	\begin{subfigure}[t]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{ikc10_m_pw.pdf} 
-        %\caption{Generic fig2 b caption} \label{fig:2b}
-    	\end{subfigure}
-\caption{Overlapping clusters produced by IKC(10)+AOC.  Clusters were generated from CEN data by IKC using $k=10$. These clusters were then enriched through the AOC process enforcing either \emph{k} (left panel) or \emph{mcd} (right panel). 
-The clusters produced  by this two-step process are overlapping. We present information about overlap between these clusters using edges and thickness reflecting how much they overlap; only pairs that have overlap Jaccard Coefficient greater  than the median  non-zero overlap Jaccard Coefficient are connected by edges. 
-Cluster numbers in both panels retain cluster numbers from the input IKC clustering.}
-\label{fig:fig4}
-\end{figure}
-
-\subsection{Experiment 4: Marker node concentrations}
+\subsection{Experiment 3: Marker node concentrations}
 
 \begin{figure}[H]
 	\centering
@@ -277,6 +259,28 @@ Cluster numbers in both panels retain cluster numbers from the input IKC cluster
 \caption{\textcolor{blue}{George, what is this table about? I don't know..}}
 \label{tab:tab1}
 \end{table}
+
+\subsection{Experiment ??: Examining overlap between clusters}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[t]{0.48\textwidth}
+	 \centering
+	 \includegraphics[width=\linewidth]{ikc10_k_pw.pdf} 
+	 %\caption{Generic fig2 a caption} \label{fig:2a}
+	 \end{subfigure}
+ \hfill
+	\begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{ikc10_m_pw.pdf} 
+        %\caption{Generic fig2 b caption} \label{fig:2b}
+    	\end{subfigure}
+\caption{Overlapping clusters produced by IKC(10)+AOC.  Clusters were generated from CEN data by IKC using $k=10$. These clusters were then enriched through the AOC process enforcing either \emph{k} (left panel) or \emph{mcd} (right panel). 
+The clusters produced  by this two-step process are overlapping. We present information about overlap between these clusters using edges and thickness reflecting how much they overlap; only pairs that have overlap Jaccard Coefficient greater  than the median  non-zero overlap Jaccard Coefficient are connected by edges. 
+Cluster numbers in both panels retain cluster numbers from the input IKC clustering.}
+\label{fig:fig4}
+\end{figure}
+
 
 \clearpage
 \begin{sidewaystable}[h!]
