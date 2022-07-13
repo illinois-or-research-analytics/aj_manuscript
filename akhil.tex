@@ -42,7 +42,7 @@
 \begin{document}
 \maketitle
 
-\abstract{Through discovery of meso-scale structures, community detection methods assist the understanding of complex networks. A variety of clustering approaches have been developed for this purpose. However, many community finding methods rely on disjoint clustering in which a node is only assigned to one community or cluster. This strict requirement limits the ability to inclusively describe communities since some nodes may reasonably be assigned to many communities. Whereas, we previously reported a scalable and modular pipeline that discovers disjoint research communities from the scientific literature, we now present a complementary overlapping community approach.  We present findings from this new approach on a network of over 13 million nodes that captures recent research in the very rapidly growing field of extracellular vesicles in biology.}
+\abstract{Community detection methods assist the understanding of complex networks through discovery of meso-scale structures. A variety of approaches have been developed for this purpose. However, many community finding methods rely on disjoint clustering techniques, in which a node is only assigned to one community or cluster. This strict requirement limits the ability to inclusively describe communities since some nodes may reasonably be assigned to many communities. Whereas, we previously reported a scalable and modular pipeline that discovers disjoint research communities from the scientific literature, we now present a complementary overlapping community approach.  We present findings from this new approach on a network of over 13 million nodes that captures recent research in the very rapidly growing field of extracellular vesicles in biology.}
 
 \clearpage
 
@@ -52,20 +52,20 @@ An approach to identifying research communities is through analyzing citation pa
 
 We stress that citation density alone does not make a confirming argument for the existence of a community. However, community finding techniques are valuable in being able to efficiently search large datasets for communities that can then be examined with complementary techniques, ideally supported by domain expertise.
 
-Beyond community detection, however, we are also interested in substructure (specifically, structure within communities), as it reflects roles and dynamics among members. \cite{Price1966}, in their study of the oxidative phosphorylation community, reported center-periphery substructure \citep{Breiger2014}: a small core of influential researchers and a much larger transient population. Core-periphery or center-periphery patterns have also been reported in other networks using different techniques, such as block modeling and k-core decomposition arguing for some degree of ubiquity in their occurrence \citep{borgatti2000models,Rombach2017,gallagher2021clarified,yanchenko_2202.04455}. 
+We are also interested in substructure (specifically, structure within communities), as it reflects roles and dynamics among members. \cite{Price1966}, in their study of the oxidative phosphorylation community, reported center-periphery substructure \citep{Breiger2014}: a small core of influential researchers and a much larger transient population. Core-periphery or center-periphery patterns have also been reported in other networks using different techniques, such as block modeling and k-core decomposition arguing for some degree of ubiquity in their occurrence \citep{borgatti2000models,Rombach2017,gallagher2021clarified,yanchenko_2202.04455}. 
 
-A considerable literature exists on community finding in graphs, and a variety of community finding or clustering approaches have been used in scientometrics~\citep{Newman2006,Fortunato2009,Boyack2010,Boyack2019,Traag2019,Ahlgren2020,Chandrasekharan2021,Wedell2022}. The majority of these approaches focus on disjoint partitioning, where a vertex is only assigned to one community. 
+A considerable literature exists on community finding in graphs, and a variety of community finding or clustering approaches have been used in scientometrics~\citep{Newman2006,Fortunato2009,Boyack2010,Boyack2019,Traag2019,Ahlgren2020,Chandrasekharan2021,Wedell2022}. The majority of these approaches focus on disjoint partitioning, where a vertex or node is only assigned to one community or cluster.
 
-We recently reported Iterative K-core Clustering or IKC \citep{Wedell2022}, a recursive algorithmic approach based on the k-core property \citep{Giatsidis2011,malliaros2019}, which helps identify densely connected parts of a graph. IKC recursively extracts disjoint k-cores from a graph beginning with the most dense  k-core and until some user-specified value of $k$ is reached. 
+We recently reported Iterative K-core Clustering or IKC \citep{Wedell2022}, a recursive algorithmic approach based on the k-core property \citep{Giatsidis2011,malliaros2019}, which helps identify densely connected parts of a graph. IKC recursively extracts disjoint k-cores from a graph beginning with the most dense  k-core and until some user-specified value of $k$ is reached. IKC avoids global modularity maximization \citep{lancichinetti2011limits} but enforces positive modularity for individual communities and the minimum value of $k$ set by a user. 
 
-We implemented IKC as the first step in a tunable modular pipeline to identify communities with core-periphery structure. Subsequent steps in the pipeline include breaking large cores, and adding peripheral nodes to each core to construct communities with core-periphery structure. We applied this pipeline to a network of roughly 14 million articles rooted in the rapidly growing field of extracellular vesicle biology \citep{Wedell2022}. 
+We implemented IKC as the first step in a tunable modular pipeline to identify communities with core-periphery structure. Subsequent steps in the pipeline include breaking large cores, and adding peripheral nodes to each core to construct communities with core-periphery structure. We tested this pipeline against a network of greater than 14 million articles that are representative of the rapidly growing field of extracellular vesicle biology \citep{Wedell2022}. 
 
-A limitation of IKC is that  it produces disjoint clusters, and some articles can reasonably be assigned to more than one community. This limitation is especially relevant to articles that describe widely used methods but is conceivably also relevant to articles reporting discovery that are influential in more than one community.   However, this is a problem with nearly all clustering methods, and suggests a need for methods that can produce meaningful overlapping clusters. 
+A limitation of IKC is that  it produces disjoint clusters, and some articles can reasonably be assigned to more than one community. This limitation is especially relevant to articles that describe widely used methods but is also relevant to articles reporting discovery that are influential in more than one community.  Thus, there is a need for methods that can produce meaningful overlapping clusters. 
 
-Several methods have been developed that can produce overlapping clusters although none of them were designed to specifically address core-periphery structure in the scientific literature  \citep{Baumes2005,Palla2005,banerjee2005model,Cleuziou2008,Lancichinetti2009,Lu2012}. An interesting approach is a two-step procedure where the input graph is first transformed into a line graph whose nodes represent edges in the original graph \citep{Harary1960}.  The line graph is then clustered and this output can be mapped back to the input graph to generate overlapping clusters. This general approach has been used by others on citation data \citep{Evans2009,Havemann2021}. However, line graph  techniques are not very scalable, since the size of a line graph is much larger than the size of its input graph. For example, the network that we studied in \cite{Wedell2022} would grow from 13,989,436 nodes and 92,051,051 edges to 92,051,051 nodes and 160,428,881,121 edges (Supplementary Materials), which presents a challenge to clustering software.
+Several methods have been developed that can produce overlapping clusters although none of them were designed to specifically address core-periphery structure in the scientific literature  \citep{Baumes2005,Palla2005,banerjee2005model,Cleuziou2008,Lancichinetti2009,Lu2012}. An interesting approach is the two-step procedure where the input graph is first transformed into a line graph whose nodes represent edges in the original graph \citep{Harary1960}.  The line graph is then clustered and this output can be mapped back to the input graph to generate overlapping clusters. This general approach has been used by others on citation data \citep{Evans2009,Havemann2021}. However, line graph  techniques are not very scalable, since the size of a line graph is much larger than the size of its input graph. For example, the network that we studied in \cite{Wedell2022} would grow from 13,989,436 nodes and 92,051,051 edges to 92,051,051 nodes and 160,428,881,121 edges (Supplementary Materials), which presents a challenge to clustering software.
  
 To address the disjoint cluster problem with IKC, we present ``Allowing Overlapping Clusters" (AOC), a scalable meta-method that takes the output of IKC and makes multiple community assignments from a list of candidate nodes. We present results from AOC applied to the cores generated by the IKC method, and discuss the results and discovery made from them. While the overarching question that motivates our work is describing research communities, this article is focused on 
-inclusively capturing the cores of core-periphery structured communities. 
+extending the IKC method towards inclusively capturing the cores of core-periphery structured communities and towards more general use in community detection. 
  
 \section{Materials and Methods}
 
@@ -193,12 +193,12 @@ We then examined the distribution of clusters per candidate node after AOC treat
 \centering
 	\begin{subfigure}[t]{0.48\textwidth}
 	 \centering
-	 \includegraphics[width=\linewidth]{cluster_group.pdf} 
+	 \includegraphics[width=\linewidth]{cluster_group.png} 
 	 \end{subfigure}
  \hfill
 	\begin{subfigure}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{tier_cluster.pdf} 
+        \includegraphics[width=\linewidth]{tier_cluster.png} 
     	\end{subfigure}
 \captionsetup{width=0.9\textwidth}	
 \caption{Cluster and tier assignments by node degree. The subfigure on the left shows the distribution of numbers of clusters each publication belongs to for each group, and the subfigure on the right shows cluster count by Tier 1 membership for each group; each subfigure presents these results for both AOC\_m and AOC\_k. Nodes are partitioned into five groups based on their total in-network degree (in\_degree + out\_degree) with group 1 containing the nodes with the smallest total degree and group 5 with the nodes with the largest total degree. Group 1 has the largest number of observations and group 5 has the smallest. Group statistics (gp no; class limit; no of nodes): [gp1; $<$100;  272,395], [gp2; 100-999; 254,832], [gp3; 1,000-9,999; 7,773], [gp4; 10,000-99,999; 161], and [gp5; $>$100,000; 4]. }
@@ -356,19 +356,11 @@ for either AOC\_m (left) or AOC\_k (right) treatment for five different values o
 
 \clearpage
 
+\section{Conclusions} In this article, we step delicately between method development and exploratory discovery. One goal was to construct a modular pipeline that could allow users to flexibly apply it to a variety of problems. The second 
+goal was to develop the understanding of communications in the area(s) of research specialization engaged in extracellular vesicle research. 
 
-\subsection{Equilibration Across Cores}
-
-\subsection{Nodes of High Degree}
-
-\subsection{Enforcing MCD}
-
-\subsection{Data}
-
-\section{Conclusions}
+In describing a method that can be applied in a subject-independent manner we have attempted to superimpose contextual relevance through controlling the input data and evaluation criteria \citep{vonluxburg2012clustering}.  
 \section{Acknowledgments etc.}
-
-
 
 \bibliographystyle{apalike}
 \bibliography{akhil.bib}
