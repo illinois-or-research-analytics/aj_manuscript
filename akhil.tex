@@ -91,6 +91,18 @@ Thus, running   AOC on the IKC clustering produces a set of potentially overlapp
 
 \section{Results and Discussion}
 
+\begin{itemize}
+\item random network comparison
+\item cluster size increases after AOC\_m/k; 
+\item multiple cluster assignments per node; non-singleton node redistribution experiments
+\item node property effects - degree, and Tier
+\item candidate node experiment- singleton high degree experiments
+\item marker node effects
+\item redraw graph based on node overlaps
+\item classify nodes reassigned to multiple clusters
+\item other
+\end{itemize}
+
 \subsection{Experiment 1: Comparison to random networks} In an initial calibration experiment, we clustered the curated exosome network (CEN) using IKC where $k \in {\{10,20,30,40, 50\}}$. The resultant distribution of cores is consistent with our observations in \cite[Figure~3]{Wedell2022}, with maximum coverage seen at the lowest value of $k$ used. At the value of $k$ with maximum coverage (IKC\_k10), 128 $km$-valid cores containing a total of 535,165 nodes (0.54\% of the CEN network) are discovered. These cores range in size from 14 to 214,877, with a median core size of 79, and minimum core degree (MCD) varying from 10-53 with median MCD of 16. Thus, the CEN is a 53-degenerate graph consisting of 13,989,436 vertices.
 
 To examine random network effects that could contribute to observed results from IKC, we generated 10 replicates of a configuration null model where the edges of the input clustering were randomized while preserving the total number of nodes, the degree of each node, the total number of nodes, and the publication year of each cited node in a citing-cited node pair. These shuffled networks were then clustered using IKC\_k10. In all 10 cases, only a single $km$-valid core with MCD of 15 was extracted, although the number of nodes in each of these cores varied as did modularity of the core (Table~\ref{tab:tab1}). The median size of this cluster across 10 replicates was 435,216. We did not run IKC at higher values for $k$ in the range that we used ($k \in {\{10,20,30,40, 50\}}$) on the shuffled networks since  the minimum core degree (MCD) of 15 for the single cluster would have been exceeded and no clusters would have resulted. 
