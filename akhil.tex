@@ -228,7 +228,7 @@ AOC\_m, in comparison to AOC\_k, results in fewer multiple cluster assignments b
         \includegraphics[width=\linewidth]{tier_cluster.png} 
     	\end{subfigure}
 \captionsetup{width=0.9\textwidth}	
-\caption{Cluster and tier assignments by node degree. The subfigure on the left shows the distribution of numbers of clusters each publication belongs to, and the subfigure on the right shows cluster count by Tier 1 membership for each group; each subfigure presents these results for both AOC\_m and AOC\_k. Nodes are partitioned into five groups based on their total in-network degree (in\_degree + out\_degree) with group 1 containing the nodes with the smallest total degree and group 5 with the nodes with the largest total degree. Group 1 has the largest number of observations and group 5 has the smallest. Group statistics (gp no; class limit; no of nodes): [gp1; $<$100;  272,395], [gp2; 100-999; 254,832], [gp3; 1,000-9,999; 7,773], [gp4; 10,000-99,999; 161], and [gp5; $>$100,000; 4]. }
+\caption{Cluster and tier assignments by node degree. The subfigure on the left shows the distribution of numbers of clusters each publication belongs to, and the subfigure on the right shows cluster count by Tier 1 membership for each group; each subfigure presents these results for both AOC\_m and AOC\_k. Nodes are partitioned into five groups based on their total in-network degree (in\_degree + out\_degree) with group 1 containing the nodes with the smallest total degree and group 5 with the nodes with the largest total degree. Group 1 has the largest number of observations and group 5 has the smallest. Group statistics (gp no; class limit; no of nodes): [gp1; $<$100;  272,395], [gp2; 100-999; 254,832], [gp3; 1,000-9,999; 7,773], [gp4; 10,000-99,999; 161], and [gp5; $\geq$100,000; 4]. }
 \label{fig:fig3}
 \end{figure}
 
@@ -261,13 +261,15 @@ citation count), provides an additional perspective into the publication, especi
 
 We have previously proposed a tier classification for nodes in a cluster, in which Tier 1 refers to the nodes in the top 10th percentile with respect to intra-cluster citations \citep{Chandrasekharan2021}. Thus, when measuring in-degree within the cluster, a Tier 1 node is in the top 10 percent compared to all other nodes in its cluster. We observe that nodes assigned to multiple clusters are more likely to have Tier 1 status (Figure~\ref{fig:fig3}, right subfigure). The Tier 1 count increases for AOC\_k compared to AOC\_m; since cluster size  increases for AOC\_k compared to AOC\_m and Tier 1 contains the top 10\% of the nodes in each cluster, this is also as expected. \textcolor{blue}{Let's discuss this last sentence.}
 For groups 1--4, there are some publications that are Tier 1 in all communities they belong to, some that are never in Tier 1, but the majority are in between. 
-However, for group 5, all publications are Tier 1 for at least 7 communities. 
-\textcolor{blue}{George, do we want to provide more information than this scatterplot. Actually I think it would be good to specifically discuss these four papers?} 
+However, while the four publications in group 5 are Tier 1 for at least 7 communities, only one is Tier 1 for more than 10 communities. 
+Interestingly, there are four publications in Group 4 that are in Tier 1 for at least 10 communities, two that are Tier 1 in more than 10 communities, and one of these is Tier 1 in 15 communities.
 
+
+\textcolor{blue}{George, do we want to provide more information than this scatterplot. Actually I think it would be good to specifically discuss these four papers in Group 5. I also think it would be good to discuss the papers in Group 4 that are in only one community, and others that are in many clusters.  Perhaps examples of papers in Group 4 that are Tier 1 in more communities than some papers in Group 5.}
 
 
 These trends show that while total degree is correlated with the number of clusters a publication belongs to and how many clusters it is Tier 1 for,
-these are not determined just by total degree. Thus, the cluster membership and Tier status within their communities provides a complementary perspective on  the publication that goes beyond its citation count.
+these values are not determined just by total degree. Thus, the cluster membership and Tier status within their communities provides complementary insights into  the publications that goes beyond its citation count.
  
  \textcolor{blue}{ 
  \emph{this paragraph troubles me. It ignores the possibility that other variables may be at play}. }
