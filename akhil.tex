@@ -220,7 +220,7 @@ AOC\_m, in comparison to AOC\_k, results in fewer multiple cluster assignments b
 	\begin{subfigure}[t]{0.48\textwidth}
 	 \centering
 	 \includegraphics[width=\linewidth]{cluster_group.png} 
-	 \end{subfigure}
+	 \end{subfigure}5
  \hfill
 	\begin{subfigure}[t]{0.48\textwidth}
         \centering
@@ -232,25 +232,46 @@ AOC\_m, in comparison to AOC\_k, results in fewer multiple cluster assignments b
 \end{figure}
 
 
-To ask whether node degree is associated with the number of clusters assigned to, we examined all nodes in the network and compared their total in-graph degree to the number of clusters they were assigned, either in AOC\_m or AOC\_k treatment of IKC\_k10 clustering of the CEN (Figure~\ref{fig:fig3}). The first comparison is between clusters produced by AOC\_m and AOC\_k (left subfigure), which shows that the number of clusters assignments per node is larger for AOC\_k than for AOC\_m. This is not unexpected since AOC\_m is a more stringent membership criterion. 
+To ask whether node degree is associated with the number of clusters assigned to, we examined all nodes in the network and compared their total in-graph degree to the number of clusters they were assigned, either in AOC\_m or AOC\_k treatment of IKC\_k10 clustering of the CEN (Figure~\ref{fig:fig3}). 
+We partitioned the nodes into five groups based on their total in-network degree (in\_degree + out\_degree),  with group 1 containing the nodes with the smallest total degree (less than 100), group 2 the nodes with total degree between 100 and 999, group 3 the nodes with total degree between 1000 and 9,999, 
+group 4 the nodes with total degree between 10,000 and 99,999, and group 5 the nodes with total degree at least 100,000.
+Although group classification is based on total degree, since we have removed the publications with large numbers of references, any publication with high total 
+in-network degree by necessity also has high  in-network citation count. 
+Of these 535,165 nodes, 50.9\% are  in group 1, 47.6\% are in group  2, 1.5\% are in group 3,  0.03\% are in group 4, and 0.0007\% are in group 5.
+Thus, 98.5\% are in groups 1 and 2, indicating that membership in group 3  reflects a large citation count, and membership
+in groups 4 or 5 (the top 169 nodes by total degree) reflects ultra-large citation counts.    
+Bearing in mind that these nodes are the ones that were added as core members to clusters, this is a further indication that even membership in group 2 reflects higher than typical  citation counts.
 
-Turning to AOC\_k specifically, we now consider how in-network degree impacts the total number of clusters each publication is in  (Figure~\ref{fig:fig3}, left subfigure).
-\textcolor{blue}{George, there is text here about total degree and then text about indegree (in-network citations).  I think we need to clarify how nodes are selected -- which is the basis?} \textcolor{red}{It's not in-degree. It's total in-graph degree as opposed to total degree in say Dimensions or Scopus. I'll try and clarify this.} Although group classification is based on total degree, since we have removed the publications with large numbers of references, any publication with high total degree by necessity also has high citation count. 
 
-The first observation is that all the nodes assigned to 14 or more communities are in groups 4 or 5, and so have total degree at least 10,000, which corresponds to the 99.999th percentile of in-network citations.
-We also note that only 169 articles have degree of 10,000 or greater in the CEN. 
-\textcolor{blue}{George, the numbers below are wrong for aoc\_k but seem to be about aoc\_m, so I am fixing them, based on the Figure 3 results.} \textcolor{red}{I think you wrote the paragraph below. Let's discuss- I feel that the next two paragraphs are confusing anyway.}
 
+We first compare clusterings produced by AOC\_m and AOC\_k (left subfigure), which shows that the number of clusters assignments per node is larger for AOC\_k than for AOC\_m. This is not unexpected since AOC\_m is a more stringent membership criterion. 
+For both AOC\_m and AOC\_k, the number of clusters that any node is assigned to increases as we move from group 1 to group 5, showing
+that in general total degree is correlated with the number of clusters that a node is assigned to.
+Hence, in-network citation count is correlated with the number of clusters that a publication is a core member of.
+
+However, the distributions for each group are overlapping, revealing potentially interesting differences between publications that are not
+explained just by citation count. 
+Here we discuss these differences, specifically in the context of AOC\_k. 
+The largest number of clusters any node is assigned to is 25 and the smallest number is 1.
+However, all the nodes assigned to 14 or more communities are in groups 4 or 5, and so have total degree at least 10,000.
+Thus,  only the nodes with ultra-high citation counts become members of 14 communities.
+In addition, group 5 publications belong to a minimum of 14 clusters.  
+In contrast, every other group has publications that belong to only 1 cluster. 
 The largest number of communities for publications in groups 1 and 2 is  9, %7, 
 group 3 publications appear in at most 13 communities, %9 clusters, 
 group 4 publications appear in up to 20 communities, %13 clusters, 
 and group 5 publications appear in up to 25 communities. 
-Since only group 5 publications appear in more than 20 communities, for this network ultra-high in-graph citation count is  necessary  for a publication to be assigned to a very large number of communities. 
-It is also interesting to note that every publication in group 5 is in at least 15 communities.
+Since only group 5 publications appear in more than 20 communities, for this network ultra-high in-graph citation count is  necessary  for a publication to be assigned to a very large number of communities.  
 
-On the other hand, there are highly cited publications that  are assigned to a small number of communities.
+On the other hand, there are highly cited publications that  are assigned to a small number of communities (even just one community), and publications that are not very highly cited (e.g., members of groups 1 and 2) that are in 9 communities. 
 For example, all the publications in group 4  have total degree at least 10,000, but  the median number of community memberships is 5, and some publications are in only one community. 
-Also noteworthy is that there are also publications from groups 2 and 3 of much lower degree that also appear in 5 to 10 communities.
+\textcolor{blue}{George, here is whee I think we could give some examples.
+\begin{itemize}
+\item Publications in Group 4 that are only in one community
+\item Publications in Group 1 that are in 5 communities (which is  the median for Group 4)
+\item Publications in Group 2 that are in 5--9 communities (above the median for Group 4)
+\end{itemize}
+}
 This shows that  the number of communities a publication belongs to, although influenced by its total degree (and hence by its
 citation count), provides an additional perspective into the publication, especially since having a very large total degree (above 10,000) is not sufficient  for membership in many communities. 
 
@@ -258,7 +279,10 @@ citation count), provides an additional perspective into the publication, especi
  
  
 
-We have previously proposed a tier classification for nodes in a cluster, in which Tier 1 refers to the nodes in the top 10th percentile with respect to intra-cluster citations \citep{Chandrasekharan2021}. Thus, when measuring in-degree within the cluster, a Tier 1 node is in the top 10 percent compared to all other nodes in its cluster. We observe that nodes assigned to multiple clusters are more likely to have Tier 1 status (Figure~\ref{fig:fig3}, right subfigure). The Tier 1 count increases for AOC\_k compared to AOC\_m; since cluster size  increases for AOC\_k compared to AOC\_m and Tier 1 contains the top 10\% of the nodes in each cluster, this is also as expected. \textcolor{blue}{Let's discuss this last sentence.}
+Another perspective that provides additional insight into publications is their ``tier" within their communities.
+In \cite{Chandrasekharan2021}, we  proposed a tier classification for nodes in a cluster, in which Tier 1 refers to the nodes in the top 10th percentile with respect to intra-cluster citations; here we consider tier status within the different communities for each publication .
+ Thus, when measuring in-degree within the cluster, a Tier 1 node is in the top 10 percent compared to all other nodes in its cluster. 
+ We observe that nodes assigned to multiple clusters are more likely to have Tier 1 status (Figure~\ref{fig:fig3}, right subfigure). The Tier 1 count increases for AOC\_k compared to AOC\_m; since cluster size  increases for AOC\_k compared to AOC\_m and Tier 1 contains the top 10\% of the nodes in each cluster, this is also as expected. \textcolor{blue}{Let's discuss this last sentence.}
 For groups 1--4, there are some publications that are Tier 1 in all communities they belong to, some that are never in Tier 1, but the majority are in between. 
 However, while the four publications in group 5 are Tier 1 for at least 7 communities, only one is Tier 1 for more than 10 communities. 
 Interestingly, there are four publications in Group 4 that are in Tier 1 for at least 10 communities, two that are Tier 1 in more than 10 communities, and one of these is Tier 1 in 15 communities.
