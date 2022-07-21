@@ -92,11 +92,11 @@ Thus, running   AOC on the IKC clustering produces a set of potentially overlapp
 Retractions were identified from a database kindly provided by Retraction Watch and matched to nodes in the network using digital object identifiers (DOIs). Any article with 250 or more references was also removed. 
 While the network in \cite{Wedell2022} consisted of 14,695,475 nodes and 99,663,372 edges, the network resultant from removing retracted and high-referencing articles comprised 13,989,436 nodes and 92,051,051 edges; we refer to this network as the Curated Exosome Network (CEN). Its largest connected component consists of 13,988,426 nodes and accounts for 99.99\% of the CEN.
 
-\emph{Marker nodes}. To identify exosome-relevant publications and communities, we re-used a set of marker nodes described in  \citep{Wedell2022}. These 1,218 markers are the cited references combined from 12 different recent review articles on exosomes and extracellular vesicles. Of these, 1,021 are present in the CEN and  were used to identify clusters relevant to extracellular vesicles.
+\emph{Marker nodes}. To identify exosome-relevant publications and communities, we re-used a set of marker nodes described in  \citep{Wedell2022}. These 1,218 markers are the cited references combined from 12 different recent review articles on exosomes and extracellular vesicles. Of these, 1,021 are present in the CEN and  were used to identify clusters relevant to extracellular vesicles. We detected two cases in our network where the same doi was assigned to two different publication ids, 10.18632/oncotarget.18038 and 10.18632/oncotarget.18737. Hence, the actual number of unique marker dois that are found in the CEN is 1019. For the purpose of this study, we assume 1021 markers.
 
 \section{Results and Discussion}
 
-As we explain in the preceding sections, AOC is a meta-method for overlapping communities that takes as input (i) a k-core based clustering such as IKC, (ii) a set of candidate nodes for consideration of membership in multiple communities, and (iii) a parameter $k$ or $m$ that defines the criterion for membership (Materials and Methods). We now examine the properties of non-disjoint clusterings produced using IKC and AOC in tandem. We analyze the effects of AOC on IKC clusters using either the nodes in non-singleton IKC clusters as candidates (the second input parameter) or nodes in singleton clusters. We also study the distribution of marker nodes in AOC enhanced clusters and finally, examine overlap across AOC clusters of interest.
+As we explain in the preceding sections, AOC is a meta-method for overlapping communities that takes as input (i) a k-core based clustering such as IKC, (ii) a set of candidate nodes for consideration of membership in multiple communities, and (iii) a parameter $k$ or $m$ that defines the criterion for membership (Materials and Methods). We now examine the properties of non-disjoint clusterings produced using IKC and AOC in tandem. We analyze the effects of AOC on IKC clusters using either the nodes in non-singleton IKC clusters as candidates (the second input parameter) or nodes in singleton clusters. We also study the distribution of marker nodes in AOC enhanced clusters and finally, examine overlap across AOC clusters of interest. 
 
 \begin{itemize}
 \item random network comparison
@@ -312,14 +312,24 @@ These 15,039  nodes were used as candidate nodes for AOC\_m and AOC\_k treatment
 
 \subsection{Experiment 4: Marker node concentrations}
 
-In this experiment, we identify those communities rich in extracellular vesicle (EV) literature. The SABPQ protocol  \citep{Wedell2022} used to construct the CEN is inclusive by design. It captures nodes that are proximal, by citation, to a seed set identified through a lexical search \citep{Wedell2022}. The number of nodes in roughly two orders of magnitude larger than the nodes in the seed set. The distribution of clusters resulting from the application of one method or another is of interest from a graph theoretic perspective. However, from the perspective of discovery, we are specifically interested in those communities pertinent to EV biology. Therefore, we use 1,021 marker nodes (Materials and Methods) to identify those communities rich in EV content. Marker nodes were located in 40 of 128 IKC clusters with [insert right number] clusters accounting for [lkjsdlkjsdf].
+In this experiment, we identify those communities rich in extracellular vesicle (EV) literature. The SABPQ protocol  \citep{Wedell2022} used to construct the CEN is inclusive by design. It captures nodes that are proximal, by citation, to a seed set identified through a lexical search \citep{Wedell2022}. The number of nodes in roughly two orders of magnitude larger than the nodes in the seed set. The distribution of clusters resulting from the application of one method or another is of interest from a graph theoretic perspective. However, from the perspective of discovery, we are specifically interested in those communities pertinent to EV biology. Therefore, we used 1,021 marker nodes (Materials and Methods) to identify those communities rich in EV content. 
+
+All 1021 markers were found in non-singleton clusters after IC\_k10, AOC\_m, or AOC\_k. Of 128 IKC clusters, 17 contained marker nodes. Three of these 17 clusters (cluster numbers 3, 4 and 35) contained 167, 416, and 310 markers respectively and accounted for 87.5\% of 1021 markers. 
+
+With both AOC\_m and AOC\_k the concentration of markers increased compared to IKC (Figure~\ref{fig:marker-node-concentration}) from 1021 (IKC) to 1946 (AOC\_m) and 3220 (AOC\_k) respectively.
+
+In the case of AOC\_m, 20 clusters contained makers with cluster numbers 3,4 and 25 containing 434, 951, and 310 markers. For AOC\_k, 31 clusters contained markers with cluster numbers 3, 4, and 35 containing 733, 966, and 710 markers. In addition, cluster 20 increased its marker count from 18 (IKC) to 20 (AOC\_m) to 152 (AOC\_k). Notably, the proportion of 1021 marker nodes in the network increases from 40.7\% in cluster 4 (r1,c4) of IKC clustering to 93.1\% after AOC m to 94.6\% after AOC k. We interpret these observations as a more natural clustering of documents once the restrictions of disjoint clustering are lifted. In particular, clusters 3, 4, 20, and 35 merit qualitative examination as foci of extracellular vesicle research. 
+
+
 
 
 
 \begin{figure}[H]
+% generated from spring_2022_research/george/marker_heatmap.R
 	\centering
-	 \includegraphics[width=0.8\linewidth]{marker_comps_wide.pdf} 
-\caption{AOC\_m and AOC\_k increase marker node concentrations in IKC clusters. Data are shown for the 40 of 128 IKC clusters with non-zero marker node counts in IKC.  We show marker node counts in 40 clusters (shown in 5 rows with 8 clusters per row) before and after AOC.  Notably, the proportion of 1021 marker nodes in the network increases from 40.7\% in cluster 4 (r1,c4) of IKC clustering to 93.1\% after AOC\_m to 94.6\% after AOC\_k. The proportion of markers in cluster 25 (r4,c1) is the same for IKC and AOC\_m but increases to  69.5\% under the more permissive conditions of AOC\_m. Data for all 128 clusters are available in Supplementary Material.}
+	 \includegraphics[width=0.9\linewidth]{marker_comps_wide.pdf} 
+\captionsetup{width=0.9\textwidth}
+\caption{AOC\_m and AOC\_k increase marker node concentrations in IKC clusters. Data are shown for the 40 of 128 IKC clusters with non-zero marker node counts in IKC.  We show marker node counts in 40 clusters (shown in 5 rows with 8 clusters per row) before and after AOC.  Notably, the proportion of 1021 marker nodes in the network increases from 40.7\% in cluster 4 (r1,c4) of IKC clustering to 93.1\% after AOC\_m to 94.6\% after AOC\_k. The proportion of markers in cluster 25 (r4,c1) is the same for IKC and AOC\_m but increases to  69.5\% under the more permissive conditions of AOC\_k. Data for all 128 clusters are available in Supplementary Material.}
 \label{fig:marker-node-concentration}
 \end{figure}
 
