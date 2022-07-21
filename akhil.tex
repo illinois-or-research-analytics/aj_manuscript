@@ -318,11 +318,9 @@ All 1021 markers were found in non-singleton clusters after IC\_k10, AOC\_m, or 
 
 With both AOC\_m and AOC\_k the concentration of markers increased compared to IKC (Figure~\ref{fig:marker-node-concentration}) from 1021 (IKC) to 1946 (AOC\_m) and 3220 (AOC\_k) respectively.
 
-In the case of AOC\_m, 20 clusters contained makers with cluster numbers 3,4 and 25 containing 434, 951, and 310 markers. For AOC\_k, 31 clusters contained markers with cluster numbers 3, 4, and 35 containing 733, 966, and 710 markers. In addition, cluster 20 increased its marker count from 18 (IKC) to 20 (AOC\_m) to 152 (AOC\_k). Notably, the proportion of 1021 marker nodes in the network increases from 40.7\% in cluster 4 (r1,c4) of IKC clustering to 93.1\% after AOC m to 94.6\% after AOC k. We interpret these observations as a more natural clustering of documents once the restrictions of disjoint clustering are lifted. In particular, clusters 3, 4, 20, and 35 merit qualitative examination as foci of extracellular vesicle research. 
+In the case of AOC\_m, 20 clusters contained makers with cluster numbers 3,4 and 25 containing 434, 951, and 310 markers. For AOC\_k, 31 clusters contained markers with cluster numbers 3, 4, and 35 containing 733, 966, and 710 markers. In addition, cluster 20 increased its marker count from 18 (IKC) to 20 (AOC\_m) to 152 (AOC\_k). Notably, the proportion of 1021 marker nodes in the network increases from 40.7\% in cluster 4 (r1,c4) of IKC clustering to 93.1\% after AOC m to 94.6\% after AOC k. 
 
-
-
-
+We interpret these observations as a more natural clustering of documents once the restrictions of the EV literature in our network once disjoint clustering are lifted. In particular, clusters 3, 4, 20, and 35 merit qualitative examination as communities of extracellular vesicle research on account of their high marker node counts. It should be noted (Table~\ref{tab:marker-node-table}) that clusters 3 and 4 are large ($>$ 100,000 nodes) :whereas clusters 20 and 25 are relatively small ($<$ 10,000 nodes). \textcolor{red}{note to Srijan to critique}
 
 \begin{figure}[H]
 % generated from spring_2022_research/george/marker_heatmap.R
@@ -335,10 +333,56 @@ In the case of AOC\_m, 20 clusters contained makers with cluster numbers 3,4 and
 
 \clearpage
 
+%xtable(marker_suppl_data[aoc_k_mcount >0 ])
+% latex table generated in R 4.2.0 by xtable 1.8-4 package
+% Thu Jul 21 12:47:19 2022
+\begin{table}[!ht]
+\centering
+\resizebox{0.9\textwidth}{!}{
+\begin{tabular}{rrrrrrrr}
+  \hline
+cluster\_number & ikc\_mcount & ikc\_size & aoc\_m\_mcount & aoc\_m\_size & aoc\_k\_mcount & aoc\_k\_size \\ 
+  \hline
+1 &  24 & 36305 &  49 & 37469 & 211 & 98219 \\ 
+2 &  39 & 12451 &  44 & 12463 & 140 & 51553 \\ 
+{\textbf 3} & 167 & 170413 & 434 & 190427 & 733 & 265681 \\ 
+{\textbf 4} & 416 & 214877 & 951 & 293509 & 966 & 316185 \\ 
+5 &   1 & 10678 &   5 & 12419 &  14 & 14658 \\ 
+6 &   9 & 7207 &   9 & 7284 &  58 & 20893 \\ 
+8 &   0 & 3406 &   0 & 3579 &   4 & 4422 \\ 
+9 &   2 & 4497 &   3 & 4583 &  12 & 8599 \\ 
+10 &   0 & 406 &   0 & 485 &   1 & 736 \\ 
+11 &   0 & 1684 &   0 & 1752 &   4 & 3234 \\ 
+12 &   3 & 20076 &   6 & 20335 &  40 & 55113 \\ 
+  12 &  13 &   1 & 3419 &   3 & 3597 &   9 & 4731 \\ 
+  13 &  14 &   0 & 124 &   0 & 124 &   1 & 450 \\ 
+  14 &  15 &   0 & 9289 &   2 & 12942 &   2 & 12942 \\ 
+  15 &  16 &  11 & 7528 &  20 & 8790 &  37 & 11093 \\ 
+  16 &  18 &   0 & 2004 &   0 & 2004 &  18 & 15623 \\ 
+  17 &  19 &   0 & 2460 &   0 & 2489 &   3 & 5954 \\ 
+  18 &  {\textbf {20}} &  18 & 5478 &  76 & 6220 & 152 & 8509 \\ 
+  19 &  21 &   1 & 2553 &   1 & 2595 &   3 & 4961 \\ 
+  20 &  22 &   0 & 408 &   0 & 408 &   2 & 1004 \\ 
+  21 &  23 &   0 & 2343 &   0 & 2606 &   2 & 3035 \\ 
+  22 &  24 &   6 & 2575 &  15 & 2690 &  52 & 6350 \\ 
+  23 &  {\textbf {25}} & 310 & 1869 & 310 & 1871 & 710 & 9241 \\ 
+  24 &  30 &   1 & 470 &   1 & 484 &   1 & 1082 \\ 
+  25 &  34 &   0 & 237 &   0 & 239 &   3 & 612 \\ 
+  26 &  37 &  11 & 276 &  12 & 278 &  28 & 1344 \\ 
+  27 &  50 &   0 & 312 &   0 & 325 &   1 & 396 \\ 
+  28 &  53 &   0 & 561 &   0 & 562 &   1 & 1217 \\ 
+  29 &  66 &   1 & 144 &   1 & 144 &   3 & 512 \\ 
+  30 &  88 &   0 &  39 &   2 &  41 &   2 &  41 \\ 
+  31 & 116 &   0 &  66 &   2 &  74 &   7 &  94 \\ 
+   \hline
+\end{tabular}}
+\captionsetup{width=0.9\textwidth}
+\caption{Comparing marker node counts in IKC, AOC\_m, and AOC\_k, The count of markers (mcount) in each IKC cluster as well as the cluster size is shown for any of 128 clusters containing at least one marker node after IKC,  AOC\_m, and AOC\_k treatments. Cluster numbers 3, 4, 20 and 25 contain significantly higher marker counts.}
+\label{tab:marker-node-table}
+\end{table}
 
 \subsection{Experiment 5: Examining overlap between clusters}
-
-Finally, we examine the relationship between AOC modified clusters based on overlap...
+Finally, we examine the relationship between AOC modified clusters based on overlap.
 
 \begin{figure}[H]
 	\centering
