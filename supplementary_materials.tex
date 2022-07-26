@@ -1,0 +1,123 @@
+\documentclass[12pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{textcomp}
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{caption}
+\usepackage{subcaption}								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\usepackage{natbib}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{authblk}
+\hypersetup{
+    colorlinks=false,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdfpagemode=FullScreen,
+}
+\usepackage{float}
+\usepackage{rotating}
+\usepackage{adjustbox}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\usepackage{authblk}
+\title{Detecting Overlapping Research Communities Supplementary Material}
+\author[1]{Akhil Jakatdar\thanks{akhilrj2@illinois.edu}}
+\author[1]{Tandy Warnow\thanks{warnow@illinois.edu}}
+\author[1,2]{George Chacko\thanks{chackoge@illinois.edu}}
+\affil[1]{Department of Computer Science, University of Illinois Urbana-Champaign, Urbana, IL 61801}
+\affil[2]{Office of Research, Grainger College of Engineering, University of Illinois Urbana-Champaign, Urbana, IL 61801}
+
+% \setlength{\parindent}{0pt}
+%SetFonts
+
+\begin{document}
+\maketitle
+
+\abstract{Community detection methods assist the understanding of complex networks through discovery of meso-scale structures. A variety of approaches have been developed for this purpose. However, many community finding methods rely on disjoint clustering techniques, in which a node is only assigned to one community or cluster. This strict requirement limits the ability to inclusively describe communities since some nodes may reasonably be assigned to many communities. Whereas we previously reported a scalable and modular pipeline that discovers disjoint research communities from the scientific literature, we now present a complementary overlapping community approach.  We present findings from this new approach on a network of over 13 million nodes that captures recent research in the very rapidly growing field of extracellular vesicles in biology.}
+
+\clearpage
+
+\section{Line Graph Proof} 
+
+\subsection{Derivation of Line Graph Nodes and Edges}
+
+In transforming any undirected graph $G(V, E)$ into its corresponding line graph $L(G(V', E'))$, the number of vertices $|V'| = |E|$ as all edges in the original graph are transformed into vertices in its corresponding line graph.
+
+We can also see that every edge $e' \in E'$ can be described as a set of 2 edges $\{e_1, e_2\}$ where $e_1,  e_2 \in E$ where both edges are adjacent to some common vertex $v \in V$.  
+Thus in order to find the total number of edges $e' \in E'$ for some fixed vertex $v \in V$, we formulate the number of edges as $d_v \choose 2$ where $d_v$ represents the degree of $v$. Thus summing over all vertices in $V$, we get the following:
+\begin{equation}
+    \begin{aligned}
+    |E'| &= \sum^{V}_{v} {d_v \choose 2}\\
+    &= \sum^{V}_{v} \frac{d_v(d_v - 1)}{2}\\
+    &= \sum^{V}_{v} \frac{{d_v}^2}{2} - \sum^{V}_{v} \frac{d_v}{2}\\
+    &= \frac{1}{2}\sum^{V}_{v} {d_v}^2 - \sum^{V}_{v} \frac{d_v}{2}
+    \end{aligned}
+\end{equation}
+The expression $\sum^{V}_{v} \frac{d_v}{2}$ can be simplified to $|E|$ as the sum of the degrees of all vertices in $G$ divided by 2 is equivalent to the total number of edges in $G$. Thus our closed form equation for $|E'|$ is as follows:
+\begin{equation}
+    \begin{aligned}
+    |E'| &= \frac{1}{2}\sum^{V}_{v} {d_v}^2 - |E|
+    \end{aligned}
+\end{equation}
+We can now use these two closed form solutions to identify the number of edges and vertices in the corresponding line graph to the Exosome Citation Network. Given that this network $N(V_n, E_n)$ has $|V_n| = 13989436$ vertices and $|E_n| = 92051051$, we can solve for $|V_n'| = 92051051$ and plug in the degree distribution of the network into our closed form solution for the number of edges to find the following:
+\begin{equation}
+    \begin{aligned}
+    |E_n'| &= \frac{1}{2}\sum^{V_n}_{v} {d_v}^2 - |E_n|\\
+    &= \frac{1}{2}(321041864344) - 92051051
+    &= 160428881121
+    \end{aligned}
+\end{equation}
+Thus we get that the corresponding line graph $L(G_n(V_n', E_n'))$ to our Exosome Citation Network will have $|V_n'| = 92051051$ and $|E_n'| = 160428881121$. 
+
+\section{Allowing Overlapping Clusters} 
+
+This program runs the step 5 of the Allowing Overlapping Clusters method and saves it to your local directory. To run this program, run the following code.
+
+In order to run the \path{overlapping_kmp_pipeline.py} program, the following code must be run in the following format. 
+ \lstset{
+  breaklines=true,
+}
+\begin{lstlisting}[language=bash]
+    python3 overlapping_kmp_pipeline.py --network-file [path to tsv network file] --clustering [path to input kmp-valid disjoint clustering csv file] -- output-path [path to save outputted overlapping clustering] --min-k-core [min k of input clustering] --rank-type [percent, percentile] --rank-val [top n percent of candidate nodes to consider adding, opposite if percentile] -- inclusion-criterion [k, mcd] --candidate-criterion [total_degree, indegree, random, seed] --candidate-file [file path to custom candidate list] --experiment-name [name of experiment being run] --experiment-num [experiment number being run] --config [bool, bool, bool, bool] (run overlapping?, display cluster stats?, include marker node analysis?, save outputs? 
+\end{lstlisting}
+
+Shown below are the flags and what purpose each flag accomplishes. 
+
+\begin{itemize}
+    \item \textbf{network-file} - str  - file path to network tsv file of the format \path{node_id[\space]node_id}
+    \item \textbf{clustering-file} - str - file path to clustering tsv file of the format \path{cluster_id[\space]node_id}
+    \item \textbf{min-k-core} - int - integer defining the min-k-core by which to add candidate nodes if selecting k as inclusion criterion. It is still mandatory even if not using k, so a dummy value must be filled in
+    \item \textbf{rank-type} - [percent, percentile] - choose whether to use percent or percentile when calculating list of candidate nodes to generate
+    \item \textbf{rank-val} - float - the percent or percentile value used to generate the list of candidate nodes
+    \item \textbf{inclusion-criterion} - [k, mcd] - utilize k or mcd of cluster as the inclusion criteria for adding a candidate node to a cluster
+    \item \textbf{candidate-criterion} - [total\_degree, indegree, random, seed] - criterion by which the rank type and rank val sort the list of nodes in the network in deciding the candidate nodes
+    \item \textbf{candidate-file} - str - only unrequired field that, if included, will override the other candidate selection values and simply use the nodes specified in the candidate file as candidate nodes. They must be in the format \path{node_id [\n] node_id}
+    \item \textbf{experiment-name} - str - string to specify the name of the experiment in order to name the statistic csv files that are ouputted with the final clustering file
+    \item \textbf{experiment-num} - int - must correspond to a directory in the environment where the program will be run with the format \path{experiment_{experiment-num}}
+    \item \textbf{config} - [bool, bool, bool, bool] - list of four boolean values that correspond to the following criteria. 1. run the overlapping step of the kmp pipeline. 2. Display the cluster statistics to the console. 3. Include an analysis of marker node coverage. 4. Save output clustering files and cluster statistics. 
+\end{itemize}
+
+\section*{Competing Interests} \vspace{3mm} The authors have no competing interests. Dimensions data were made available by Digital Science through the \href{http://www.dimensions.ai/scientometric-research/.}{free data access for scientometrics research projects program}. Digital Science personnel did not participate in conceptualization, experimental design, review of results, or conclusions presented. 
+
+\section*{Funding Information} TW receives funding from the Grainger Foundation. Research reported in this manuscript was supported by the Google Cloud Research Credits program through award GCP19980904 to GC.
+
+\section*{Data Availability} Access to the bibliographic data analyzed in this study requires access from Digital Science. Code generated for this study is freely available from our Github site \citep{Park2021}.
+
+\section*{Acknowledgments} We thank Digital Science, Google, and the Grainger Foundation.
+
+\bibliographystyle{apalike}
+\bibliography{akhil.bib}
+\end{document}
+
+
+
