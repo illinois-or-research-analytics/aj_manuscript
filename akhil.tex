@@ -221,31 +221,39 @@ We then examined the distribution of clusters per candidate node after AOC treat
 \includegraphics[width=\linewidth]{tier_cluster.png} 
 \end{subfigure}
 \captionsetup{width=0.9\textwidth}	
-\caption{Cluster and tier assignments by node degree. The subfigure on the left shows the distribution of numbers of clusters each publication belongs to, and the subfigure on the right shows cluster count by Tier 1 membership for each group; each subfigure presents these results for both AOC\_m and AOC\_k. Nodes are partitioned into five groups based on their total in-network degree (in\_degree + out\_degree) with group 1 containing the nodes with the smallest total degree and group 5 with the nodes with the largest total degree. Group 1 has the largest number of observations and group 5 has the smallest. Group statistics (gp no; class limit; no of nodes): [gp1; $<$100;  272,395], [gp2; 100-999; 254,832], [gp3; 1,000-9,999; 7,773], [gp4; 10,000-99,999; 161], and [gp5; $\geq$100,000; 4]. }
+\caption{Cluster and tier assignments by node degree. The subfigure on the left shows the distribution of numbers of clusters each publication belongs to, and the subfigure on the right shows cluster count by Tier 1 membership for each group; each subfigure presents these results for both AOC\_m and AOC\_k. Nodes are partitioned into five groups based on their total in-network degree (in\_degree + out\_degree) with group 1 containing the nodes with the smallest total degree and group 5 with the nodes with the largest total degree. Group 1 has the largest number of observations and group 5 has the smallest. Group statistics (group; class limit; number of nodes): [gp1; $<$100;  272,395], [gp2; 100-999; 254,832], [gp3; 1,000-9,999; 7,773], [gp4; 10,000-99,999; 161], and [gp5; $\geq$100,000; 4]. }
 \label{fig:fig3}
 \end{figure}
 	
 To ask whether node degree is associated with the number of clusters assigned to, we examined clustered nodes in the CEN and compared their total in-graph degree to the number of clusters they were assigned, either in AOC\_m or AOC\_k treatment of IKC\_k10 clustering of the CEN (Figure~\ref{fig:fig3}). We partitioned the nodes into five groups based on their total in-network degree (in\_degree + out\_degree),  with group 1 containing the nodes with the smallest total degree (less than 100), group 2 with nodes of total degree between 100 and 999, group 3 with nodes of total degree between 1000 and 9,999, group 4 with nodes of total degree between 10,000 and 99,999, and group 5 the nodes with total degree at least 100,000.
 
-Over, 98\% of these 535,165 nodes are in groups 1 and 2; 50.9\% in group 1, 47.6\% in group  2, 1.5\% in group 3,  0.03\% in group 4, and 0.0007\% in group 5. sAlthough group classification is based on total degree,  any publication in groups 2-5 with high total degree must have high in-degree(in-network citation count). Membership in group 3  reflects a large citation count (at least 750 in-graph citations), and membership in groups 4 or 5, the top 169 nodes by total degree, reflects ultra-large citation counts (at least 9,750 in-graph citations).    
+Over 98\% of these 535,165 nodes are in groups 1 and 2; 50.9\% in group 1, 47.6\% in group  2, 1.5\% in group 3,  0.03\% in group 4, and 0.0007\% in group 5. 
+Although group classification is based on total degree,  any publication in groups 2-5 with high total degree must have high in-degree (in-network citation count). Membership in group 3  reflects a large citation count (at least 750 in-graph citations), and membership in groups 4 or 5, the top 169 nodes by total degree, reflects ultra-large citation counts (at least 9,750 in-graph citations).    
 	
 We first compare clusterings produced by AOC\_m and AOC\_k (left subfigure), which shows that the number of clusters assignments per node is larger for AOC\_k than for AOC\_m. This is not unexpected since AOC\_m is a more stringent membership criterion. For both AOC\_m and AOC\_k, the number of clusters that any node is assigned to increases as we move from group 1 to group 5, showing that in general total degree is associated with the number of clusters that a node is assigned to. Hence, in-network citation count is associated with the number of clusters that a publication is a core member of.
 	
-However, the distributions for each group are overlapping, revealing potentially interesting differences between publications that are not explained just by citation count. The largest number of clusters any node is assigned to is 25 and the smallest number is 1. All the nodes assigned to 14 or more communities are in groups 4 or 5, and so have total degree at least 10,000. In addition, group 5 publications belong to a minimum of 14 clusters. In contrast, every other group has publications that belong to only 1 cluster. 
 
+However, for both AOC\_k and AOC\_m, the distributions for each group are overlapping, revealing potentially interesting differences between publications that are not explained just by citation count. 
+Examining AOC\_k, for example, we see the following trends. The largest number of clusters any node is assigned to is 25 and the smallest number is 1. All the nodes assigned to 14 or more communities are in groups 4 or 5, and so have total degree at least 10,000. In addition, group 5 publications belong to a minimum of 14 clusters. In contrast, every other group has publications that belong to only 1 cluster. 
 The largest number of communities for publications in groups 1 and 2 is  9,  group 3 publications appear in at most 13 communities, group 4 publications appear in up to 20 communities, 
 and group 5 publications appear in up to 25 communities. 	Since only group 5 publications appear in more than 20 communities, we conclude that, under the conditions of our clustering,
 an ultra-high in-graph citation count is  necessary  for assignment to a large number of communities.  
+Results for AOC\_m are similar but with reductions in the total number of clusters each publication can be in,  which follows because AOC\_m is a more restrictive condition than AOC\_k.  
+
 	
-While there appears to be an association between the degree of a node and the likelihood of it being assigned to multiple clusters, there are instances where nodes of high degree are assigned to one or two clusters. For example, five publications are found in Group 4 that are assigned to only one cluster \citep{arnon1949copper,ellman1961new,friedewald1972estimation,iijima1991helical,raymond1995genepop}. Four of these five describe methods. All five were published in or before 1995 (1949-1995), have high in-degree (12,741 to 32,927) and very low out-degree in our data (0-11). Whether this low out-degree contributed to restricted cluster assignment merits follow up and opens up the questions of breadth and dependence \citep{bu2021multidimensional} in publication communities, as well as that of data quality. This shows that high total degree is not sufficient for membership in many communities and underscores the case for mixed methods approaches.
+While there appears to be an association between the degree of a node and the likelihood of it being assigned to multiple clusters, there are instances where nodes of high degree are assigned to only one or two clusters.
+%George, please check whether this is AOC\_k or AOC\_m
+For example, for AOC\_k, five publications are found in Group 4 that are assigned to only one cluster \citep{arnon1949copper,ellman1961new,friedewald1972estimation,iijima1991helical,raymond1995genepop}. Four of these five describe methods. All five were published in or before 1995 (1949-1995), have high in-degree (12,741 to 32,927) and very low out-degree in our data (0-11). Whether this low out-degree contributed to restricted cluster assignment merits follow up and opens up the questions of breadth and dependence \citep{bu2021multidimensional} in publication communities, as well as that of data quality. This shows that high total degree is not sufficient for membership in many communities and underscores the case for mixed methods approaches.
 	
 Another perspective that provides additional insight into publications is their ``tier" within their communities. In \cite{Chandrasekharan2021}, we  proposed a tier classification for nodes in a cluster, in which Tier 1 refers to the nodes in the top 10th percentile with respect to intra-cluster citations. Thus, when measuring in-degree within the cluster, a Tier 1 node is in the top 10 percent compared to all other nodes in its cluster. 
 
 We observe that nodes assigned to multiple clusters are more likely to have Tier 1 status (Figure~\ref{fig:fig3}, right subfigure). The Tier 1 count also increases for AOC\_k compared to AOC\_m. The greater Tier I count for AOC\_k is likely a combination of larger clusters and the in-degree of nodes within them.
 
 For groups 1--4, there are some publications that are Tier 1 in all communities they belong to, some that are never in Tier 1, but the majority are in between. 
-However, while the four publications in group 5 are Tier 1 for at least 7 communities, only one is in Tier 1 for more than 10 communities. 
-Interestingly, there are four publications in Group 4 that are in Tier 1 for at least 10 communities, two that are Tier 1 in more than 10 communities, and one of these is Tier 1 in 15 communities.
+However, while the four publications in group 5 are Tier 1 for at least 7 communities for AOC\_k, only one is in Tier 1 for more than 10 communities. 
+Interestingly, under AOC\_k there are four publications in Group 4 that are in Tier 1 for at least 10 communities, two that are Tier 1 in strictly more than 10 communities, and one of these is Tier 1 in 15 communities.
+Also in AOC\_m, we find publications in group 2 that are Tier 1 in up to 7 communities, publications in group 3 that are Tier 1 in 8 or more communities, and a publication in group 4 that is in Tier 1 for 15 communities.
+Results under AOC\_m also show similar trends but with lower total Tier 1 counts, consistent with the reduced number of clusters that each publication belongs to.
 	
 These trends show that while total degree is correlated with the number of clusters a publication belongs to and how many clusters it is Tier 1 for,
 these values are not determined just by total degree. Thus, the cluster membership and Tier status within their communities provides complementary insights into  the publications that goes beyond its citation count.
@@ -270,11 +278,21 @@ In terms of cluster size increases, the effect is also mild, 71\% of the 128 clu
 	
 \subsection{Experiment 4: Marker node concentrations}
 
-We examine the effects of AOC from two complementary perspectives. A graph theoretic one, which is designed for generalizability, and a contextual perspective, in which we interpret findings relative to a field of interest. The first perspective is considered in the preceding sections. In the second case, we are studying communities in the field of extracellular vesicle research. Here, we address context in two ways. We use, as input to IKC, a citation network (CEN) that is enriched in the recent extracellular vesicle literature . IKC reduces this large network to 128 cores that contain 3.8\% of the nodes in the network. From these 128 cores, we identify a subset of of interest by using a set of markers derived from the cited references of recent reviews of the extracellular vesicle field that were authored by different researchers. Under the assumption that cores enriched in marker nodes are relevant to extracellular vesicle research, we further reduce the data under consideration to those cores. We now assess how AOC impacts marker node concentration.
+We examine the effects of AOC from two complementary perspectives: a graph-theoretic one, which is designed for generalizability, and a contextual perspective, in which we interpret findings relative to a field of interest. The first perspective is considered in the preceding sections. In the second case, we are studying communities in the field of extracellular vesicle (EV) research. Here, we address context in two ways. We use, as input to IKC, a citation network (CEN) that is enriched in the recent extracellular vesicle literature. 
+IKC reduces this large network to 128 cores that contain 3.8\% of the nodes in the network. From these 128 cores, we identify a subset of of interest by using a set of markers derived from the cited references of recent reviews of the extracellular vesicle field that were authored by different researchers. Under the assumption that cores enriched in marker nodes are relevant to extracellular vesicle research, we further reduce the data under consideration to those cores. We now assess how AOC impacts marker node concentration.
 
-Of 128 cores, 31 cores contained between 0.1 \% and 94.6\% of the markers. The count of cores with non zero marker counts varied between treatments and consisted of 17 (IKC), 20(AOC\_m), and 31 (AOC\_k) respectively. Cluster 3,4, and 25 are notable in accounting for 87.5\% of 1021 markers after IKC clustering. After AOC\_m treatment of IKC clusters, clusters 3,4 and 25 contained 
+Of 128 cores, 31 cores contained between 0.1\% and 94.6\% of the markers. The count of cores with non-zero marker counts varied between treatments and consisted of 17 (IKC), 20(AOC\_m), and 31 (AOC\_k) respectively. Clusters 3, 4, and 25 are notable in accounting for 87.5\% of 1021 markers after IKC clustering. 
+Moreover, because of the substantial coverage of marker nodes, 
+from the perspective of EV biology, clusters 3, 4, and 25 are of obvious interest and offer a significant reduction in the amount of information to be studied qualitatively.  
 
-After AOC\_m treatment of IKC clusters, cluster 4 contained 30.4\%, 42.5\%, and 93.1\% of all markers. After AOC\_k treatment of IKC clusters, clusters 1,3,4, and 25 contained 20.7\%, 69.5\%, 71.8\%, and 94.6\% of all markers respectively (Figure~\ref{fig:marker-node-concentration}). These data also suggest that the recursive approach of IKC results in markers being segregated by disjoint clustering that can be post-processed by AOC treatment. AOC\_m and AOC\_k offer relatively stringent and permissive options respectively. From the perspective of EV biology, clusters 3,4, and 25 are of obvious interest and offer a significant reduction in the amount of information to be studied qualitatively.  We believe that AOC\_m is the better choice since it is a local constraint that preserves the MCD of each core, whereas AOC\_k enforces the value of $k$ across all the cores. AOC\_k may therefore add weakly linked nodes to the k-core. This may be of interest to some researchers, therefore, we allow both options. 
+AOC\_m and AOC\_k offer relatively stringent and permissive options respectively, and hence the results of using AOC\_m and AOC\_k to augment IKC clusters differs.
+After AOC\_m treatment of IKC clusters, clusters 3, 4, and 25  contained 30.4\%, 42.5\%, and 93.1\%, respectively, of all markers. After AOC\_k treatment of IKC clusters, clusters  3, 4, and 25 contained 
+69.5\%, 71.8\%, and 94.6\% of all markers respectively (Figure~\ref{fig:marker-node-concentration}).  
+Thus,  clusters 3, 4, and 25 all expand more significantly under AOC\_k than under AOC\_m.
+We also note that cluster 1  contained 20.7\% of the marker nodes in IKC+AOC\_k, indicating that cluster 1 is also significantly enriched for
+marker nodes by AOC\_k.
+These data  suggest that the recursive approach of IKC results in markers being segregated by disjoint clustering that can be post-processed by AOC treatment. 
+
 
 
 
@@ -319,7 +337,31 @@ After AOC\_m treatment of IKC clusters, cluster 4 contained 30.4\%, 42.5\%, and 
 \subsection{Examining overlap between clusters}
 
 %:
-Whereas the use of marker nodes is one approach to identify clusters of relevance, there is overlap by non-marker nodes. Accordingly, we examined overlap between clusters after AOC\_m or AOC\_k treatment of IKC clusters. Weighted edges were drawn between clusters based on the Jaccard Coefficient (ratio of intersection/union) for overlap. A threshold of the median Jaccard Coefficient from all values was set to permit an edge. The data show that IKC + AOC cores form subgraphs that contain fewer clusters in the case of AOC\_m and more in the case of AOC\_k. Interestingly, of the clusters that were rich in marker nodes, clusters 3 and 4 are found in one subgraph and cluster 25 in a second. This, for both AOC\_m and AOC\_k. \textcolor{red}{We need to discuss. It's cool but...}
+Whereas the use of marker nodes is one approach to identify clusters of relevance, after expansion by AOC\_k or AOC\_m, clusters will overlap, and the overlap will contain
+a mixture of marker and non-marker nodes.   Accordingly, we examined overlap between clusters after AOC\_m or AOC\_k treatment of IKC clusters, and we specifically examine  relationships between clusters 3, 4, and 25. 
+Weighted edges were drawn between clusters based on the Jaccard Coefficient (ratio of intersection/union) for overlap. A threshold of the median Jaccard Coefficient from all values was set to permit an edge. 
+Because some clusters do not have sufficient intersection with any others  they do not have any incident edges in these graphs.
+These networks shown in Figure \ref{fig:overlapping} (left shows the result for AOC\_m and right shows the result for AOC\_k) contain only those clusters that have at least
+one edge. 
+Note that  the left network (for IKC+AOC\_m) has fewer nodes than the right network (for   IKC + AOC\_k) which indicates that
+augmentation using AOC\_m does not produce substantial overlap between as many pairs of clusters as augmentation by AOC\_k.
+
+Beginning with the IKC+AOC\_m network, we note that the network forms five connected components, with clusters 3 and 4  in the same component and connected by an edge.
+In contrast, cluster 25 is in a separate component. Thus, clusters 3 and 4 identified in IKC have substantial overlap after AOC\_m, indicating some shared research questions or approaches, but
+cluster 25 reflects a different population. 
+
+Turning to IKC+AOC\_k, we see a larger number of clusters, indicating that more of the clusters had sufficient overlap with other clusters to be retained in the network visualization. 
+Interestingly here we see that clusters 3, 4, and 25 are all pairwise connected by edges, indicating that all three have have  shared publications after AOC\_k. 
+Hence,  what we see here is that the overlap after AOC\_m between cluster 25 and the other two clusters is too weak to be considered significant, but is
+sufficient  after AOC\_k to be considered significant.
+Since AOC\_m represents are more restrictive criterion, this shows that clusters 3 and 4 have a strong relationship  to each other and a omewhat weaker relationship to cluster 25 (but one that is nevertheless
+worth noting).  
+
+
+While both AOC\_k and AOC\_m offer insights into the EV research community structure,   AOC\_m provides more specific information about the research communities, since it is a local constraint that preserves the MCD of each core, compared to AOC\_k which only enforces the value of $k$ across all the cores and may therefore add weakly linked nodes to the IKC cores. 
+On the other hand, the examination of clusters 3, 4, and 25 given above shows that by combining information obtained from both AOC\_m and AOC\_k, additional insights can be obtained.  
+Therefore, we allow both options. 
+  \textcolor{red}{We need to discuss. It's cool but...}
 
 \begin{figure}[H]
 \centering
