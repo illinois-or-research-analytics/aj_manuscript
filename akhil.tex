@@ -94,7 +94,7 @@ Once candidate nodes are chosen, AOC constructs overlapping clusters by adding a
 	
 The resulting clustering generated from the overlapping clusters construction stage can now contains nodes in multiple clusterings, a property not found in the IKC method. 
 
-\emph{ER Graphs}. Erd\H{o}s-Renyi (ER) graphs generated and analyzed in this paper were generated using the Python package NetworkX using the random graph function that requires four parameters, number of input vertices, number of input edges, random seed value (for reproducibility) and a boolean truth value for whether the randomly generated graph is directed or not. Using this function, 100 ER graphs were generated using seed values from 0 to 99 inclusive. An example of a command used to generate a single graph is  `nx.gnm\_random\_graph(n=13989436, m=92051051, seed=0, directed=True)'. 
+\emph{ER Graphs}. Erd\H{o}s-Renyi (ER) graphs generated and analyzed in this paper were generated using the Python package NetworkX (nx) using the random graph function that requires four parameters, number of input vertices, number of input edges, random seed value (for reproducibility) and a boolean truth value for whether the randomly generated graph is directed or not. Using this function, 100 ER graphs were generated using seed values from 0 to 99 inclusive. An example of a command used to generate a single graph is  `nx.gnm\_random\_graph(n=13989436, m=92051051, seed=0, directed=True)'. 
 	
 \subsection{Data} 
 \emph{Citation network} We previously generated a citation network \citep{Wedell2022} representing the exosome \citep{harding1983} and more generally the extracellular vesicle literature \citep{raposo2021} from the Dimensions database \citep{hook2018dimensions} in the Google cloud. For the present study, we curated this network to deplete it of both retracted articles and relatively high-referencing articles. Retractions were identified from a database kindly provided by Retraction Watch \citep{rw2022} and matched to nodes in the network using digital object identifiers (DOIs). Any article with 250 or more references was also removed. 
@@ -119,13 +119,15 @@ As we explain in the preceding sections, AOC is a meta-method for overlapping co
 		\item other?
 \end{itemize}
 	
-\subsection{Experiment 1: Comparison to random networks} In an initial exploratory experiment, we clustered the curated exosome network (CEN) using IKC where $k \in {\{10,20,30,40, 50\}}$. The resultant distribution of cores is consistent with prior observations on IKC clustering \citep[Figure 3]{Wedell2022} with maximum coverage seen at the lowest value of $k$ used. At the value of $k$ with maximum coverage (IKC\_k10) in the CEN, 128 $km$-valid ($k >=10$ and modularity $> 0$) cores containing a total of 535,165 nodes (3.8\% of the CEN network) are discovered. These cores range in size from 14 to 214,877, with a median core size of 79, and minimum core degree (MCD) varying from 10 to 53 with median MCD of 16. Thus, the CEN is a 53-degenerate graph consisting of 13,989,436 vertices.
+\subsection{Characterizing the Curated Exosome Network} In an initial exploratory experiment on the curated exosome network (CEN) we clustered it using IKC where $k \in {\{10,20,30,40, 50\}}$.  At the value of $k$ with maximum coverage (IKC\_k10) in the CEN, 128 $km$-valid ($k >=10$ and modularity $> 0$) cores containing a total of 535,165 nodes (3.8\% of the CEN network) are discovered. These cores range in size from 14 to 214,877, with a median core size of 79, and minimum core degree (MCD) varying from 10 to 53 with median MCD of 16. Thus, the CEN is a 53-degenerate graph consisting of 13,989,436 vertices. The distribution of core sizes and MCD values is consistent with prior observations on IKC clustering \citep[Figure 3]{Wedell2022} and suggests that the benefit of removing retracted and high-referencing articles does not come at a steep cost with coverage reduced from 4.2\% to 3.8\%, the degeneracy of the curated network reduced from 56 to 53, the number of clusters increasing from 119 to 128, and the median core size reduced from 85 to 79.
 	
-To examine random network effects that could contribute to observed results from IKC, we generated 10 replicates of a configuration null model where the edges of the input network were randomized while preserving the total number of nodes, the degree of each node,  and the publication year of each cited node in a citing-cited node pair. These shuffled networks were then clustered using IKC\_k10. In all 10 cases, only a single $km$-valid core with MCD of 15 was extracted, although the number of nodes in each of these cores varied (Table~\ref{tab:tab1}). The median size of this cluster across 10 replicates was 435,216. We did not run IKC at higher values for $k$ in the range that we used ($k \in {\{10,20,30,40, 50\}}$) on the shuffled networks since  the minimum core degree (MCD) of 15 for the single cluster would have been exceeded and no clusters would have resulted. We did not run AOC on the output from IKC.k10 since by definition AOC cannot add new members when the clustering has only one cluster. 
+To examine random network effects that could contribute to observed results from IKC, we generated 10 replicates of a configuration null model where the edges of the input network were randomized while preserving the total number of nodes, the degree of each node,  and the publication year of each cited node in a citing-cited node pair \citep{bradley2020,uzzi2013}. These shuffled networks were then clustered using IKC\_k10. In all 10 cases, only a single $km$-valid core with MCD of 15 was extracted, although the number of nodes in each of these cores varied (Figure~\ref{fig:shuffleplot}). The median size of this cluster across 10 replicates was 435,216 roughly double the size of the largest cluster generated from the unperturbed network. These observations suggest that even under these controlled conditions, randomization of edges disrupts the collective affinity of community members expressed as internal edge density. \textcolor{red}{Tandy please edit to better capture our discussion of locality/affinity.}
 
-We also generated 100 replicates of an Erd\H{o}s-Renyi graph with the same number of nodes and edges as the CEN network and clustered them with IKC\_k10 (Supplementary Material). No $km$-valid clusters were generated from the Erd\H{o}s-Renyi graphs. We did not run AOC on the IKC output from  the Erd\H{o}s-Renyi graphs, since there were no clusters to use as input. 
+We did not run IKC at higher values of $k$ on the shuffled networks since  the minimum core degree (MCD) of 15 for the single cluster would have been exceeded and no clusters would have resulted. We did not run AOC on the output from IKC\_k10 since by definition AOC cannot add new members when the output has only one cluster. 
+
+We also generated 100 replicates of an Erd\H{o}s-Renyi graph with the same number of nodes and edges as the CEN network and clustered them with IKC\_k10 (Supplementary Material). No $km$-valid clusters were generated from these Erd\H{o}s-Renyi graphs. We did not run AOC on the IKC output from  the Erd\H{o}s-Renyi graphs, since there were no clusters to use as input. 
 	
-The distinct differences in outcomes between the real world CEN network and the two random models we explored show that, the results seen in IKC clustering on a real world network are unlikely to be the result of random effects alone. \textcolor{red}{This sentence reads like a statement of personal conviction. Invite comment and further analysis from Srijan}.
+The distinct differences in outcomes between the real world CEN network and the two random models we explored show that, the results seen in IKC clustering on a real world network are unlikely to be the result of random effects alone. 
 	
 	% derived from k_10_totaldegree_1percent_original_cluster_stats.csv in /shared/aj_manuscript_data/experiment_1/. 
 	
@@ -143,33 +145,16 @@ The distinct differences in outcomes between the real world CEN network and the 
 	% 9:          1    15 0.01106562     424074  shuffled_ikc8.clustering
 	%10:         1    15 0.01105279     436273 shuffled_ikc9.clustering
 	
-\begin{table}[!h]
-% data drawn from xtable product above using
-% collate_shuffled_results.R gc 7/3/2022
+\begin{figure}[H]
 \centering
+\includegraphics[width=0.6\linewidth]{shuffleplot.pdf} 
 \captionsetup{width=0.9\textwidth}
-\caption{IKC clustering of Configuration Null Model. The edges of the CEN network were randomly shuffled while preserving degree distribution for each node and the year of publication for citing and cited nodes. The resultant network was clustered with IKC with k=10 (IKC\_k10).  In all 10 cases, a single k-core with minimum core degree of 15 resulted although the size and modularity of these cores vary. In contrast, the IKC\_k10 analysis of the original CEN (unperturbed) network produced 128 cores  with minimum core degrees ranging from 10 to 52.}
-\begin{tabular}{lcccc}
-\hline
-cluster\_id & cluster\_count & mcd & node\_count  \\ 
-\hline
-shuffled\_CEN\_network-1 &     1 &    15 & 435,216 \\
-shuffled\_CEN\_network-2 &     1 &    15 & 425,275 \\
-shuffled\_CEN\_network-3 &     1 &    15 & 443,254 \\
-shuffled\_CEN\_network-4 &     1 &    15 & 440,106 \\
-shuffled\_CEN\_network-5 &     1 &    15 & 448,858 \\
-shuffled\_CEN\_network-6 &     1 &    15 & 432,842 \\
-shuffled\_CEN\_network-7 &     1 &    15 & 446,305 \\
-shuffled\_CEN\_network-8 &     1 &    15 & 436,192 \\
-shuffled\_CEN\_network-9 &     1 &    15 & 424,074 \\
-shuffled\_CEN\_network-10 &    1 &   15 & 436,273 \\ 
-\hline
-\end{tabular}
-\label{tab:tab1}
-\end{table}
+\caption{IKC clustering of Configuration Null Model. IKC\_k10 clustering of the original CEN network produced 128 clusters  with MCD ranging from 10 to 52. The edges of the CEN network were randomly shuffled while preserving degree distribution for each node and the year of publication for citing and cited nodes. The resultant networks were clustered with IKC with k=10 (IKC\_k10).  In all 10 cases, a single k-core with minimum core degree (MCD) of 15 resulted although the size of this core varied slightly between replicates (s1, s2, ..., s10). Cluster size is shown on the y-axis in natural log units}
+\label{fig:shuffleplot}
+\end{figure}
 	
-\subsection{Experiment 2: Effect of AOC on IKC clusters} 
-As we assert (\emph{vide supra}), a limitation of disjoint clustering methods is that restricting membership to one community excludes assignment to other communities where a node may have both role and influence. Since clustering with IKC occurs iteratively with the most dense core being extracted first, nodes in an extracted core are not considered for membership in cores that are subsequently extracted.
+\subsection{Effect of AOC on IKC clusters} 
+As we assert, a limitation of disjoint clustering methods is that restricting membership to one community excludes assignment to other communities where a node may have both role and influence. Since clustering with IKC occurs iteratively with the most dense core being extracted first, nodes in an extracted core are not considered for membership in cores that are subsequently extracted.
 
 Accordingly, we asked whether AOC could redistribute nodes from disjoint cores generated by IKC to other cores in the same clustering. 
 In this experiment,  we set the algorithmic parameters for AOC as follows: (i) the input clustering was produced by IKC with the CEN network as input and $k \in \{10, 20, 30, 40, 50\}$; (ii) the set of candidate nodes was every node within the cores generated by IKC; and (iii) the criterion for membership was either (i) AOC\_m or AOC\_k (defined above).
@@ -220,7 +205,7 @@ We then examined the distribution of clusters per candidate node after AOC treat
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
 \includegraphics[width=\linewidth]{cluster_group.png} 
-\end{subfigure}5
+\end{subfigure}
 \hfill
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
