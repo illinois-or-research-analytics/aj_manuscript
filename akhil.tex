@@ -42,7 +42,7 @@
 \begin{document}
 	\maketitle
 	
-\abstract{Community detection methods assist the understanding of complex networks through discovery of meso-scale structures. A variety of approaches have been developed for this purpose. However, many community finding methods rely on disjoint clustering techniques, in which a node is only assigned to one community or cluster. This strict requirement limits the ability to inclusively describe communities since some nodes may reasonably be assigned to many communities. Whereas we previously reported a scalable and modular pipeline that discovers disjoint research communities from the scientific literature, we now present a complementary overlapping community approach.  We present findings from this new approach on a network of over 13 million nodes that captures recent research in the very rapidly growing field of extracellular vesicles in biology.}
+\abstract{Through discovery of meso-scale structures, community detection methods assist the understanding of complex networks . A variety of approaches have been developed for this purpose. However, many community finding methods rely on disjoint clustering techniques, in which a node is only assigned to one community or cluster. This strict requirement limits the ability to inclusively describe communities since some nodes may reasonably be assigned to many communities. Whereas we previously reported a scalable and modular pipeline that discovers disjoint research communities from the scientific literature, we now present a complementary overlapping community approach.  We present findings from this new approach on a network of over 13 million nodes that captures recent research in the very rapidly growing field of extracellular vesicles in biology.}
 	
 \clearpage
 	
@@ -55,28 +55,28 @@ The work presented in this article is motivated by the problem of identifying an
 Beyond identifying communities, we are interested in their structure and roles played by community members.  The observation by \citep{Price1966} that a community of oxidative phosphorylation researchers consisted of a small core of influential researchers and a much larger transient population draws attention to core-periphery or center-periphery structure \citep{Breiger2014}. Core-periphery patterns have also been reported in other networks using different techniques, such as block modeling and k-core decomposition, arguing for some degree of ubiquity in their occurrence \citep{borgatti2000models,Rombach2017,gallagher2021clarified,yanchenko_2202.04455}. 
 	
 		
-One approach to identifying research communities is through analyzing citation patterns in the scientific literature. The underlying assumption is that members of a research community are more likely to cite each other's work than the work from outside their community.  \textcolor{red}{Ask Srijan about homophily.} Drawing upon the rich literature in graph theory, this question can then be framed as a community finding problem where a community is defined as a set of vertices in a graph that exhibit stronger connectivity to each other than to vertices outside such a community. Thus, in the graph (or network) of scientific literature, citation-dense areas suggest the existence of communities of publications. Accordingly, a community of publications can be defined by edge-density and its
-its researcher members can then be inferred from the authorship of these publications \citep{Chandrasekharan2021,Wedell2022}. This approach is different from understanding the publications authored by researchers of known communities \citep{crane1972invisible,smallspecialties1979}. \textcolor{red}{check these references again}.
+One approach to identifying research communities is through analyzing citation patterns in the scientific literature. The underlying assumption is that members of a research community are more likely to cite each other's work than the work from outside their community. Drawing upon the rich literature in graph theory, this question can then be framed as a community finding problem where a community is defined as a set of vertices in a graph that exhibit stronger connectivity to each other than to vertices outside such a community. Thus, in the graph (or network) of scientific literature, citation-dense areas suggest the existence of communities of publications. Accordingly, a community of publications can be defined by edge-density and its
+its researcher members can then be inferred from the authorship of these publications \citep{Chandrasekharan2021,Wedell2022}. 
 	
 We stress that citation density alone does not make a confirming argument for the existence of a community. However, community finding techniques are valuable in being able to search large datasets for communities, efficiently reducing them to smaller units of data that can then be examined with complementary techniques, some qualitative.
 	
-A considerable literature exists on community finding in graphs that reflects a diversity of perspectives and solutions. These diverse approaches can be drawn upon in identifying research communities \citep{Fortunato2009,FORTUNATO201075,Coscia2011,Yang2016}.  Community finding and clustering approaches have been applied to the scientific literature~\citep{Newman2006,Fortunato2009,Boyack2010,Boyack2019,Traag2019,Ahlgren2020,Chandrasekharan2021,Wedell2022}. The majority of these approaches focus on disjoint partitioning, where a vertex or node is only assigned to only one community.  This is a limitation when analyzing citation data, since some nodes can reasonably be assigned to more than one community; for example, publications introducing widely used methods may be integral to the research activities of multiple communities. 
+A considerable literature exists on community finding in graphs that reflects a diversity of perspectives and solutions. Hence various approaches can be drawn upon in identifying research communities, of which we cite a few \citep{Fortunato2009,FORTUNATO201075,Coscia2011,Yang2016}.  Community finding and clustering approaches have been applied to the scientific literature~\citep{Newman2006,Fortunato2009,Boyack2010,Boyack2019,Traag2019,Ahlgren2020,Chandrasekharan2021,Wedell2022}. Most community finding approaches focus on disjoint partitioning, where a vertex or node is only assigned to only one community.  This is a limitation when analyzing citation data, since some nodes can reasonably be assigned to more than one community; for example, publications introducing widely used methods may be integral to the research activities of multiple communities. 
 
-Several methods have been developed that can produce overlapping clusters \citep{Baumes2005,Palla2005,banerjee2005model,Cleuziou2008,Lancichinetti2009,Lu2012}, although they do not appear to enjoy wide use in scientometric studies. 
+However, several methods have been developed that can produce overlapping clusters \citep{Baumes2005,Palla2005,banerjee2005model,Cleuziou2008,Lancichinetti2009,Lu2012,yang2013overlapping}, although these do not appear to enjoy wide use in scientometric studies. 
 	
-We recently reported Iterative K-core Clustering or IKC \citep{Wedell2022}, a recursive algorithmic approach based on the k-core property \citep{Giatsidis2011,malliaros2019}, which helps identify densely connected parts of a graph. IKC recursively extracts disjoint k-cores from a graph beginning with the most dense  k-core and until some user-specified value of $k$ is reached. IKC avoids global modularity maximization \citep{lancichinetti2011limits} but enforces positive modularity for individual communities and the minimum value of $k$ set by a user. 
+We recently reported Iterative K-core Clustering or IKC \citep{Wedell2022}, a recursive algorithmic approach based on the k-core property \citep{Giatsidis2011,malliaros2019}, which helps identify densely connected parts of a graph; the cores of core-periphery structures. IKC recursively extracts disjoint k-cores from a graph beginning with the most dense  k-core and until some user-specified value of $k$ is reached. IKC avoids global modularity maximization \citep{lancichinetti2011limits} but enforces positive modularity for individual communities and the minimum value of $k$ set by a user. 
 	
-We implemented IKC as the first step in a tunable modular pipeline to identify communities with core-periphery structure. Subsequent steps in the pipeline include breaking large cores, and adding peripheral nodes to each core to construct communities with core-periphery structure. While IKC is a necessary step in the pipeline, the remaining steps are optional. We tested the ability of IKC to recursively extract k-cores from a network where nodes were publications and edges were citations. The input was a network of greater than 14 million articles centered around the rapidly growing field of extracellular vesicle biology \citep{Wedell2022}. Using the IKC pipeline, we were able to identify two communities of interest, rich in extracellular vesicle literature, that were robust to various option settings \citep[Figures 5]{Wedell2022} from this large dataset.
+We implemented IKC as the first step in a tunable modular pipeline to identify communities with core-periphery structure. Subsequent steps in the pipeline include breaking large cores, and adding peripheral nodes to each core to construct communities with core-periphery structure. While IKC is a necessary step in the pipeline, the remaining steps are optional. We tested the ability of IKC to recursively extract k-cores from a network where nodes were publications and edges were citations. The input was a network of greater than 14 million articles centered around the rapidly growing field of extracellular vesicle biology \citep{Wedell2022}. Using this pipeline, we were able to reduce a large network to two principal communities of interest that were robust to various option settings \citep[Figures 5]{Wedell2022} from this large dataset.
 	
-However, IKC produces disjoint clusters, and some articles can reasonably be assigned to more than one community.  As noted above, this limitation impacts articles that describe widely used methods but is also relevant, in theory at least, to articles reporting discovery that are influential in more than one community.  Thus, a need for exists for methods that can produce meaningful overlapping clusters. 
+However, IKC produces disjoint clusters, and some nodes can reasonably be assigned to more than one community.  As noted above, this limitation impacts articles that describe widely used methods but is also relevant, in theory at least, to articles reporting discovery that are influential in more than one community.  Thus, a need for exists for methods that can produce meaningful overlapping clusters. 
 	
 Several methods have been developed that can produce overlapping clusters, although none of them were specifically designed to address core-periphery structure in the scientific literature  \citep{Baumes2005,Palla2005,banerjee2005model,Cleuziou2008,Lancichinetti2009,Lu2012}. An interesting approach is the two-step procedure where the input graph is first transformed into a line graph whose nodes represent edges in the original graph \citep{Harary1960}.  The line graph is then clustered and this output can be mapped back to the input graph to generate overlapping clusters. This general approach has been used by others on citation graphs \citep{Evans2009,Havemann2021}. 
 	
 However, line graph  techniques are not very scalable, since the size of a line graph is much larger than the size of its input graph. For example, the network that we studied in \cite{Wedell2022} would grow from 13,989,436 nodes and 92,051,051 edges to 92,051,051 nodes and 160,428,881,121 edges (Supplementary Materials), which presents a challenge to clustering software. Further, the line graph approach has not been adapted to detect core-periphery structure.
 	
-To address the limitation of disjoint clusters with IKC, we developed  ``Allowing Overlapping Clusters" (AOC), a scalable meta-method that takes the output of IKC and makes multiple community assignments from a list of candidate nodes. AOC can be used as an optional step in the IKC pipeline at the discretion of the user. We present results from AOC applied to the cores generated by the IKC method, and discuss the results and discovery made from them. 
+To address the limitation of disjoint clusters with IKC, we developed  ``Allowing Overlapping Clusters" (AOC), a scalable meta-method that takes the output of IKC and makes multiple community assignments from a list of candidate nodes, while enforcing criteria for cores. AOC can be used as an optional step in the IKC pipeline at the discretion of the user. We present results from AOC applied to the cores generated by the IKC method, and discuss the results and discovery made from them. 
 	
-While the overarching question that motivates our work is identifying and describing research communities, this article is focused on the more narrow question of extending the IKC method towards inclusively identifying the cores of core-periphery structured communities and towards more general use in community detection. We present results from testing this method on a network centered around the recent extracellular vesicle literature, a very rapidly growing field in biology \citep{van2022challenges}. 
+While the overarching question that motivates our work is identifying and describing research communities, this article is focused on the more narrow question of extending the IKC method towards inclusively identifying the cores of core-periphery communities and towards more general use in community detection. To test AOC, we use a citation network centered around the recent extracellular vesicle literature, a very rapidly growing field in biology \citep{van2022challenges}. We use the terms core, community, and cluster contextually but they should be considered interchangeable within the scope of this article.
 
 \section{Materials and Methods}
 	
@@ -84,7 +84,7 @@ While the overarching question that motivates our work is identifying and descri
 	
 The IKC pipeline has three basic steps, where the second and third steps are optional.  The first step (the iterative k-core extraction algorithm) produces disjoint $km$-valid clusters where each cluster has positive modularity and each node in each cluster is adjacent to at least $k$ other nodes in the cluster; these form the centers or cores of the communities. The optional second and third steps breaks these clusters into smaller clusters, and adds peripheries to the clusters respectively.  Note that the parameter $k$ is used to define the centers and the parameter $p$ is used to define the periphery. If the only objective is cores or centers of communities, then the pipeline can be run using only the first step (or optionally also with the second step if smaller communities are desired).
 	
-\emph{Allowing Overlapping Clusters (AOC)}. The AOC method, presented herein, builds on the first step of the IKC pipeline (k-core extraction). To run AOC, the user specifies two additional parameters:  the set of nodes that can be members of  additional clusters and the criterion for membership.  The two criteria for membership in the core of cluster $C$ we consider are: (i) to have at least $MCD(C)$ neighbors in the center of $C$, where $MCD(C)$ is the minimum core degree; the minimum number of center neighbors of any node within $C$ or (ii) to have at least $k$ neighbors in the core of $C$.  We note that $k$ (the parameter for condition (i)) has been used to construct the IKC clustering; hence, for every cluster $C$,  (ii) is a weaker condition than (i). We refer to the first as AOC\_m and the second as AOC\_k.
+\emph{Allowing Overlapping Clusters (AOC)}. The AOC method, presented herein, builds on the first step of the IKC pipeline (k-core extraction). To run AOC, the user specifies two additional parameters:  the set of nodes that can be members of  additional clusters and the criterion for membership.  The two criteria for membership in the core of cluster $C$ we consider are: (i) to have at least $MCD(C)$ neighbors in the center of $C$, where $MCD(C)$ is the minimum core degree; the minimum number of center neighbors of any node within $C$ or (ii) to have at least $k$ neighbors in the core of $C$.  We note that $k$ (the parameter for condition (i)) has been used to construct the IKC clustering; hence, for every cluster $C$,  (ii) is a weaker condition than (i). We refer to the first membership criterion as AOC\_m and the second as AOC\_k.
 	
 Thus, running   AOC on the IKC clustering produces a set of potentially overlapping clusters, each of which has positive modularity and has at least $k$ other nodes in the cluster. These clusters form the cores of communities.  This study is focused on core structure but the clustering process could be extended to the same optional second and third steps from the IKC pipeline, which would break up the large clusters and add peripheral nodes. 
 	
@@ -92,14 +92,14 @@ AOC begins by parsing the input clustering file for kmp-validity and running the
 	
 Once candidate nodes are chosen, AOC constructs overlapping clusters by adding all candidate nodes to all clusters that meet either of the two inclusion criterion, maintaining the k-core of the clustering or the minimum core degree of the given cluster. Another condition that a candidate node must satisfy when added to a cluster is that inclusion of candidate node to the given cluster keeps positive modularity within the cluster. The overlapping cluster construction stage of this method adds these candidate nodes as non-core members of clusters they are added while original members of the clusters are labelled as core members of the clusters they were originally a part of. This property allows the construction stage to run a single pass through all clusters for each candidate node without recursively iterating back through each cluster if they are updated from previous passes through this stage.
 	
-The resulting clustering generated from the overlapping clusters construction stage can now contains nodes in multiple clusterings, a property not found in the IKC method. 
+The resulting clustering generated from the overlapping clusters construction stage can now contains nodes in multiple clusterings, a property not found in the IKC method. Depending on the membership criterion chosen (AOC\_m or AOC\_k) either the MCD of each cluster is preserved or the value of $k$ is enforced as a minimum condition for all clusters on the network. 
 
 \emph{ER Graphs}. Erd\H{o}s-Renyi (ER) graphs generated and analyzed in this paper were generated using the Python package NetworkX (nx) using the random graph function that requires four parameters, number of input vertices, number of input edges, random seed value (for reproducibility) and a boolean truth value for whether the randomly generated graph is directed or not. Using this function, 100 ER graphs were generated using seed values from 0 to 99 inclusive. An example of a command used to generate a single graph is  `nx.gnm\_random\_graph(n=13989436, m=92051051, seed=0, directed=True)'. 
 	
 \subsection{Data} 
-\emph{Citation network} We previously generated a citation network \citep{Wedell2022} representing the exosome \citep{harding1983} and more generally the extracellular vesicle literature \citep{raposo2021} from the Dimensions database \citep{hook2018dimensions} in the Google cloud. For the present study, we curated this network to deplete it of both retracted articles and relatively high-referencing articles. Retractions were identified from a database kindly provided by Retraction Watch \citep{rw2022} and matched to nodes in the network using digital object identifiers (DOIs). Any article with 250 or more references was also removed. 
+\emph{Citation network} We previously generated a citation network \citep{Wedell2022} representing the exosome \citep{harding1983} and more generally the extracellular vesicle literature \citep{raposo2021} from the Dimensions database \citep{hook2018dimensions} in the Google cloud. For the present study, we curated this network to deplete it of both retracted articles and relatively high-referencing articles. Retractions were identified from a database kindly provided by Retraction Watch \citep{rw2022} and matched to nodes in the network using digital object identifiers (DOIs). Based on pilot studies and conservative estimates, any article with 250 or more references was also removed. 
 
-While the network in \cite{Wedell2022} consisted of 14,695,475 nodes and 99,663,372 edges, the network resultant from removing retracted and high-referencing articles comprised 13,989,436 nodes and 92,051,051 edges; we refer to this network as the Curated Exosome Network (CEN). Its largest connected component consists of 13,988,426 nodes and accounts for 99.99\% of the CEN.
+While the network in \cite{Wedell2022} consisted of 14,695,475 nodes and 99,663,372 edges, the network resultant from removing retracted and high-referencing articles comprised 13,989,436 nodes and 92,051,051 edges. Thus, 706,039 nodes and 7,612,321 were removed. We refer to the resultant network as the Curated Exosome Network (CEN). Its largest connected component consists of 13,988,426 nodes and accounts for 99.99\% of the CEN.
 	
 \emph{Marker nodes}. To identify exosome-relevant publications and communities, we re-used a set of marker nodes described in  \citep{Wedell2022}. These 1,218 markers are the cited references combined from 12 different recent review articles on exosomes and extracellular vesicles. Of these, 1,021 are present in the CEN and  were used to identify clusters relevant to extracellular vesicles research.
 	
@@ -107,43 +107,33 @@ While the network in \cite{Wedell2022} consisted of 14,695,475 nodes and 99,663,
 	
 As we explain in the preceding sections, AOC is a meta-method for overlapping communities that takes as input (i) a k-core based clustering such as IKC, (ii) a set of candidate nodes for consideration of membership in multiple communities, and (iii) a parameter $k$ or $m$ that defines the criterion for membership (Materials and Methods). We now examine the properties of non-disjoint clusterings produced using IKC and AOC in tandem. We analyze the effects of AOC on IKC clusters using either the nodes in non-singleton IKC clusters as candidates (the second input parameter) or nodes in singleton clusters. We also study the distribution of marker nodes in AOC enhanced clusters and finally, examine overlap across AOC clusters. 
 	
-\begin{itemize}
-		\item random network comparison
-		\item cluster size increases after AOC\_m/k; 
-		\item multiple cluster assignments per node; non-singleton node redistribution experiments
-		\item node property effects - degree, and Tier
-		\item candidate node experiment- singleton high degree experiments
-		\item marker node effects
-		\item redraw graph based on node overlaps
-		\item classify nodes reassigned to multiple clusters
-		\item other?
-\end{itemize}
-	
-\subsection{Characterizing the Curated Exosome Network} In an initial exploratory experiment on the curated exosome network (CEN) we clustered it using IKC where $k \in {\{10,20,30,40, 50\}}$.  At the value of $k$ with maximum coverage (IKC\_k10) in the CEN, 128 $km$-valid ($k >=10$ and modularity $> 0$) cores containing a total of 535,165 nodes (3.8\% of the CEN network) are discovered. These cores range in size from 14 to 214,877, with a median core size of 79, and minimum core degree (MCD) varying from 10 to 53 with median MCD of 16. Thus, the CEN is a 53-degenerate graph consisting of 13,989,436 vertices. The distribution of core sizes and MCD values is consistent with prior observations on IKC clustering \citep[Figure 3]{Wedell2022} and suggests that the benefit of removing retracted and high-referencing articles does not come at a steep cost with coverage reduced from 4.2\% to 3.8\%, the degeneracy of the curated network reduced from 56 to 53, the number of clusters increasing from 119 to 128, and the median core size reduced from 85 to 79.
-	
-To examine random network effects that could contribute to observed results from IKC, we generated 10 replicates of a configuration null model where the edges of the input network were randomized while preserving the total number of nodes, the degree of each node,  and the publication year of each cited node in a citing-cited node pair \citep{bradley2020,uzzi2013}. These shuffled networks were then clustered using IKC\_k10. In all 10 cases, only a single $km$-valid core with MCD of 15 was extracted, although the number of nodes in each of these cores varied (Figure~\ref{fig:shuffleplot}). The median size of this cluster across 10 replicates was 435,216 roughly double the size of the largest cluster generated from the unperturbed network. These observations suggest that even under these controlled conditions, randomization of edges disrupts the collective affinity of community members expressed as internal edge density. \textcolor{red}{Tandy please edit to better capture our discussion of locality/affinity.}
+\subsection{Characterizing the Curated Exosome Network} In an initial exploratory experiment, we clustered the curated exosome network (CEN) using IKC where $k \in {\{10,20,30,40, 50\}}$.  At the value of $k$ with maximum coverage (IKC\_k10) in the CEN, 128 $km$-valid ($k >=10$ and modularity $> 0$) cores containing a total of 535,165 nodes (3.8\% of the CEN network) are discovered. These cores range in size from 14 to 214,877, with a median core size of 79, and minimum core degree (MCD) varying from 10 to 53 with median MCD of 16. Thus, the CEN is a 53-degenerate graph consisting of 13,989,436 vertices. 
 
-We did not run IKC at higher values of $k$ on the shuffled networks since  the minimum core degree (MCD) of 15 for the single cluster would have been exceeded and no clusters would have resulted. We did not run AOC on the output from IKC\_k10 since by definition AOC cannot add new members when the output has only one cluster. 
+The distribution of core sizes and MCD values is consistent with prior observations on IKC clustering \citep[Figure 3]{Wedell2022} and suggests that the benefit of removing retracted and high-referencing articles does not come at a steep cost with coverage reduced from 4.2\% to 3.8\%, the degeneracy of the curated network reduced from 56 to 53, the number of clusters increasing from 119 to 128, and the median core size reduced from 85 to 79.
+	
+To examine random network effects that could contribute to observed results from IKC, we generated 10 replicates of a configuration null model where the edges of the input network were randomized while preserving the total number of nodes, the degree of each node,  and the publication year of each cited node in a citing-cited node pair \citep{bradley2020,uzzi2013}. These shuffled networks were then clustered using IKC\_k10. In all 10 cases, only a single $km$-valid core with MCD of 15 was extracted, although the number of nodes in each of these cores varied (Figure~\ref{fig:shuffleplot}). The median size of this cluster across 10 replicates was 435,216 roughly double the size of the largest cluster generated from the unperturbed network. These observations suggest that under these controlled conditions of randomization, the collective affinity of community members expressed as internal edge density is disrupted and a single core results.  
+
+We did not run IKC at higher values of $k$ on the shuffled networks since  the minimum core degree (MCD) of 15 for the single cluster would have been exceeded and no clusters would have resulted. We did not run AOC on the output from IKC\_k10 either since, by definition, AOC cannot add new members when the output has only one cluster. 
 
 We also generated 100 replicates of an Erd\H{o}s-Renyi graph with the same number of nodes and edges as the CEN network and clustered them with IKC\_k10 (Supplementary Material). No $km$-valid clusters were generated from these Erd\H{o}s-Renyi graphs. We did not run AOC on the IKC output from  the Erd\H{o}s-Renyi graphs, since there were no clusters to use as input. 
 	
-The distinct differences in outcomes between the real world CEN network and the two random models we explored show that, the results seen in IKC clustering on a real world network are unlikely to be the result of random effects alone. 
+The distinct differences in results from the real world CEN network and the two random models we explored show that, the results seen in IKC clustering on a real world network are unlikely to be the result of random effects alone. 
 	
-	% derived from k_10_totaldegree_1percent_original_cluster_stats.csv in /shared/aj_manuscript_data/experiment_1/. 
+% derived from k_10_totaldegree_1percent_original_cluster_stats.csv in /shared/aj_manuscript_data/experiment_1/. 
 	
-	% > shuffled_df
-	%   cluster_no   mcd modularity node_count                cluster_id
-	%         <int> <int>      <num>      <int>                    <char>
-	% 1:          1    15 0.01110796     435216  shuffled_ikc1.clustering
-	% 2:          1    15 0.01094716     425275 shuffled_ikc10.clustering
-	% 3:          1    15 0.01119657     443254  shuffled_ikc2.clustering
-	% 4:          1    15 0.01125269     440106  shuffled_ikc3.clustering
-	% 5:          1    15 0.01132720     448858  shuffled_ikc4.clustering
-	% 6:          1    15 0.01126005     432842  shuffled_ikc5.clustering
-	% 7:          1    15 0.01131381     446305  shuffled_ikc6.clustering
-	% 8:          1    15 0.01122132     436192  shuffled_ikc7.clustering
-	% 9:          1    15 0.01106562     424074  shuffled_ikc8.clustering
-	%10:         1    15 0.01105279     436273 shuffled_ikc9.clustering
+% > shuffled_df
+%   cluster_no   mcd modularity node_count                cluster_id
+%         <int> <int>      <num>      <int>                    <char>
+% 1:          1    15 0.01110796     435216  shuffled_ikc1.clustering
+% 2:          1    15 0.01094716     425275 shuffled_ikc10.clustering
+% 3:          1    15 0.01119657     443254  shuffled_ikc2.clustering
+% 4:          1    15 0.01125269     440106  shuffled_ikc3.clustering
+% 5:          1    15 0.01132720     448858  shuffled_ikc4.clustering
+% 6:          1    15 0.01126005     432842  shuffled_ikc5.clustering
+% 7:          1    15 0.01131381     446305  shuffled_ikc6.clustering
+% 8:          1    15 0.01122132     436192  shuffled_ikc7.clustering
+% 9:          1    15 0.01106562     424074  shuffled_ikc8.clustering
+%10:         1    15 0.01105279     436273 shuffled_ikc9.clustering
 	
 \begin{figure}[H]
 \centering
@@ -156,12 +146,42 @@ The distinct differences in outcomes between the real world CEN network and the 
 \subsection{Effect of AOC on IKC clusters} 
 As we assert, a limitation of disjoint clustering methods is that restricting membership to one community excludes assignment to other communities where a node may have both role and influence. Since clustering with IKC occurs iteratively with the most dense core being extracted first, nodes in an extracted core are not considered for membership in cores that are subsequently extracted.
 
-Accordingly, we asked whether AOC could redistribute nodes from disjoint cores generated by IKC to other cores in the same clustering. 
-In this experiment,  we set the algorithmic parameters for AOC as follows: (i) the input clustering was produced by IKC with the CEN network as input and $k \in \{10, 20, 30, 40, 50\}$; (ii) the set of candidate nodes was every node within the cores generated by IKC; and (iii) the criterion for membership was either (i) AOC\_m or AOC\_k (defined above).
-	
+Accordingly we asked whether AOC could redistribute nodes from disjoint cores generated by IKC to other cores in the same clustering. 
+In this experiment,  we set the algorithmic parameters for AOC as follows: (i) the input clustering produced by IKC with the CEN network was used as input to AOC with $k \in \{10, 20, 30, 40, 50\}$; (ii) the set of candidate nodes was every node within the cores generated by IKC; and (iii) the criterion for membership was either (i) AOC\_m or AOC\_k (defined above).
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rlcc}
+\hline
+& AOC\_m & \# clusters that do not change & \# clusters that increase\\ 
+\hline
+1 & ikc10 &  33 &  95 \\ 
+2 & ikc20 &  10 &  34 \\ 
+3 & ikc30 &   8 &  14 \\ 
+4 & ikc40 &   3 &   3 \\ 
+5 & ikc50 &   1 &   0 \\ 
+\hline
+\end{tabular}
+\quad
+\begin{tabular}{rlcc}
+\hline
+& AOC\_k& \# clusters that do not change & \# clusters that increase \\ 
+\hline
+1 & ikc10 &  17 & 111 \\ 
+2 & ikc20 &   2 &  42 \\ 
+3 & ikc30 &   4 &  18 \\ 
+4 & ikc40 &   2 &   4 \\ 
+5 & ikc50 &   1 &   0 \\ 
+\hline
+\end{tabular}
+\caption{The number of clusters that change or do not change in size, after AOC\_m or AOC\_k treatment.}
+\label{tab:tab-change-no-change}
+\end{table}
+
+
 By construction, the number of cores cannot change by running AOC  under any setting of its algorithmic parameters. However, core sizes can increase, with increases resulting from AOC\_k being at least as large as increases resulting from AOC\_m. Of interest, therefore, is how the algorithmic parameters, such as the value for $k$ and the specified subset of nodes, impact the increase in size, and how node properties, such as degree, influence the number of clusters they are added to.
 	
-Figure~\ref{fig:fig1} shows the distribution of cluster sizes generated by AOC relative to the core sizes from the IKC run at various values for \emph{k}. For both AOC\_m and AOC\_k a subset of the clusters increases in size (Table~\ref{tab:tab1} ). Approximately 74\% and 87\% of  128 cores increase in size with AOC\_m and AOC\_k treatment respectively when IKC with k=10 is used as the input clustering. AOC treatment of IKC clustering, therefore, results in an increase in cluster sizes that is is inversely related to the value of \emph{k} used in IKC and is more pronounced with AOC\_k than with AOC\_m. 
+Figure~\ref{fig:fig1} shows the distribution of cluster sizes generated by AOC relative to the core sizes from the IKC run at various values for \emph{k}. For both AOC\_m and AOC\_k a subset of the clusters increases in size (Table~\ref{tab:tab-change-no-change} ). Approximately 74\% and 87\% of  128 cores increase in size with AOC\_m and AOC\_k treatment respectively when IKC with k=10 is used as the input clustering. AOC treatment of IKC clustering, therefore, results in an increase in cluster sizes that is is inversely related to the value of \emph{k} used in IKC and is more pronounced with AOC\_k than with AOC\_m. 
 	
 \begin{figure}[H]
 \centering
@@ -180,7 +200,7 @@ IKC, the value $k$ used to construct the clustering, and the set of nodes to be 
 \label{fig:fig1}
 \end{figure}
 	
-We then examined the distribution of clusters per candidate node after AOC treatment of clusterings generated by  IKC. For AOC\_k treatment of IKC\_k10 clusters, 54\% of nodes in non-singleton clusters were assigned to between 2 and 24 clusters in a progressively decreasing manner with roughly 26\% of nodes assigned to 2 clusters and a single node being assigned to 24 different clusters (Table~\ref{tab:tab2}).  The remaining 46\% of the nodes were assigned to a single cluster. AOC\_m, in comparison to AOC\_k, results in fewer multiple cluster assignments because of its more stringent membership criterion (Table~\ref{tab:tab2} and Figure~\ref{fig:fig2}).
+We then examined the distribution of clusters per candidate node after AOC treatment of clusterings generated by  IKC. For AOC\_k treatment of IKC\_k10 clusters, 54\% of nodes in non-singleton clusters were assigned to between 2 and 24 clusters in a progressively decreasing manner with roughly 26\% of nodes assigned to 2 clusters and a single node being assigned to 24 different clusters.  The remaining 46\% of the nodes were assigned to a single cluster. AOC\_m, in comparison to AOC\_k, results in fewer multiple cluster assignments because of its more stringent membership criterion (Figure~\ref{fig:fig2}).
 	
 \begin{figure}[H]
 \centering
@@ -199,7 +219,7 @@ We then examined the distribution of clusters per candidate node after AOC treat
 \end{figure}
 	
 \subsection{Experiment 3: Which node properties impact multiple assignments?}
-\begin{figure}[H]
+\begin{figure}
 % generated by fig_tier_cluster_counts_3.R 
 \centering
 \begin{subfigure}[t]{0.48\textwidth}
@@ -259,7 +279,7 @@ We examine here whether this population is reduced after AOC treatment of IKC cl
 
 In terms of cluster size increases, the effect is also mild, 71\% of the 128 clusters in this AOC\_k treatment do not increase in size. In comparison, 74\% and 87\% of the 128 clusters increase in size with AOC\_m and AOC\_k treatment of 128 IKC clusters with nodes in non-singleton clusters as candidates (Section 3.2).  
 	
-\begin{figure}[H]
+\begin{figure}
 \centering
 \includegraphics[width=0.6\linewidth]{singletons.pdf} 
 \captionsetup{width=0.9\textwidth}
@@ -296,34 +316,6 @@ These data  suggest that the recursive approach of IKC results in markers being 
 \end{figure}
 	
 \clearpage
-\begin{table}[H]
-\centering
-\begin{tabular}{rlcc}
-\hline
-& AOC\_m & \# clusters that do not change & \# clusters that increase\\ 
-\hline
-1 & ikc10 &  33 &  95 \\ 
-2 & ikc20 &  10 &  34 \\ 
-3 & ikc30 &   8 &  14 \\ 
-4 & ikc40 &   3 &   3 \\ 
-5 & ikc50 &   1 &   0 \\ 
-\hline
-\end{tabular}
-\quad
-\begin{tabular}{rlcc}
-\hline
-& AOC\_k& \# clusters that do not change & \# clusters that increase \\ 
-\hline
-1 & ikc10 &  17 & 111 \\ 
-2 & ikc20 &   2 &  42 \\ 
-3 & ikc30 &   4 &  18 \\ 
-4 & ikc40 &   2 &   4 \\ 
-5 & ikc50 &   1 &   0 \\ 
-\hline
-\end{tabular}
-\caption{The number of clusters that change or do not change in size, after AOC\_m or AOC\_k treatment.}
-\label{tab:tab-change-no-change}
-\end{table}
 	
 \subsection{Examining overlap between clusters}
 
@@ -352,7 +344,6 @@ worth noting).
 While both AOC\_k and AOC\_m offer insights into the EV research community structure,   AOC\_m provides more specific information about the research communities, since it is a local constraint that preserves the MCD of each core, compared to AOC\_k which only enforces the value of $k$ across all the cores and may therefore add weakly linked nodes to the IKC cores. 
 On the other hand, the examination of clusters 3, 4, and 25 given above shows that by combining information obtained from both AOC\_m and AOC\_k, additional insights can be obtained.  
 Therefore, we allow both options. 
-  \textcolor{red}{We need to discuss. It's cool but...}
 
 \begin{figure}[H]
 \centering
@@ -370,50 +361,16 @@ Therefore, we allow both options.
 \caption{Overlapping clusters produced by IKC\_k10 + AOC.  Overlapping clusters were generated from CEN data using IKC\_k10 followed by either AOC\_m (left) or AOC\_k (right). Edges are drawn between clusters based on the Jaccard Coefficient for node overlap and are visible if the JC exceeds the median value for all pairs. Cluster numbers in both panels correspond to cluster numbers from the input IKC clustering.}
 \label{fig:overlapping}
 \end{figure}
-	
-	
-\clearpage
-\begin{sidewaystable}[h!]
-\centering
-\resizebox{\textwidth}{!}{
-\begin{tabular}{clllllllllll}
-\hline
-no\_clusters & ikc10\_k & ikc10\_m & ikc20\_k & ikc20\_m & ikc30\_k & ikc30\_m & ikc40\_k & ikc40\_m & ikc50\_k & ikc50\_m \\ 
-\hline
-1 & 246787 & 442485 & 221728 & 254435 & 85515 & 86806 & 36367 & 36463 & 2004 & 2004 \\ 
-2 & 194427 & 78150 & 49195 & 20280 & 2731 & 1487 & 363 & 269 &  &  \\ 
-3 & 72367 & 12518 & 4511 & 1057 &  82 &  43 &   4 &   2 &  &  \\ 
-4 & 17401 & 1642 & 377 &  98 &  15 &   8 &  &  &  &  \\ 
-5 & 3232 & 256 &  61 &  21 &   2 &   1 &  &  &  &  \\ 
-6 & 641 &  63 &  19 &   5 &  &  &  &  &  &  \\ 
-7 & 168 &  27 &   4 &  &  &  &  &  &  &  \\ 
-8 &  64 &   8 &   1 &   1 &  &  &  &  &  &  \\ 
-9 &  29 &   5 &   1 &  &  &  &  &  &  &  \\ 
-10 &  14 &   1 &   1 &   1 &  &  &  &  &  &  \\ 
-11 &   7 &   2 &  &  &  &  &  &  &  &  \\ 
-12 &   6 &   3 &  &  &  &  &  &  &  &  \\ 
-13 &   5 &   2 &  &  &  &  &  &  &  &  \\ 
-14 &   8 &   2 &  &  &  &  &  &  &  &  \\ 
-15 &   1 &  &  &  &  &  &  &  &  &  \\ 
-16 &   1 &  &  &  &  &  &  &  &  &  \\ 
-18 &   2 &  &  &  &  &  &  &  &  &  \\ 
-19 &   2 &   1 &  &  &  &  &  &  &  &  \\ 
-20 &   2 &  &  &  &  &  &  &  &  &  \\ 
-24 &   1 &  &  &  &  &  &  &  &  &  \\ 
-\hline
-\end{tabular}}
-\caption{Cluster Size Increases After AOC Treatment. The count of clusters that either increase in size (increase) or remain the same size (no\_change) is shown for either AOC\_m (left) or AOC\_k (right) treatment for five different values of $k$ and where the nodes allowed to be in multiple clusters are those that appear in one non-singleton cluster in IKC(k). For k=50, IKC returns a single cluster; by definition, the cluster does not change after AOC treatment.}
-\label{tab:tab2}
-\end{sidewaystable}
-	
+		
 \clearpage
 	
-\section{Conclusions} We are positioned between method development and exploratory discovery. One objective was to construct a modular community finding pipeline that is relatively subject-independent. Using IKC, a k-core based approach have identified citation dense communities of publications. We have enriched these clusters by applying two variants of AOC, a meta-method for overlapping clusters. In this respect, we are able to remediate a limitation of our original IKC method that arises from extracting k-cores in decreasing order of the value of $k$. This prevents a node captured in a k-core from being considered for inclusion in a subsequently extracted k-core.
+\section{Conclusions} We are positioned between method development and exploratory discovery. We sought to offer multiple options to users and this is achievable through varying the input data, the $k$ setting for IKC, the two AOC options, and the choice of candidate nodes.
 
-A second objective was to study the extracellular vesicle literature. In combining the two, we have sought to include human experience and intent \citep{vonluxburg2012clustering} through controlling the input data and designing contextual evaluation criteria. Our use of markers suggests that AOC tends to enrich those clusters, already rich in markers. On the one hand, this may not be very useful in identifying the most marker-dense clusters but it does support a more complete independent follow-on study that relies on qualitative techniques. 
+One objective was to construct a modular community finding pipeline that is relatively subject-independent. Using IKC, a k-core based approach, we have identified citation dense communities of publications. We have enriched these clusters by applying two variants of AOC, a meta-method for overlapping clusters. In this respect, we are able to addresses a limitation of our original IKC method that arises from extracting k-cores in decreasing order of the value of $k$. This limitation prevents a node captured in a k-core from being considered for inclusion in a subsequently extracted k-core. Post-processing with AOC overcomes this limitation.
 
-Lastly, we sought to offer multiple options to users and this is achievable through varying the input data, the $k$ setting for IKC, the two AOC options, and the choice of candidate nodes.
+A second objective was to study the extracellular vesicle literature. In combining the two, we have sought to include human experience and intent \citep{vonluxburg2012clustering} through controlling the input data and enabling contextual evaluation in the form of externally identified markers. The results with the CEN suggest that AOC tends to enrich those clusters, already rich in markers. On the one hand, this may not be very useful in identifying the most marker-dense clusters but it does provide a more complete description for follow-on studies. 
 
+Finally, we note that AOC could be applied to clustering  outputs from algorithms other than IKC. Further, it could be engineered to accommodate new membership criteria such as average cluster degree. 
 	
 \section*{Competing Interests} \vspace{3mm} The authors have no competing interests. AJ is presently in the graduate program at Princeton University. His contributions to this manuscript were made while he was a computer science major at the University of Illinois Urbana-Champaign.
 	
@@ -571,5 +528,41 @@ Lastly, we sought to offer multiple options to users and this is achievable thro
 	\end{tabular}
 	\caption(blah blah blah}
 \end{table}
+
+\clearpage
+\begin{sidewaystable}[h!]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{clllllllllll}
+\hline
+no\_clusters & ikc10\_k & ikc10\_m & ikc20\_k & ikc20\_m & ikc30\_k & ikc30\_m & ikc40\_k & ikc40\_m & ikc50\_k & ikc50\_m \\ 
+\hline
+1 & 246787 & 442485 & 221728 & 254435 & 85515 & 86806 & 36367 & 36463 & 2004 & 2004 \\ 
+2 & 194427 & 78150 & 49195 & 20280 & 2731 & 1487 & 363 & 269 &  &  \\ 
+3 & 72367 & 12518 & 4511 & 1057 &  82 &  43 &   4 &   2 &  &  \\ 
+4 & 17401 & 1642 & 377 &  98 &  15 &   8 &  &  &  &  \\ 
+5 & 3232 & 256 &  61 &  21 &   2 &   1 &  &  &  &  \\ 
+6 & 641 &  63 &  19 &   5 &  &  &  &  &  &  \\ 
+7 & 168 &  27 &   4 &  &  &  &  &  &  &  \\ 
+8 &  64 &   8 &   1 &   1 &  &  &  &  &  &  \\ 
+9 &  29 &   5 &   1 &  &  &  &  &  &  &  \\ 
+10 &  14 &   1 &   1 &   1 &  &  &  &  &  &  \\ 
+11 &   7 &   2 &  &  &  &  &  &  &  &  \\ 
+12 &   6 &   3 &  &  &  &  &  &  &  &  \\ 
+13 &   5 &   2 &  &  &  &  &  &  &  &  \\ 
+14 &   8 &   2 &  &  &  &  &  &  &  &  \\ 
+15 &   1 &  &  &  &  &  &  &  &  &  \\ 
+16 &   1 &  &  &  &  &  &  &  &  &  \\ 
+18 &   2 &  &  &  &  &  &  &  &  &  \\ 
+19 &   2 &   1 &  &  &  &  &  &  &  &  \\ 
+20 &   2 &  &  &  &  &  &  &  &  &  \\ 
+24 &   1 &  &  &  &  &  &  &  &  &  \\ 
+\hline
+\end{tabular}}
+\caption{Cluster Size Increases After AOC Treatment. The count of clusters that either increase in size (increase) or remain the same size (no\_change) is shown for either AOC\_m (left) or AOC\_k (right) treatment for five different values of $k$ and where the nodes allowed to be in multiple clusters are those that appear in one non-singleton cluster in IKC(k). For k=50, IKC returns a single cluster; by definition, the cluster does not change after AOC treatment.}
+\label{tab:tab1}
+\end{sidewaystable}
+%:
+
 
 
