@@ -29,7 +29,7 @@
 \usepackage[font=small,labelfont=bf]{caption}
 
 \usepackage{authblk}
-\title{Detecting Overlapping Research Communities}
+\title{AOC; Assembling Overlapping Communities}
 \author[1]{Akhil Jakatdar}
 \author[1]{Tandy Warnow\thanks{warnow@illinois.edu}}
 \author[1,2]{George Chacko\thanks{chackoge@illinois.edu}}
@@ -123,16 +123,13 @@ While the network in \cite{Wedell2022} consisted of 14,695,475 nodes and 99,663,
 
 
 \emph{Random networks}
-We also explored clustering on random networks, specifically using both Erd\H{o}s-Renyi (ER) graphs and configuration graphs.  The
+We also explored clustering on random networks, specifically using both Erd\H{o}s-Renyi (ER) graphs and configuration models.  The
 ER graphs generated and analyzed in this paper were generated using the Python package NetworkX (nx) using the random graph function that requires four parameters, number of input vertices, number of input edges, random seed value (for reproducibility) and a boolean truth value for whether the randomly generated graph is directed or not. Using this function, 100 ER graphs were generated using seed values from 0 to 99 inclusive. An example of a command used to generate a single graph is  `nx.gnm\_random\_graph(n=13989436, m=92051051, seed=0, directed=True)'. 
-The configuration null model is where the edges of the input network were randomized while preserving the total number of nodes, the degree of each node,  and the publication year of each cited node in a citing-cited node pair \citep{bradley2020,uzzi2013}. 
+The configuration null model is where the edges of the input network were randomized while preserving the total number of nodes, the degree of each node,  and the publication year of each cited node in a citing-cited node pair \citep{bradley2020}. 
  
-	
-	
 \section{Results and Discussion}
 	
-As we explain in the preceding sections, AOC is a meta-method for overlapping communities that takes as input (i) a k-core based clustering such as IKC, (ii) a set of candidate nodes for consideration of membership in multiple communities, and (iii) a parameter $k$ or $m$ that defines the criterion for membership (Materials and Methods). We now examine the properties of non-disjoint clusterings produced using IKC followed by AOC (i.e., IKC+AOC).  
-We analyze the effects of AOC on IKC clusters using either the nodes in non-singleton IKC clusters as candidates (the second input parameter) or nodes in singleton clusters. We also study the distribution of marker nodes in AOC enhanced clusters and finally, examine overlap across AOC clusters. 
+As we explain in the preceding sections, AOC is a meta-method for overlapping communities that takes as input (i) a k-core based clustering such as IKC, (ii) a set of candidate nodes for consideration of membership in multiple communities, and (iii) a parameter $k$ or $m$ that defines the criterion for membership (Materials and Methods). We now examine the properties of non-disjoint clusterings produced using IKC followed by AOC. We analyze the effects of AOC on IKC clusters using either the nodes in non-singleton IKC clusters as candidates (the second input parameter) or high-degree nodes in singleton clusters. We also study the distribution of marker nodes in AOC enhanced clusters and finally, examine overlap across AOC clusters. 
 	
 \subsection{Characterizing the Curated Exosome Network}
  In an initial exploratory experiment, we clustered the curated exosome network (CEN) using IKC where $k \in {\{10,20,30,40, 50\}}$, and we refer to these clusterings as
