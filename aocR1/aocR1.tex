@@ -8,6 +8,7 @@
 \usepackage{caption}
 \usepackage{subcaption}								% TeX will automatically convert eps --> pdf in pdflatex		
 \usepackage{hyperref}
+\usepackage{color}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
@@ -29,7 +30,7 @@
 \usepackage[font=small,labelfont=bf]{caption}
 
 \usepackage{authblk}
-\title{AOC; Assembling Overlapping Communities}
+\title{AOC: Assembling Overlapping Communities}
 \author[1]{Akhil Jakatdar}
 \author[1]{Tandy Warnow\thanks{warnow@illinois.edu}}
 \author[1,2]{George Chacko\thanks{chackoge@illinois.edu}}
@@ -98,17 +99,27 @@ While the overarching question that motivates our work is identifying and descri
 The IKC pipeline has three basic steps, where the second and third steps are optional.  The first step (the iterative k-core extraction algorithm) produces disjoint clusters that are both $k$-valid and $m$-valid (i.e.,  $km$-valid), where each cluster has positive modularity and each node in each cluster is adjacent to at least $k$ other nodes in the cluster; these form the centers or cores of the communities. The optional second and third steps breaks these clusters into smaller clusters and adds peripheries to the clusters respectively.  Note that the parameter $k$ is used to define the centers and the parameter $p$ is used to define the periphery. If the only objective is cores or centers of communities, then the pipeline can be run using only the first step (or optionally also with the second step if smaller communities are desired).
 
 	
-The \emph{Assembling Overlapping Clusters (AOC)} method, presented herein, builds on the first step of the IKC pipeline (k-core extraction). To run AOC, the user specifies two additional parameters:  the set of nodes that being considered for membership in clusters and the criterion for membership.  The two criteria for membership in the core of cluster $C$ we consider are: (i) to have at least $MCD(C)$ neighbors in the center of $C$, where $MCD(C)$ is the minimum core degree (i.e., the minimum number of center neighbors of any node within $C$)  and (ii) to have at least $k$ neighbors in the core of $C$.  We note that $k$ (the parameter for condition (i)) has been used to construct the IKC clustering; hence, for every cluster $C$,  it follows that $MCD(C) \geq k$ and so (ii) is a weaker condition than (i). We refer to the first membership criterion as AOC\_m and the second as AOC\_k.
+The \emph{Assembling Overlapping Clusters (AOC)} method, presented herein, builds on the first step of the IKC pipeline (k-core extraction), 
+\textcolor{blue}{so that the input to AOC is a set of disjoint clusters produced by the first step of the IKC pipeline. These clusters will be enlarged by AOC,  producing expanded versions, using a simple technique that we now describe.}
+To run AOC, the user specifies two additional parameters:  the set of nodes that are being considered for membership in \textcolor{blue}{the expanded} clusters and the criterion for membership.  
+
+The two criteria for \textcolor{blue}{allowing node $v$ to be added 
+to the expansion of cluster $C$ (where $C$ is in the input clustering) 
+we consider are: (i) $v$ must have at least $MCD(C)$ neighbors in  $C$, 
+where $MCD(C)$ is the minimum core degree (i.e., the minimum number of neighbors of any node within $C$)  and 
+(ii) $v$ must have at least $k$ neighbors in  $C$.}
+  We note that $k$ (the parameter for condition (i)) has been used to construct the IKC clustering; hence, for every cluster $C$,  it follows that $MCD(C) \geq k$ and so (ii) is a weaker condition than (i). We refer to the first membership criterion as AOC\_m and the second as AOC\_k.
+\textcolor{blue}{We also require that the addition of $v$ to the current expansion of $C$ produce a cluster that has positive modularity.
+This last criterion ensures that the final expanded cluster that is produced will also have positive modularity.}
 	
-Thus, whether running   AOC\_m or AOC\_k on the IKC clustering, both pipelines produce a set of potentially overlapping clusters, each of which has positive modularity and where every node in every cluster has at least $k$ other nodes in the cluster. This study is focused on core structure but the clustering process could be extended to the same optional second and third steps from the IKC pipeline, which would break up the large clusters and add peripheral nodes. 
-	
-The input to AOC is a clustering of a network into disjoint clusters, a value for $k$,  the criterion it uses (either AOC\_m or AOC\_k), and the list of candidate nodes. If this clustering is produced by IKC, by construction the clustering will be $km$-valid. The list of candidate nodes (the first of the two additional parameters) can be constructed from node-network characteristics such cluster membership,  total degree, in-degree,  or out-degree,  or some other basis for candidate selection such as publication venue or funding sources.
-	
-Once candidate nodes are chosen, AOC constructs overlapping clusters by adding all candidate nodes to all clusters that meet  the selected inclusion criterion (AOC\_m or AOC\_k).
- Another condition that a candidate node must satisfy when added to a cluster is that inclusion of candidate node to the given cluster preserves positive modularity within the cluster. 
- 
- The overlapping cluster construction stage of this method adds these candidate nodes as non-core members of their new clusters,  while original members of the clusters are labelled as core members of the clusters they were originally a part of. 
- This approach has two benefits: first, it maintains the original ``definition" of the core part of the community (rather than potentially allowing gradual expansion of this core group) and second, it provides computational efficiency since the construction stage can take place in a single pass, does not depend on the order in which the nodes are added, and makes the test for meeting the AOC\_k or AOC\_m criterion very fast.
+Thus, whether running   AOC\_m or AOC\_k on the IKC clustering, both pipelines produce a set of  \textcolor{blue}{expanded clusters (compared to the input clustering)} that are potentially overlapping,  each of which has positive modularity and where every node in every cluster has at least $k$ other nodes in the cluster.  
+\textcolor{blue}{If desired, these clusters (which constitute cores) could be expanded to include peripheral nodes (i.e., step 3 in the IKC pipeline).
+Moreover, the input clusters could be produced in variants of the IKC pipeline (e.g., including the optional second step, which breaks up the large clusters).}
+
+	\textcolor{blue}{George, I don't think the next paragraph is needed, because it is repeating what is above. Alternatively, we can start this off saying ``In summary"...}
+Thus, the input to AOC is a clustering of a network into disjoint clusters, a value for $k$,  the criterion it uses (either AOC\_m or AOC\_k), and the list of candidate nodes. If this clustering is produced by IKC, by construction the clustering will be $km$-valid. The list of candidate nodes (the first of the two additional parameters) can be constructed from node-network characteristics such cluster membership,  total degree, in-degree,  or out-degree,  or some other basis for candidate selection such as publication venue or funding sources.
+Once candidate nodes are chosen, AOC constructs overlapping clusters by adding all candidate nodes to all clusters that meet  the selected inclusion criterion (AOC\_m or AOC\_k) and ensures positive modularity is maintained with each added node.  
+
 	
 The resulting clustering generated from the overlapping clusters construction stage can now contains nodes in multiple clusterings, a property not found in the IKC method. 
 Moreover, every cluster that is produced is still $km$-valid. Furthermore, if AOC\_m is used as the criterion, then the MCD of each cluster is preserved. 
