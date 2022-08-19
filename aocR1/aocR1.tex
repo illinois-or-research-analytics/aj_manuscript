@@ -106,7 +106,7 @@ The \emph{Assembling Overlapping Clusters (AOC)} method, presented herein, build
 \textcolor{blue}{so that the input to AOC is a set of disjoint clusters produced by the first step of the IKC pipeline. These clusters will be expanded by AOC,  using a simple technique that we now describe.}
 To run AOC, the user specifies two additional parameters:  the set of candidate nodes that are being considered for membership in \textcolor{blue}{the expanded} clusters and the criterion for adding nodes to the expanding clusters. 
 
-\textcolor{blue}{The set of candidate nodes can be constructed from node-network characteristics, such as  being in selected  input clusters,  total degree, in-degree,  out-degree,  or some other basis for candidate selection such as publication venue or funding sources. The candidate nodes are then sorted decreasingly by their degrees and are processed one-by-one for each cluster.
+\textcolor{blue}{The set of candidate nodes can be constructed from node-network characteristics, such as  being in selected  input clusters,  total degree, in-degree,  out-degree,  or some other basis for candidate selection such as publication venue or funding sources. The candidate nodes are then sorted decreasingly by their degrees and are processed one-by-one for each input cluster.
 The criterion for adding node $v$ to the expansion of cluster $C$ (where $C$ is in the input clustering) is selected from the following two criteria:
  (i) $v$ must have at least $MCD(C)$ neighbors in  $C$, 
 where $MCD(C)$ is the minimum core degree (i.e., the minimum number of neighbors of any node within $C$)  and
