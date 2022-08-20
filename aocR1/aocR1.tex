@@ -83,7 +83,8 @@ However,
 IKC does not enforce global modularity maximization \citep{lancichinetti2011limits}, which has theoretical limitations (such as the resolution limit). 
 
 We implemented IKC as the first step in a tunable modular pipeline to identify communities with core-periphery structure. 
-Subsequent steps in the pipeline include breaking large cores and adding peripheral nodes to each core to construct communities with core-periphery structure. While IKC is a necessary step in the pipeline, the remaining steps are optional. We tested the ability of IKC to recursively extract k-cores from a network where nodes were publications and edges were citations. The input was a network of greater than 14 million articles centered around the rapidly growing field of extracellular vesicle biology \citep{Wedell2022}. Using this pipeline, we were able to reduce a large network to two principal communities of interest that were robust to various option settings \citep[Figure 5]{Wedell2022} from this large dataset.
+Subsequent steps in the pipeline include breaking large cores and adding peripheral nodes to each core to construct communities with core-periphery structure. While IKC is a necessary step in the pipeline, the remaining steps are optional. We tested the ability of IKC to recursively extract k-cores from a network where nodes were publications and edges were citations. 
+The input was a network of greater than 14 million articles centered around the rapidly growing field of extracellular vesicle biology \citep{Wedell2022}. Using this pipeline, we were able to reduce a large network to two principal communities of interest that were robust to various option settings \citep[Figure 5]{Wedell2022} from this large dataset.
 	
 However, IKC produces disjoint clusters, and some nodes can reasonably be assigned to more than one community.  As noted above, this limitation impacts articles that describe widely used methods but is also relevant, in theory at least, to articles reporting discovery that are influential in more than one community.  Thus, a need exists for methods that can produce meaningful overlapping clusters. 
 	
@@ -97,29 +98,35 @@ While the overarching question that motivates our work is identifying and descri
 
 \section{Materials and Methods}
 	
-\subsection{Methods} Motivated by the graph-theoretic concept of k-cores \citep{Giatsidis2011,malliaros2019}, we have previously constructed a clustering pipeline we refer to as  the Iterative K-core Clustering (IKC) pipeline in \cite{Wedell2022}, This scalable and tunable method takes, as input, two parameters $k$ and $p$ with $k > p \geq 1$, and computes a clustering of a given network $N$ into disjoint clusters where each cluster has a ``core'' component, and a ``periphery". This clustering is designed to satisfy several criteria: (i) the core is connected,  has positive modularity ($m$-valid), and each node in the center  is adjacent to at least $k$ other nodes in the center ($k$-valid), and (ii) every node in the periphery of a cluster is adjacent to at least $p$ center nodes in the cluster ($p$-valid). Thus, membership in the core of a cluster requires a greater degree of connectivity to the other center nodes than membership in the periphery. 
-	
+\subsection{Methods} Motivated by the graph-theoretic concept of k-cores \citep{Giatsidis2011,malliaros2019}, we have previously constructed a clustering pipeline we refer to as  the Iterative K-core Clustering (IKC) pipeline in \cite{Wedell2022}, 
+\textcolor{blue}{The input to the IKC pipeline is a network $N$ and the output is a set of disjoint clusters, where each cluster has a ``core'' component, and a ``periphery".  To produce this clustering,
+the IKC pipeline takes,}
+ as \textcolor{blue}{algorithmic parameters (selected by the user)}, two positive integers $k$ and $p$ with $k > p$, and computes a clustering of a given network $N$ into disjoint clusters 
+This clustering is designed to satisfy several criteria: (i) the core is connected,  has positive modularity ($m$-valid), and each node in the center  is adjacent to at least $k$ other nodes in the center ($k$-valid), and (ii) every node in the periphery of a cluster is adjacent to at least $p$ center nodes in the cluster ($p$-valid). Thus, membership in the core of a cluster requires a greater degree of connectivity to the other center nodes than membership in the periphery. 
+
 The IKC pipeline has three basic steps, where the second and third steps are optional.  The first step (the iterative k-core extraction algorithm) produces disjoint clusters that are both $k$-valid and $m$-valid (i.e.,  $km$-valid), where each cluster has positive modularity and each node in each cluster is adjacent to at least $k$ other nodes in the cluster; these form the centers or cores of the communities. The optional second and third steps breaks these clusters into smaller clusters and adds peripheries to the clusters respectively.  Note that the parameter $k$ is used to define the centers and the parameter $p$ is used to define the periphery. If the only objective is cores or centers of communities, then the pipeline can be run using only the first step (or optionally also with the second step if smaller communities are desired).
+\textcolor{blue}{Thus, the IKC pipeline is a scalable and tunable method.}
 
 	
-The \emph{Assembling Overlapping Clusters (AOC)} method, presented herein, builds on the first step of the IKC pipeline (k-core extraction), 
-\textcolor{blue}{so that the input to AOC is a set of disjoint clusters produced by the first step of the IKC pipeline. These clusters will be expanded by AOC,  using a simple technique that we now describe.}
-To run AOC, the user specifies two additional parameters:  the set of candidate nodes that are being considered for membership in \textcolor{blue}{the expanded} clusters and the criterion for adding nodes to the expanding clusters. 
+The \emph{Assembling Overlapping Clusters (AOC)} method, presented herein, builds on the first step of the IKC pipeline (k-core extraction);
+\textcolor{blue}{thus, the input to AOC is the network $N$ and a set of disjoint clusters produced by the first step of the IKC pipeline. These clusters will be expanded by AOC,  using a simple technique that we now describe.}
+To run AOC, the user specifies additional \textcolor{blue}{algorithmic} parameters:  (i) the set of candidate nodes that are being considered for membership in \textcolor{blue}{the expanded} clusters and  (ii) the criterion for adding nodes to the expanding clusters. 
+\textcolor{blue}{Thus, we will refer to the network $N$ and the clustering as the input to AOC, and the set of candidate nodes and criterion for node inclusion in additional clusters as the algorithmic parameters (however, these may also be considered part of the input since the user specifies these values).}
 
-\textcolor{blue}{The set of candidate nodes can be constructed from node-network characteristics, such as  being in selected  input clusters,  total degree, in-degree,  out-degree,  or some other basis for candidate selection such as publication venue or funding sources. The candidate nodes are then sorted decreasingly by their degrees and are processed one-by-one for each input cluster.
+\textcolor{blue}{The user can specify any  set of candidate nodes, but obvious options are using node-network characteristics, such as  being in selected  input clusters,  total degree, in-degree,  out-degree,  or some other basis for candidate selection such as publication venue or funding sources. The candidate nodes are then sorted by their total degrees in decreasing order (largest degree first), and are processed one-by-one for each input cluster.
 The criterion for adding node $v$ to the expansion of cluster $C$ (where $C$ is in the input clustering) is selected from the following two criteria:
  (i) $v$ must have at least $MCD(C)$ neighbors in  $C$, 
 where $MCD(C)$ is the minimum core degree (i.e., the minimum number of neighbors of any node within $C$)  and
 (ii) $v$ must have at least $k$ neighbors in  $C$.}
  We note that $k$ (the parameter for condition (i)) has been used to construct the IKC clustering; hence, for every cluster $C$,  it follows that $MCD(C) \geq k$ and so (ii) is a weaker condition than (i). We refer to the first membership criterion as AOC\_m and the second as AOC\_k.
 \textcolor{blue}{Independent of the selected membership criterion, we also require that the addition of $v$ to the current expansion of $C$ produce a cluster that has positive modularity.
-This last criterion ensures that the final expanded cluster that is produced will also have positive modularity.}
+This last criterion ensures that the final expanded cluster will also have positive modularity.}
 	Thus, whether running   AOC\_m or AOC\_k on the IKC clustering, both pipelines produce a set of  \textcolor{blue}{expanded clusters (relative to the input clustering)} that are potentially overlapping,  each of which has positive modularity and where every node in every cluster has at least $k$ other nodes in the cluster.  
 	 	
 The resulting clustering generated from the overlapping clusters construction stage can now \textcolor{blue}{contain} nodes in multiple clusterings, a property not found in the IKC method. 
 \textcolor{blue}{Since the input clustering is produced by IKC,} every  expanded cluster that is produced is still $km$-valid. Furthermore, if AOC\_m is used as the criterion, then the MCD of each cluster is preserved.
 
-\textcolor{blue}{The AOC technique we describe can be modified to suit the user's interests. For example,   by modifying the input IKC clustering through the optional second step, which breaks  up large clusters but still ensures that the clusters are km-valid.
+\textcolor{blue}{The AOC technique we describe can be modified to suit the user's interests. For example,   the user may wish to modify the input IKC clustering through the optional second step, which breaks  up large clusters but still ensures that the clusters are km-valid.
 If positive modularity is not required, then the check for modularity could be dropped.  Finally these expanded clusters can also be enlarged through the inclusion of peripheral nodes through Step 3 in the IKC pipeline.}
 
 	
@@ -143,7 +150,8 @@ We also constructed configuration null models where the edges of the input netwo
  
 \section{Results and Discussion}
 	
-As we explain in the preceding sections, AOC is a meta-method for overlapping communities that takes as input (i) a k-core based clustering such as IKC, (ii) a set of candidate nodes for consideration of membership in multiple communities, and (iii) a parameter $k$ or $m$ that defines the criterion for membership (Materials and Methods). We now examine the properties of non-disjoint clusterings produced using IKC followed by AOC. We analyze the effects of AOC on IKC clusters using either the nodes in non-singleton IKC clusters as candidates (the second input parameter) or high-degree nodes in singleton clusters. We also study the distribution of marker nodes in IKC clusters enhanced by AOC and finally, examine overlap across AOC clusters. 
+As we explain in the preceding sections, AOC is a meta-method for overlapping communities that takes as input  a \textcolor{blue}{network $N$ and a clustering of the network produced by IKC,  and has user-specified parameters:} (i) a set of candidate nodes for consideration of membership in multiple communities, and (ii) a parameter $k$ or $m$ that defines the criterion for membership (Materials and Methods). We now examine the properties of non-disjoint clusterings produced using IKC followed by AOC. We analyze the effects of AOC on IKC clusters using either the nodes in non-singleton IKC clusters as candidates (the second input parameter) or high-degree nodes in singleton clusters. 
+We also study the distribution of marker nodes in IKC clusters enhanced by AOC and, finally, we examine overlap across AOC clusters. 
 	
 \subsection{Characterizing the Curated Exosome Network}
  In an initial exploratory experiment, we clustered the curated exosome network (CEN) using IKC where $k \in {\{10,20,30,40, 50\}}$, and we refer to these clusterings as
@@ -236,6 +244,7 @@ For both AOC\_m and AOC\_k a subset of the clusters increases in size (Table~\re
 Figure~\ref{fig:fig1} shows the distribution of cluster sizes generated by AOC relative to the core sizes from the IKC run at various values for \emph{k}.  Approximately 74\% and 87\% of  128 cores increase in size with AOC\_m and AOC\_k treatment respectively when IKC with $k$=10 is used as the input clustering. AOC treatment of IKC clustering, therefore, results in an increase in cluster sizes that \textcolor{blue}{is} inversely related to the value of \emph{k} used in IKC and is more pronounced with AOC\_k than with AOC\_m. For reasons of coverage, we used IKC with $k$=10 in all subsequent experiments.
 	
 \begin{figure}[H]
+% updated on  (GEORGE)
 \centering
 \begin{subfigure}[t]{0.48\textwidth}
 \centering
@@ -252,6 +261,7 @@ IKC and the set of candidate nodes to be assigned additional clusters was all no
 \label{fig:fig1}
 \end{figure}
 	
+%Tandy writes: this next text  (and all subsequent) might change. Text up to this point is probably fine.
 We then examined the number of clusters a candidate node was assigned to after AOC treatment of clusterings generated by  IKC. For AOC\_k treatment of IKC\_k10 clusters, 54\% of nodes in non-singleton clusters were assigned to between 2 and 24 clusters in a progressively decreasing manner, with roughly 26\% of nodes assigned to 2 clusters and a single node being assigned to 24 different clusters.  The remaining 46\% of the nodes were assigned to a single cluster. AOC\_m, in comparison to AOC\_k, results in fewer multiple cluster assignments because of its more stringent membership criterion (Figure~\ref{fig:fig2}).
 	
 \begin{figure}[H]
