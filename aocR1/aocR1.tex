@@ -43,11 +43,12 @@
 
 % ORCID IDs
 % Akhil Jakatdar: 0000-0003-1580-010X
+% Baqiao Liu:
 % Tandy Warnow: 0000-0001-7717-3514
 % George Chacko: 0000-0002-2127-1892
 
 \begin{document}
-	\maketitle
+\maketitle
 	
 \abstract{Through discovery of meso-scale structures, community detection methods support understanding complex networks. To this purpose, a variety of community detection approaches have been developed. Some have been applied to bibliometric data and have resulted in useful discovery. Many community finding methods, however, rely on disjoint clustering techniques, in which node membership is restricted to one community or cluster. This strict requirement limits the ability to inclusively describe communities since some nodes may reasonably be assigned to many communities. We previously reported a scalable and modular pipeline that discovers disjoint research communities from the scientific literature. We now present Assembling Overlapping Clusters (AOC), a complementary meta-method for overlapping communities as an option that addresses the disjoint clustering problem. We present findings from the use of AOC on a network of over 13 million nodes that captures recent research in the very rapidly growing field of extracellular vesicles in biology.
 \textcolor{blue}{Availability: AOC is available in open source form on GitHub.}
@@ -349,15 +350,15 @@ In the previous experiments, we examined the effects of AOC from a graph-theoret
 
 The count of cores with non-zero marker counts varied between treatments. For IKC, 17 of 128 cores exhibited  non-zero marker counts. Clusters 3, 4, and 25 are notable in accounting for 87.5\% of 1021 markers after IKC clustering. Because of this substantial coverage of marker nodes, from the perspective of EV biology, clusters 3, 4, and 25 are of obvious interest and offer a significant reduction in the amount of information to be studied qualitatively.  
 
-After IKC+AOC treatment, 20 of 128 (AOC\_m) and 31 of 128 (AOC\_k) cores respectively contained non-zero marker counts, which is consistent with their relatively stringent and permissive design. 
-After AOC\_m treatment of IKC clusters, clusters 3, 4, and 25  contained 30.4\%, 42.5\%, and 93.1\%, respectively, of all markers. After AOC\_k treatment of IKC clusters, clusters  3, 4, and 25 contained 69.5\%, 71.8\%, and 94.6\% of all markers respectively.  Thus,  clusters 3, 4, and 25 all expand more significantly under AOC\_k than under AOC\_m. We also note that cluster 1  contained 20.7\% of the marker nodes in IKC+AOC\_k, indicating that cluster 1 is also significantly enriched for marker nodes by AOC\_k. 
-These data  suggest that the recursive approach of IKC results in markers being segregated by disjoint clustering, but this effect can be remediated by post-processing using AOC.
+\textcolor{blue}{After IKC+AOC treatment, 20 of 128 (AOC\_m) and 31 of 128 (AOC\_k) cores respectively contained non-zero marker counts, which is consistent with their relatively stringent and permissive design. After AOC\_m treatment of IKC clusters, clusters 3, 4, and 25  contained 42.5\%, 90.2\%, and 30.4\% respectively, of all markers. After AOC\_k treatment of IKC clusters, clusters  3, 4, and 25 contained 60.5\%, 91.3\%, and 69.5\% of all markers respectively.  Thus,  clusters 3, 4, and 25 all expand more significantly under AOC\_k than under AOC\_m. We also note that cluster 1, which contains 2.4\% of markers in IKC and 4.8\% after AOC\_m, is significantly enriched for marker nodes by AOC\_k to 20.7\% of the marker nodes. These data  suggest that the recursive approach of IKC results in markers being segregated by disjoint clustering, but this effect can be remediated by post-processing using AOC.}
 
  \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{marker_comps_wide.pdf} 
+\includegraphics[width=0.7\linewidth]{bl_marker_comps_wide.pdf} 
 \captionsetup{width=0.9\textwidth}
-\caption{Marker Node Enrichment with AOC. We show marker node counts in 40 clusters (5 rows with 8 clusters per row) before and after AOC.  The count of clusters with non-zero marker node counts is maximal in the case of AOC\_k (right panel), with 31 clusters containing markers. Notably, the proportion of 1,021 marker nodes in the network increases from 40.7\% in cluster 4 (r1,c4) of IKC clustering to 93.1\% after AOC\_m to 94.6\% after AOC\_k. The proportion of markers in cluster 25 (r4,c1) is the same for IKC and AOC\_m but increases to  69.5\% under the more permissive conditions of AOC\_m. Data are shown for clusters where 1\% or more of the markers are present in any of IKC, AOC\_m, or AOC\_k. \emph{Perc}: Percentage of 1,021 marker nodes found in a cluster.}
+% updated percentage calculations Aug 21, 2022
+% see /shared/aocv2_plus/gc/bl_marker_suppl_data.csv
+\caption{Marker Node Enrichment with AOC. We show marker node counts in 40 clusters (5 rows with 8 clusters per row) before and after AOC.  The count of clusters with non-zero marker node counts is maximal in the case of AOC\_k (right panel), with 31 clusters containing markers. Notably, the proportion of 1,021 marker nodes in the network increases from 40.7\% in cluster 4 (r1,c4) of IKC clustering to 90.2\% after AOC\_m to 91.3\% after AOC\_k. The proportion of markers in cluster 25 (r4,c1) is the same (30.4\%) for IKC and AOC\_m but increases to  69.5\% under the more permissive conditions of AOC\_m. Data are shown for clusters where 1\% or more of the markers are present in any of IKC, AOC\_m, or AOC\_k. \emph{Perc}: Percentage of 1,021 marker nodes found in a cluster.}
 \label{fig:marker-node-concentration}
 \end{figure}
 	
