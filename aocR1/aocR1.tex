@@ -330,18 +330,16 @@ IKC clustering of the CEN results in 3.8\% coverage. A large number of nodes of 
 With AOC\_m using these 15,039  ``singleton" nodes as candidates, no additional assignments are made and so the output of AOC\_m is identical to IKC\_k10. 
 With the lower stringency AOC\_k, however, 7,459 of 15,039 (49.6\%) of the singleton nodes are assigned to IKC\_k10 clusters, with all nodes assigned to at most 5 clusters, most nodes assigned to only one cluster, and only one node assigned to 5 clusters (Figure~\ref{fig:singleton}). 
 
-In terms of cluster size increases, the effect is also mild: 71\% of the 128 clusters in this AOC\_k treatment do not increase in size. 
-In contrast, when the candidates are nodes that are not singletons (so that they belong to a non-singleton cluster), 74\% and 87\% of the 128 clusters increase in size with AOC\_m and AOC\_k respectively  (Section 3.2).  
+In terms of cluster size increases, the effect is also mild: 51\% of the 128 clusters in this AOC\_k treatment do not increase in size. In contrast, when the candidates are nodes that are not singletons (so that they belong to a non-singleton cluster), 74\% and 87\% of the 128 clusters increase in size with AOC\_m and AOC\_k respectively  (Section 3.2).  
 
-Thus, AOC enables nodes previously assigned to singleton clusters to  be incorporated into cores, and while these assignments may not impact the clusters significantly, these assignments may shed light into the roles of these publications within the network.  
-Whether this option is useful will depend on the purpose of clustering and the evaluation criteria designed by users for a specific study.
+Thus, AOC enables nodes previously assigned to singleton clusters to  be incorporated into cores, and while these assignments may not impact the clusters significantly, these assignments may shed light into the roles of these publications within the network.  Whether this option is useful will depend on the purpose of clustering and the evaluation criteria designed by users for a specific study.
 
 \begin{figure}
 \centering
 \includegraphics[width=0.6\linewidth]{bl_singletons.pdf} 
 \captionsetup{width=0.9\textwidth}
-\caption{AOC\_k but not AOC\_m incorporates high-degree singleton nodes from IKC\_k10 into clusters. 15,039 nodes belonging to the top  1\% of nodes by total degree in the CEN were assigned to singleton clusters after IKC\_k10 clustering. These 15,039  ``singleton" nodes were used as candidate nodes for AOC\_m and AOC\_k treatment of IKC\_k10 clusters. After AOC\_m treatment, none of these 15,039 nodes were incorporated into any of the 128 clusters resulting from  IKC\_k10. After the more permissive AOC\_k protocol, 7,459 (49.6\%) were incorporated into one or more of the 128 IKC\_k10 clusters. The count of clusters is plotted against percent increase in cluster size for all 128 clusters. The maximum increase in cluster size was 8\%. The majority of the clusters (71\%) did not change in size. After AOC\_k treatment, 540,883 nodes (99\%) of the nodes were assigned to one cluster, 1504 to 2 clusters, 210 to 3 clusters, and 26 to 4 clusters; one node was assigned to 5 clusters.}
-\label{fig:singleton}
+\caption{AOC\_k but not AOC\_m incorporates high-degree singleton nodes from IKC\_k10 into clusters. 15,039 nodes belonging to the top  1\% of nodes by total degree in the CEN were assigned to singleton clusters after IKC\_k10 clustering. These 15,039  ``singleton" nodes were used as candidate nodes for AOC\_m and AOC\_k treatment of IKC\_k10 clusters. After AOC\_m treatment, none of these 15,039 nodes were incorporated into any of the 128 clusters resulting from  IKC\_k10. \textcolor{blue}{After the more permissive AOC\_k protocol, 7,459 (49.6\%) were incorporated into one or more of the 128 IKC\_k10 clusters. The count of clusters is plotted against percent increase in cluster size for all 128 clusters. 65 of 128 clusters did not change in size. Of the remaining 63 clusters, the maximum increase in cluster size was 8.1\%.  After AOC\_k treatment, 540,883 nodes (99\%) of the nodes were assigned to one cluster, 1504 to 2 clusters, 210 to 3 clusters, and 26 to 4 clusters; one node was assigned to 5 clusters.}
+\label{fig:singleton}}
 \end{figure}
 	
 \subsection{Experiment 4: Marker node concentrations}
