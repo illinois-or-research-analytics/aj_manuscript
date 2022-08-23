@@ -142,7 +142,7 @@ While the network in \cite{Wedell2022} consisted of 14,695,475 nodes and 99,663,
 
 \emph{Random networks.}
 We also explored clustering on random networks, specifically using both Erd\H{o}s-Renyi (ER) graphs and configuration models.  The
-ER graphs  analyzed in this paper were generated using the Python package NetworkX (nx) using the random graph function that requires four parameters: number of input vertices, number of input edges, random seed value (for reproducibility) and a Boolean value for whether the randomly generated graph is directed or not. Using this function, 100 ER graphs were generated using seed values from 0 to 99 inclusive. An example of a command used to generate a single graph is  `nx.gnm\_random\_graph(n=13989436, m=92051051, seed=0, directed=True)'. 
+ER graphs  analyzed in this paper were generated using the Python package NetworkX (nx) \citep{hagberg2008} using the random graph function that requires four parameters: number of input vertices, number of input edges, random seed value (for reproducibility) and a Boolean value for whether the randomly generated graph is directed or not. Using this function, 100 ER graphs were generated using seed values from 0 to 99 inclusive. An example of a command used to generate a single graph is  `nx.gnm\_random\_graph(n=13989436, m=92051051, seed=0, directed=True)'. 
 We also constructed configuration null models where the edges of the input network were randomized while preserving the total number of nodes, the degree of each node,  and the publication year of each cited node in a citing-cited node pair \citep{bradley2020}. 
  
 \section{Results and Discussion}
@@ -415,7 +415,6 @@ Therefore, we allow both options and allow users to choose between them.
 
 One objective was to construct a modular community finding pipeline that is relatively subject-independent. Using IKC, a k-core based approach, we have identified citation-dense communities of publications. We have enriched these clusters by applying two variants of AOC. In this respect, we are able to address a limitation of our original IKC method that arises by its restriction to producing disjoint clustering (as a result of extracting k-cores in decreasing order of the value of $k$). This limitation prevents a node captured in a k-core from being considered for inclusion in a subsequently extracted k-core. Post-processing with AOC overcomes this limitation.
 
-%:
 Since membership in multiple clusters following AOC occurs for many nodes, and is not completely predictable based on degree within the network, a benefit of AOC is that examination of the clusters a publication belongs to, and the role of the publication within these clusters,  may provide additional insights into the roles of publications within the network that go beyond evaluation based on citation count.
 Such studies require expertise in the disciplines for the publications, and thus provides opportunities for specialists for future investigation.
 
