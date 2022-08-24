@@ -73,44 +73,41 @@
 
 \section{Commands for Assembling Overlapping Cluster} 
 
-After downloading \href{https://github.com/illinois-or-research-analytics/aocv2_plus}{our software} locally, the following command can be run to generate the set of overlapping clusters:
+After downloading \href{https://github.com/illinois-or-research-analytics/aocv2_plus/tree/main/v2_revisions}{our software} locally, the following command can be run to generate the set of overlapping clusters:
 
  \lstset{
   breaklines=true,
   literate = {-}{-}1
 }
 \begin{lstlisting}[language=bash]
-python3 overlapping_kmp_pipeline.py
---network-file [path_to_tsv_network file]
---clustering [path_to_input_kmp-valid_clustering_file.csv]
+python3 aoc.py
+--network-file [path_to_tsv_network_edgelist]
+--clustering [existing_cluster_by_ikc]
 --output-path [path_to_output_overlapping_clustering]
---min-k-core [min_k_of_input_clustering]
---rank-type [percent, percentile]
---rank-val [top_n_percent_of_candidate_nodes_to consider_adding]#opposite if percentile 
---inclusion-criterion [k, mcd]
---candidate-criterion [total_degree,indegree,random,seed]
---candidate-file [path_to_custom_candidate_list]
---experiment-name [name_of_experiment_being_run]
---experiment-num [experiment_number_being_run] 
---config [bool, bool, bool, bool] 
-# (run overlapping?, display cluster stats?, include marker node analysis?, save outputs?)
+--min-k-core [10, 20, 30, 40, 50]
+--inclusion-criterion [k|mcd]
+--candidate-file [path_to_candidate_file]
 \end{lstlisting}
 
-Shown below are the flags and what purpose each flag accomplishes. 
+Shown below are some explanations for the parameters (for more information, see our README for the software):
 
 \begin{itemize}
-\item \textbf{network-file} - str  - file path to network tsv file of the format \path{node_id[\space]node_id}
-\item \textbf{clustering-file} - str - file path to clustering tsv file of the format \path{cluster_id[\space]node_id}
-\item \textbf{min-k-core} - int - integer defining the min-k-core by which to add candidate nodes if selecting k as inclusion criterion. It is still mandatory even if not using k, so a dummy value must be filled in
-\item \textbf{rank-type} - [percent, percentile] - choose whether to use percent or percentile when calculating list of candidate nodes to generate
-\item \textbf{rank-val} - float - the percent or percentile value used to generate the list of candidate nodes
-\item \textbf{inclusion-criterion} - [k, mcd] - utilize k or mcd of cluster as the inclusion criteria for adding a candidate node to a cluster
-\item \textbf{candidate-criterion} - [total\_degree, indegree, random, seed] - criterion by which the rank type and rank val sort the list of nodes in the network in deciding the candidate nodes
-\item \textbf{candidate-file} - str - only unrequired field that, if included, will override the other candidate selection values and simply use the nodes specified in the candidate file as candidate nodes. They must be in the format \path{node_id [\n] node_id}
-    \item \textbf{experiment-name} - str - string to specify the name of the experiment in order to name the statistic csv files that are ouputted with the final clustering file
-    \item \textbf{experiment-num} - int - must correspond to a directory in the environment where the program will be run with the format \path{experiment_{experiment-num}}
-    \item \textbf{config} - [bool, bool, bool, bool] - list of four boolean values that correspond to the following criteria. 1. run the overlapping step of the kmp pipeline. 2. Display the cluster statistics to the console. 3. Include an analysis of marker node coverage. 4. Save output clustering files and cluster statistics. 
+\item \textbf{network-file} - the path to the background graph, in edge-list format
+\item \textbf{clustering} - the path to an input disjoint clustering, each line contains an entry of format \path{cluster_id[\space]node_id}
+\item \textbf{output-path} - the path for the output clustering
+\item \textbf{min-k-core} - an integer defining the threshold for $k$ by which to add candidate nodes if using ``AOC\_k''. Not required if using ``AOC\_m''
+\item \textbf{inclusion-criterion} - use \texttt{k} (``AOC\_k'') or \texttt{mcd} (``AOC\_m'') as the inclusion criteria for adding a candidate node to a cluster
+\item \textbf{candidate-file} - the path to the candidate nodes. Not required and defaults to all nodes appearing in the input clustering
 \end{itemize}
+
+For example, given a network and clustering files produced by IKC\_k10, and assuming
+that we want the candidates to be all nodes that appear in one of the input non-singleton clusters, AOC\_k can be run as follows:
+\begin{lstlisting}[language=bash]
+python3 aoc.py --network-file [path_to_tsv_network_edgelist] --clustering [existing_cluster_by_ikc]
+    --output-path [output_path]
+    --min-k-core 10
+    --inclusion-criterion k
+\end{lstlisting}
 
 \section{Line Graph Proof} 
 
