@@ -81,7 +81,7 @@ After downloading \href{https://github.com/illinois-or-research-analytics/aocv2_
 }
 \begin{lstlisting}[language=bash]
 python3 aoc.py
---network-file [path_to_tsv_network file]
+--network-file [path_to_tsv_network_edgelist]
 --clustering [existing_cluster_by_ikc]
 --output-path [path_to_output_overlapping_clustering]
 --min-k-core [10, 20, 30, 40, 50]
@@ -92,13 +92,22 @@ python3 aoc.py
 Shown below are some explanations for the parameters (for more information, see our README for the software):
 
 \begin{itemize}
-\item \textbf{network-file} - the path to the background graph, an edge-list
+\item \textbf{network-file} - the path to the background graph, in edge-list format
 \item \textbf{clustering} - the path to an input disjoint clustering, each line contains an entry of format \path{cluster_id[\space]node_id}
 \item \textbf{output-path} - the path for the output clustering
 \item \textbf{min-k-core} - an integer defining the threshold for $k$ by which to add candidate nodes if using ``AOC\_k''. Not required if using ``AOC\_m''
 \item \textbf{inclusion-criterion} - use \texttt{k} (``AOC\_k'') or \texttt{mcd} (``AOC\_m'') as the inclusion criteria for adding a candidate node to a cluster
 \item \textbf{candidate-file} - the path to the candidate nodes. Not required and defaults to all nodes appearing in the input clustering
 \end{itemize}
+
+For example, given a network and clustering files produced by IKC\_k10, and assuming
+that we want the candidates to be all nodes that appear in one of the input non-singleton clusters, AOC\_k can be run as follows:
+\begin{lstlisting}[language=bash]
+python3 aoc.py --network-file [path_to_tsv_network_edgelist] --clustering [existing_cluster_by_ikc]
+    --output-path [output_path]
+    --min-k-core 10
+    --inclusion-criterion k
+\end{lstlisting}
 
 \section{Line Graph Proof} 
 
