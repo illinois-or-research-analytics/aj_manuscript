@@ -31,7 +31,7 @@
 
 \usepackage{authblk}
 \title{AOC: Assembling Overlapping Communities}
-\author[1]{Akhil Jakatdar}
+\author[1]{Akhil Jakatdar\thanks{AK and BL contributed equally to this study.}}
 \author[1]{Baqiao Liu}
 \author[1]{Tandy Warnow\thanks{warnow@illinois.edu}}
 \author[1,2]{George Chacko\thanks{chackoge@illinois.edu}}
@@ -61,21 +61,21 @@ We are motivated by the problem of identifying and characterizing research commu
 
 A community in a network generally refers to a group of nodes that are more densely connected with each other than to nodes outside the community. Various flavors of this definition exist, and the terms community and cluster have overlapping uses  \citep{Coscia2011,yang2013overlapping}. 
   
-A considerable literature exists on community finding in graphs that reflects a diversity of perspectives and solutions. Hence various approaches can be drawn upon in identifying research communities, of which we cite a few \citep{Fortunato2009,FORTUNATO201075,Coscia2011,Yang2016}. Most community finding approaches focus on disjoint partitioning, where a vertex or node is only assigned to only one community. This restriction can be viewed as a limitation since some nodes can reasonably be assigned to more than one community.
+A considerable literature exists on community finding in graphs that reflects a diversity of perspectives and solutions. Hence various approaches can be drawn upon in identifying  communities, of which we cite a few \citep{Fortunato2009,FORTUNATO201075,Coscia2011,Yang2016}. Most community finding approaches focus on disjoint partitioning, where a vertex or node is only assigned to only one community. This restriction can be viewed as a limitation since some nodes can reasonably be assigned to more than one community.
 
-Community finding and clustering approaches have been applied to the scientific literature~\citep{Newman2006,Fortunato2009,Boyack2010,Boyack2019,Traag2019,Ahlgren2020,Chandrasekharan2021,Wedell2022}. As for other networks, disjoint methods are also limited when studying citation networks.  For example, publications introducing widely used methods may be relevant to multiple communities.
 
 Several methods have been developed that address the limitation of disjoint clustering by producing overlapping clusters. \citep{Baumes2005,Palla2005,banerjee2005model,Cleuziou2008,Lancichinetti2009,Lu2012,yang2013overlapping}, although these do not appear to enjoy much use in scientometric studies. 
 
 One interesting approach, however, is the two-step procedure where the input graph is first transformed into a line graph whose nodes represent edges in the original graph \citep{Harary1960}.  The line graph is then clustered and this output can be mapped back to the input graph to generate overlapping clusters. This general approach has been used by others on citation graphs \citep{Evans2009,Havemann2021}. However, line graph  techniques are not very scalable, since the size of a line graph is much larger than the size of its input graph. For example, the network that we studied in \cite{Wedell2022} would grow from 13,989,436 nodes and 92,051,051 edges to 92,051,051 nodes and 160,428,881,121 edges, which presents a challenge to clustering software. 
  
 
-One approach to identifying research communities is through analyzing citation patterns in the scientific literature. The underlying assumption is that members of a research community are more likely to cite each other's work than the work from outside their community. Drawing upon the rich literature in graph theory, this question can be framed as a community finding problem where a community is defined as a set of vertices in a graph that exhibit stronger connectivity to each other than to vertices outside such a community. 
-
+For the specific problem of identifying research communities, one approach is through analyzing citation patterns in the scientific literature. The underlying assumption is that members of a research community are more likely to cite each other's work than the work from outside their community. Drawing upon the rich literature in graph theory, this question can be framed as a community finding problem where a community is defined as a set of vertices in a graph that exhibit stronger connectivity to each other than to vertices outside such a community. 
 Thus, in the graph (or network) of scientific literature, citation-dense areas suggest the existence of communities of publications. Accordingly, a community of publications can be defined by edge-density and 
 its researcher members can then be inferred from the authorship of these publications \citep{Chandrasekharan2021,Wedell2022}. 
-	
 We stress that citation density alone does not make a confirming argument for the existence of a research community. However, community finding techniques are valuable in being able to efficiently search large datasets for communities, reducing them to smaller units of data that can then be examined with complementary analytical techniques that include the use of human judgment. 
+
+Community finding and clustering approaches have been applied to the scientific literature~\citep{Newman2006,Fortunato2009,Boyack2010,Boyack2019,Traag2019,Ahlgren2020,Chandrasekharan2021,Wedell2022}. As for other networks, disjoint methods are also limited when studying citation networks.  For example, publications introducing widely used methods may be relevant to multiple communities.
+	
 	
 Beyond identifying research communities, we are interested in their structure and the roles played by community members.  The observation by \cite{Price1966} that a community of oxidative phosphorylation researchers consisted of a small core of influential researchers and a much larger transient population drew attention to core-periphery or center-periphery structure in research communities. Core-periphery patterns have also been reported in other networks using different techniques, such as block modeling and k-core decomposition, arguing for some degree of ubiquity in their occurrence \citep{borgatti2000models,Breiger2014,Rombach2017,gallagher2021clarified,yanchenko_2202.04455}. 	
 
@@ -97,7 +97,7 @@ However, IKC produces disjoint clusters. As noted above, this limitation impacts
 	
 To address the limitation of disjoint clusters with IKC, we developed  ``Assembling Overlapping Clusters" (AOC), a scalable meta-method that takes the output of IKC and makes multiple community assignments from a list of candidate nodes, while enforcing criteria for cores. AOC can be used as an optional step in the IKC pipeline at the discretion of the user. We present results from AOC applied to the cores generated by the IKC method, and discuss the results and discovery made from them. 
 	
-While the overarching question that motivates our work is identifying and describing research communities, this article is focused on the more narrow question of extending the IKC method towards inclusively identifying the cores of core-periphery communities and towards more general use in community detection. To test AOC, we use a citation network centered around the recent extracellular vesicle literature, a very rapidly growing field in biology \citep{van2022challenges}. We also use the terms core, community, and cluster interchangeably in this article.
+While the overarching question that motivates our work is identifying and describing research communities, this article is focused on the narrower question of extending the IKC method towards inclusively identifying the cores of core-periphery communities and towards more general use in community detection. To test AOC, we use a citation network centered around the recent extracellular vesicle literature, a very rapidly growing field in biology \citep{van2022challenges}. We also use the terms core, community, and cluster interchangeably in this article.
 
 \section{Materials and Methods}
 	
@@ -163,15 +163,13 @@ Specifically, the impact of curation reduced coverage
 
 	
 To examine random network effects that could contribute to observed results from IKC, we generated 10 replicates of a configuration null model where the edges of the input network were randomized while preserving the total number of nodes, the degree of each node,  and the publication year of each cited node in a citing-cited node pair \citep{bradley2020,uzzi2013}. These shuffled networks were then clustered using IKC\_k10. In all 10 cases, only a single $km$-valid core with MCD of 15 was extracted, although the number of nodes in each of these cores varied (Figure~\ref{fig:shuffleplot}).
-%Question to George: is the degeneracy of this graph also 15?
  The median size of this cluster across 10 replicates was 435,216, roughly double the size of the largest cluster generated from the unperturbed network. These observations suggest that under these controlled conditions of randomization, the collective affinity of community members expressed as internal edge density is disrupted and a single core results. 
- We did not run IKC at higher values of $k$ on the shuffled networks since  by definition no clusters would have been found.
- % the minimum core degree (MCD) of 15 for the single cluster would have been exceeded and no clusters would have resulted; 
+ We did not run IKC at higher values of $k$ on the shuffled networks since  by definition no clusters would have been found. 
  We also did not run AOC on the output from IKC with  k=10 either,  since AOC cannot add new members when the output has only one cluster and the candidate node list is restricted to membership of that cluster.
 
-We also generated 100 random Erd\H{o}s-Renyi graphs with the same number of nodes and edges as the CEN network and clustered them with IKC with $k=10$ (Supplementary Material). No $km$-valid clusters were generated from these Erd\H{o}s-Renyi graphs. 
-%George, did any k-cores get created? What is the degeneracy of the graph? 
-We did not run AOC on the IKC output from  the Erd\H{o}s-Renyi graphs, since there were no clusters to use as input. 
+We also generated 100 random Erd\H{o}s-Renyi graphs with the same number of nodes and edges as the CEN network and clustered them with IKC with $k=10$ (Supplementary Material). No $km$-valid clusters were generated from these Erd\H{o}s-Renyi graphs (and in particular, we found that the degeneracy of each of the Erd\H{o}s-Renyi graphs was 9).
+Because there were no clusters in the IKC output,  it was meaningless to run AOC.
+
 	
 The distinct differences in results from the real world CEN network and the two random network models we explored show that the results seen in IKC clustering on a real world network are unlikely to be the result of random effects alone. 
 	
@@ -314,7 +312,8 @@ For example, for AOC\_k, five publications are found in Group 4 that are assigne
 	
 Another perspective that provides additional insight into publications is their ``tier" within their communities. In \cite{Chandrasekharan2021}, we  proposed a tier classification for nodes in a cluster, in which Tier 1 refers to the nodes in the top 10th percentile with respect to intra-cluster citations. Thus, when measuring in-degree within the cluster, a Tier 1 node is in the top 10 percent compared to all other nodes in its cluster. 
 
-We observe that nodes assigned to multiple clusters are more likely to have Tier 1 status (Figure~\ref{fig:fig3}, right subfigure). The Tier 1 count also increases for AOC\_k compared to AOC\_m. The greater Tier I count for AOC\_k is likely a combination of larger clusters and the in-degree of nodes within them.
+We observe that nodes assigned to multiple clusters are more likely to have Tier 1 status (Figure~\ref{fig:fig3}, right subfigure). The Tier 1 count also increases for AOC\_k compared to AOC\_m. 
+The greater Tier 1 count for AOC\_k is likely a combination of larger clusters and the in-degree of nodes within them.
 
 For groups 1--4, there are some publications that are Tier 1 in all communities they belong to, some that are never in Tier 1, but the majority are in between. 
 However, while the four publications in group 5 are Tier 1 for at least 7 communities for AOC\_k, only one is in Tier 1 for more than 10 communities. 
@@ -340,17 +339,17 @@ Thus, AOC enables nodes previously assigned to singleton clusters to  be incorpo
 \centering
 \includegraphics[width=0.6\linewidth]{bl_singletons.pdf} 
 \captionsetup{width=0.9\textwidth}
-\caption{AOC\_k but not AOC\_m incorporates high-degree singleton nodes from IKC\_k10 into clusters. 15,039 nodes belonging to the top  1\% of nodes by total degree in the CEN were assigned to singleton clusters after IKC\_k10 clustering. These 15,039  ``singleton" nodes were used as candidate nodes for AOC\_m and AOC\_k treatment of IKC\_k10 clusters. After AOC\_m treatment, none of these 15,039 nodes were incorporated into any of the 128 clusters resulting from  IKC\_k10. \textcolor{blue}{After the more permissive AOC\_k protocol, 7,459 (49.6\%) were incorporated into one or more of the 128 IKC\_k10 clusters. The count of clusters is plotted against percent increase in cluster size for all 128 clusters. 65 of 128 clusters did not change in size. Of the remaining 63 clusters, the maximum increase in cluster size was 8.1\%.  After AOC\_k treatment, 540,883 nodes (99\%) of the nodes were assigned to one cluster, 1504 to 2 clusters, 210 to 3 clusters, and 26 to 4 clusters; one node was assigned to 5 clusters.}
+\caption{AOC\_k but not AOC\_m incorporates high-degree singleton nodes from IKC\_k10 into clusters. 15,039 nodes belonging to the top  1\% of nodes by total degree in the CEN were assigned to singleton clusters after IKC\_k10 clustering. These 15,039  ``singleton" nodes were used as candidate nodes for AOC\_m and AOC\_k treatment of IKC\_k10 clusters. After AOC\_m treatment, none of these 15,039 nodes were incorporated into any of the 128 clusters resulting from  IKC\_k10. After the more permissive AOC\_k protocol, 7,459 (49.6\%) were incorporated into one or more of the 128 IKC\_k10 clusters. The count of clusters is plotted against percent increase in cluster size for all 128 clusters. 65 of 128 clusters did not change in size. Of the remaining 63 clusters, the maximum increase in cluster size was 8.1\%.  After AOC\_k treatment, 540,883 nodes (99\%) of the nodes were assigned to one cluster, 1504 to 2 clusters, 210 to 3 clusters, and 26 to 4 clusters; one node was assigned to 5 clusters.
 \label{fig:singleton}}
 \end{figure}
 	
 \subsection{Experiment 4: Marker node concentrations}
 
-In the previous experiments, we examined the effects of AOC from a graph-theoretic one, aimed at generalizability. We now introduce a contextual perspective, in which we interpret findings relative to a field of interest. In this case, we are studying communities in the field of extracellular vesicle (EV) research. Context is addressed in two ways. We use, as input to IKC, a citation network (CEN) that is enriched in the recent extracellular vesicle literature. IKC reduces this large network to 128 cores that contain 3.8\% of the nodes in the network. From these 128 cores, we identify a subset of of interest by using a set of markers derived from the cited references of recent reviews of the extracellular vesicle field that were authored by different researchers \citep{Wedell2022}. Under the assumption that cores enriched in marker nodes are relevant to extracellular vesicle research, we further reduce the data under consideration to those cores. We now assess how AOC impacts marker node concentration (Figure~\ref{fig:marker-node-concentration}).
+In the previous experiments, we examined the effects of AOC from a graph-theoretic one, aimed at generalizability. We now introduce a contextual perspective, in which we interpret findings relative to a field of interest. In this case, we are studying communities in the field of extracellular vesicle (EV) research. Context is addressed in two ways. We use, as input to IKC, a citation network (CEN) that is enriched in the recent extracellular vesicle literature. IKC reduces this large network to 128 cores that contain 3.8\% of the nodes in the network. From these 128 cores, we identify a subset of interest by using a set of markers derived from the cited references of recent reviews of the extracellular vesicle field that were authored by different researchers \citep{Wedell2022}. Under the assumption that cores enriched in marker nodes are relevant to extracellular vesicle research, we further reduce the data under consideration to those cores. We now assess how AOC impacts marker node concentration (Figure~\ref{fig:marker-node-concentration}).
 
 The count of cores with non-zero marker counts varied between treatments. For IKC, 17 of 128 cores exhibited  non-zero marker counts. Clusters 3, 4, and 25 are notable in accounting for 87.5\% of 1021 markers after IKC clustering. Because of this substantial coverage of marker nodes, from the perspective of EV biology, clusters 3, 4, and 25 are of obvious interest and offer a significant reduction in the amount of information to be studied qualitatively.  
 
-\textcolor{blue}{After IKC+AOC treatment, 20 of 128 (AOC\_m) and 31 of 128 (AOC\_k) cores respectively contained non-zero marker counts, which is consistent with their relatively stringent and permissive design. After AOC\_m treatment of IKC clusters, clusters 3, 4, and 25  contained 42.5\%, 90.2\%, and 30.4\% respectively, of all markers. After AOC\_k treatment of IKC clusters, clusters  3, 4, and 25 contained 60.5\%, 91.3\%, and 69.5\% of all markers respectively.  Thus,  clusters 3, 4, and 25 all expand more significantly under AOC\_k than under AOC\_m. We also note that cluster 1, which contains 2.4\% of markers in IKC and 4.8\% after AOC\_m, is significantly enriched for marker nodes by AOC\_k to 20.7\% of the marker nodes. These data  suggest that the recursive approach of IKC results in markers being segregated by disjoint clustering, but this effect can be remediated by post-processing using AOC.}
+After IKC+AOC treatment, 20 of 128 (AOC\_m) and 31 of 128 (AOC\_k) cores respectively contained non-zero marker counts, which is consistent with their relatively stringent and permissive design. After AOC\_m treatment of IKC clusters, clusters 3, 4, and 25  contained 42.5\%, 90.2\%, and 30.4\% respectively, of all markers. After AOC\_k treatment of IKC clusters, clusters  3, 4, and 25 contained 60.5\%, 91.3\%, and 69.5\% of all markers respectively.  Thus,  clusters 3, 4, and 25 all expand more significantly under AOC\_k than under AOC\_m. We also note that cluster 1, which contains 2.4\% of markers in IKC and 4.8\% after AOC\_m, is significantly enriched for marker nodes by AOC\_k to 20.7\% of the marker nodes. These data  suggest that the recursive approach of IKC results in markers being segregated by disjoint clustering, but this effect can be remediated by post-processing using AOC.
 
  \begin{figure}[H]
 \centering
@@ -379,11 +378,11 @@ Beginning with the AOC\_m network, we note that the network forms five connected
 In contrast, cluster 25 is in a separate component. Thus, clusters 3 and 4 identified in IKC have substantial overlap after AOC\_m, indicating some shared research questions or approaches, but
 cluster 25 reflects a different population. 
 
-Turning to IKC+AOC\_k, we see a larger number of clusters, indicating that more of the clusters had sufficient overlap with other clusters to be retained in the network visualization. 
-Interestingly here we see that clusters 3, 4, and 25 are all pairwise connected by edges, indicating that all three \textcolor{blue}{have}  shared publications after AOC\_k. 
+Turning to IKC+AOC\_k,  as noted earlier, we see a larger number of clusters, indicating that more of the clusters had sufficient overlap with other clusters to be retained in the network visualization. 
+Interestingly here we see that clusters 3, 4, and 25 are all pairwise connected by edges, indicating that all three \textcolor{blue}{have a significant number of}  shared publications after AOC\_k. 
 Hence,  what we see here is that the overlap after AOC\_m between cluster 25 and the other two clusters is too weak to be considered significant, but is
 sufficient  after AOC\_k to be considered significant.
-Since AOC\_m represents are more restrictive criterion, this shows that clusters 3 and 4 have a strong relationship  to each other and a somewhat weaker relationship to cluster 25 but one that is nevertheless worth noting.  
+Since AOC\_m represents a more restrictive criterion, this shows that clusters 3 and 4 have a strong relationship  to each other and a somewhat weaker relationship to cluster 25 but one that is nevertheless worth noting.  
 
 
 While both AOC\_k and AOC\_m offer insights into the EV research community structure,   AOC\_m provides more specific information about the research communities, since it is a local constraint that preserves the MCD of each core, compared to AOC\_k which only enforces the value of $k$ across all the cores and may therefore add weakly linked nodes to the IKC cores. 
@@ -396,6 +395,7 @@ Therefore, we allow both options and allow users to choose between them.
 \centering
 %\includegraphics[width=\linewidth]{ikc10_m_pw.pdf}
 \includegraphics[width=\linewidth]{fig7_overlapping_m.pdf}
+\caption{IKC\_k10 +AOC\_m}
 %\caption{Generic fig2 a caption} \label{fig:2a}
 \end{subfigure}
 \hfill
@@ -403,9 +403,10 @@ Therefore, we allow both options and allow users to choose between them.
 \centering
 % \includegraphics[width=\linewidth]{ikc10_k_pw.pdf} 
 \includegraphics[width=\linewidth]{fig7_overlapping_k.pdf} 
+\caption{IKC\_k10 +AOC\_k}
 %\caption{Generic fig2 b caption} \label{fig:2b}
 \end{subfigure}
-\caption{Overlapping clusters produced by IKC\_k10 + AOC.  Overlapping clusters were generated from CEN data using IKC\_k10 followed by either treatment with either AOC\_m (left) or AOC\_k (right). The set of candidate nodes presented to AOC was all nodes in non-singleton IKC clusters. Edges are drawn between clusters based on the Jaccard Coefficient for node overlap and are visible if the JC exceeds the median value for all pairs. Cluster numbers in both panels correspond to cluster numbers from the input IKC clustering. Clusters 3, 4, and 25 are enriched for markers.}
+\caption{Overlapping clusters produced by IKC\_k10 + AOC.  Overlapping clusters were generated from CEN data using IKC\_k10 followed by either treatment with either AOC\_m (left) or AOC\_k (right). The set of candidate nodes presented to AOC was all nodes in non-singleton IKC clusters. Edges are drawn between clusters based on the Jaccard Coefficient for node overlap and are visible if the JC exceeds the median value for all pairs. Cluster numbers in both panels correspond to cluster numbers from the input IKC clustering. Clusters 3, 4, and 25 are enriched for markers.  Custers 4 and 25 are adjacent in IKC\_k10+AOC\_k, although the edge connecting them passes through node 16 in the visualization.}
 \label{fig:overlapping}
 \end{figure}
 		
