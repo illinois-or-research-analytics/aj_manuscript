@@ -28,6 +28,18 @@
 \usepackage{rotating}
 \usepackage{adjustbox}
 \usepackage[font=small,labelfont=bf]{caption}
+\usepackage{changes}
+\definechangesauthor[name={George Chacko}, color=orange]{gc}
+
+%This is \added[id=per,remark={we need this}]{new} text.
+%This is \added[id=per,remark={has to be in it}]{new} text.
+%This is \deleted[id=per,remark=obsolete]{unnecessary}text.
+%This is \replaced[id=per]{nice}{bad} text.
+%This is \added[remark={we need this}]{new} text.
+%This is \added[remark={has to be in it}]{new} text.
+%This is \deleted[remark=obsolete]{unnecessary}text.
+%This is \replaced{nice}{bad} text.
+%\listofchanges
 
 \usepackage{authblk}
 \title{AOC: Assembling Overlapping Communities}
@@ -125,16 +137,9 @@ Since the input clustering is produced by IKC, every  expanded cluster that is p
 The AOC technique we describe can be modified to suit the user's interests. For example,   the user may wish to modify the input IKC clustering through the optional second step, which breaks  up large clusters but still ensures that the clusters are km-valid.
 If positive modularity is not required, then the check for modularity could be dropped.  Finally these expanded clusters can also be enlarged through the inclusion of peripheral nodes through Step 3 in the IKC pipeline.
 
-	
-
-
-
 \subsection{Data} 
 
-
-\emph{Citation network} We previously generated a citation network \citep{Wedell2022} representing the exosome literature and more generally the extracellular vesicle literature \citep{harding1983,raposo2021} from the Dimensions database \citep{hook2018dimensions} in the Google cloud. For the present study, we curated this network to deplete it of both retracted articles and relatively high-referencing articles. Retractions were identified from a database kindly provided by Retraction Watch \citep{rw2022} and matched to nodes in the network using digital object identifiers (DOIs). Any article with 250 or more references was also removed. 
-
-While the network in \cite{Wedell2022} consisted of 14,695,475 nodes and 99,663,372 edges, the network resulting from removing retracted and high-referencing articles comprised 13,989,436 nodes and 92,051,051 edges. Thus, 706,039 nodes and 7,612,321 edges were removed. We refer to this network as the Curated Exosome Network (CEN). Its largest connected component consists of 13,988,426 nodes and accounts for 99.99\% of the CEN.
+\emph{Citation network} We previously generated a citation network \citep{Wedell2022} representing the exosome literature and more generally the extracellular vesicle literature \citep{harding1983,raposo2021} from the Dimensions database \citep{hook2018dimensions} in the Google cloud. \textcolor{blue}{Briefly, the network was constructed by first performing a lexical search for the term ``exosome'', which was labeled as ``S", the seed set. This seed set was amplified using the SABPQ protocol described in \cite{Wedell2022} to capture articles linked to the seed set by citation and form a final network where each node in the network is a publication and each edge is a direct citation. For the present study, we curated this exosome-centric network to deplete it of both retracted articles and relatively high-referencing articles. Retractions were identified from a database kindly provided by Retraction Watch \citep{rw2022} and matched to nodes in the network using digital object identifiers (DOIs). Any article with 250 or more references was also removed. While the network in \cite{Wedell2022} consisted of 14,695,475 nodes and 99,663,372 edges, the network resulting from removing retracted and high-referencing articles comprised 13,989,436 nodes and 92,051,051 edges. Thus, 706,039 nodes and 7,612,321 edges were removed. We refer to this network as the Curated Exosome Network (CEN). Its largest connected component consists of 13,988,426 nodes and accounts for 99.99\% of the CEN.}
 	
 \emph{Marker nodes}. To identify exosome-relevant publications and communities, we re-used a set of marker nodes described in  \cite{Wedell2022}. These 1,218 markers are the cited references from 12 different recent review articles on exosomes and extracellular vesicles. Of these, 1,021 are present in the CEN and  were used to identify clusters relevant to extracellular vesicles research.
 
@@ -342,7 +347,7 @@ Thus, AOC enables nodes previously assigned to singleton clusters to  be incorpo
 	
 \subsection{Experiment 4: Marker node concentrations}
 
-In the previous experiments, we examined the effects of AOC from a graph-theoretic one aimed at generalizability. We now introduce a contextual perspective, in which we interpret findings relative to a field of interest. In this case, we are studying communities in the field of extracellular vesicle (EV) research. Context is addressed in two ways. We use, as input to IKC, a citation network (CEN) that is enriched in the recent extracellular vesicle literature. IKC reduces this large network to 128 cores that contain 3.8\% of the nodes in the network. From these 128 cores, we identify a subset of interest by using a set of markers derived from the cited references of recent reviews of the extracellular vesicle field that were authored by different researchers \citep{Wedell2022}. Under the assumption that cores enriched in marker nodes are relevant to extracellular vesicle research, we further reduce the data under consideration to those cores. We now assess how AOC impacts marker node concentration (Figure~\ref{fig:marker-node-concentration}).
+In the preceding sections, we examined the effects of AOC from a graph-theoretic one aimed at generalizability. We now introduce a contextual perspective, in which we interpret findings relative to a field of interest. In this case, we are studying communities in the field of extracellular vesicle (EV) research. Context is addressed in two ways. We use, as input to IKC, a citation network (CEN) that is enriched in the recent extracellular vesicle literature. IKC reduces this large network to 128 cores that contain 3.8\% of the nodes in the network. From these 128 cores, we identify a subset of interest by using a set of markers derived from the cited references of recent reviews of the extracellular vesicle field that were authored by different researchers \citep{Wedell2022}. Under the assumption that cores enriched in marker nodes are relevant to extracellular vesicle research, we further reduce the data under consideration to those cores. We now assess how AOC impacts marker node concentration (Figure~\ref{fig:marker-node-concentration}).
 
 The count of cores with non-zero marker counts varied between treatments. For IKC, 17 of 128 cores exhibited  non-zero marker counts. Clusters 3, 4, and 25 are notable in accounting for 87.5\% of 1021 markers after IKC clustering. Because of this substantial coverage of marker nodes, from the perspective of EV biology, clusters 3, 4, and 25 are of obvious interest and offer a significant reduction in the amount of information to be studied qualitatively.  
 
