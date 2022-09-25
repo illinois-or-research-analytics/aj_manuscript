@@ -72,21 +72,21 @@ We have tried to emphasize that citation density is not sufficient to conclusive
 
 If the reviewer is indicting clustering methods in a more general sense, we agree that a simple ground truth does not exist but we submit that the scalable benefit of theory-supported clustering offers value when examining very large datasets that otherwise present a cognitive challenge to expert analysis and may account for the very substantial investment in clustering techniques across multiple disciplines. 
 
-Last, if the reviewer demands that we should conclusively identify a research community to validate the AOC method- we would like to and we are seeking collaborations with qualitative experts for this purpose but for more detailed studies and not in this manuscript.
+Last, if the reviewer demands that we should conclusively identify a research community to validate the AOC method- we would like to and we are seeking collaborations with domain experts for more detailed studies but not for this manuscript.
 
-Overall, we envision a multi-stage discovery pipeline for discovering and characterizing research communities. The pipeline begins with assembling a domain-relevant citation network (Stage 1) and terminates in expert interpretation (the endpoint). Stages 2-5 consist of core extraction; optional breaking of large cores; augmentation of cores with peripheral nodes; and identification of specific clusters using marker nodes that have been described in (Wedell et al. 2022, doi=10.1162/qss\_a\_00184) where we explicitly comment on the benefits of overlapping cluster options. This article is all about one such option- a theoretical basis for overlapping clusters. AOC is a new optional module in the pipeline  that also has the potential to be integrated with other clustering approaches. We do not assert that AOC alone would identify and characterize research communities.
+In summary, we envision a multi-stage discovery pipeline for discovering and characterizing research communities. The pipeline begins with assembling a domain-relevant citation network (Stage 1) and terminates in expert interpretation (The endpoint). Stages 2-5 presently consist of core extraction; optional breaking of large cores; augmentation of cores with peripheral nodes; and identification of specific clusters using marker nodes that have been described in (Wedell et al. 2022, doi=10.1162/qss\_a\_00184) where we explicitly comment on the desirability of overlapping cluster options. This article is all about one such option- a theoretical basis for overlapping clusters. We see AOC as a new optional module in the pipeline but it also has the potential to be integrated with other clustering approaches. We do not assert that AOC alone would identify and characterize research communities.
 
-In Wedell, we qualitatively examined articles in marker-rich clusters and identified common themes of research in them indicative of research community behavior; for example, a small module exhibited center-periphery structure that addressed emerging research on extracellular vesicles in cancer. Cluster 1 involved 356 authors of which nine were authors of at least five articles in the cluster and one person was an author of 17 articles in the cluster. However, 301 authors (84.6\%) had contributed to only one article in the cluster" (Wedell et al. 2022, section on results from marker node analysis). These observations are consistent with Price and Beaver's 1966 description of the oxidative phosphorylation community. The difference between Price and Beaver's study and ours is that they began with a sample of a known community and characterized its citation behavior. We are using this citation model as a first step towards finding new Kuhnian communities.
+We have qualitatively examined clusters from our pipeline. In Wedell, we qualitatively examined articles in marker-rich clusters and identified common themes of research in them indicative of research community behavior; for example, a small module exhibited center-periphery structure that addressed emerging research on extracellular vesicles in cancer. Cluster 1 involved 356 authors of which nine were authors of at least five articles in the cluster and one person was an author of 17 articles in the cluster. However, 301 authors (84.6\%) had contributed to only one article in the cluster" (Wedell et al. 2022, section on results from marker node analysis). These observations are consistent with Price and Beaver's 1966 description of the oxidative phosphorylation community. The difference between Price and Beaver's study and ours is that they began with a sample of a known community and characterized its citation behavior. We are using a core-periphery model to find new communities.
 
-We tried our best not to recycle large amounts of Wedell into this manuscript but it appears that a better summary of our previous work may assist reading and we hope our revision achieves this purpose. 
+We do not wish to recycle large amounts of Wedell into this manuscript but it appears that better reference to our previous work may assist reading. We hope our revision achieves this purpose. 
 
 \emph{``From a set of about 14 million publications, only 128 cores are identified (using k=10). It is stated that the cores “range in size from 14 to 214,877, with a median core size of 79”. Around 40\% of the assigned nodes are in the same core. I find it likely that such distribution will make it difficult to identify and characterize research communities. If there are clear reasons for this distribution (e.g. if the distribution is reasonable given some knowledge of the field) the authors should discuss these reasons. The marker nodes are concentrated into 3 clusters; however, we do not get to know the size or scope of these clusters.''}
 
-The IKC method is selective. It identifies the meso-scale components of a network where the edge density (citation signal) is high. With citation data (and its power law/lognormal distribution of edge density), coverage would be small (128 cores $=>$ 3.8\% of the network) 
+The IKC method is selective. It identifies the meso-scale components of a network where the edge density (citation signal) is high. With citation data and its power law/lognormal distribution of edge density, coverage is expected to be small (128 cores $=>$ 3.8\% of the network). If we relaxed the conditions by setting $k<= 10$, coverage would increase but the point is to discover dense cores.
 
 Our intent had been to focus on the big picture but we now provide additional descriptive statistics. We have added a table of data in the Supplementary Materials. The three clusters in question have the following characteristics. 
 
-\clearpage
+
 
 \begin{itemize}
 \item Cluster 3: 170,413 nodes, mcd = 26, modularity +ve
@@ -94,48 +94,46 @@ Our intent had been to focus on the big picture but we now provide additional de
 \item Cluster 25: 1,869 nodes, mcd = 49, modularity +ve
 \end{itemize}
 
-
-
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
   \hline
 cluster\_id & ikc & aoc\_m & aoc\_k & ikc\_perc & aoc\_m\_perc & aoc\_k\_perc \\ 
   \hline
-1 & 24.00 &  49 & 211 &   2 &   5 &  21 \\ 
-2 & 39.00 &  44 & 140 &   4 &   4 &  14 \\ 
-3 & 167.00 & 434 & 618 &  16 &  43 &  61 \\ 
-4 & 416.00 & 921 & 932 &  41 &  90 &  91 \\ 
-5 & 1.00 &   5 &  14 &   0 &   0 &   1 \\ 
-6 & 9.00 &   9 &  58 &   1 &   1 &   6 \\ 
-8 & 0.00 &   0 &   4 &   0 &   0 &   0 \\ 
-9 & 2.00 &   3 &  12 &   0 &   0 &   1 \\ 
-10 & 0.00 &   0 &   1 &   0 &   0 &   0 \\ 
-11 & 0.00 &   0 &   4 &   0 &   0 &   0 \\ 
-12 & 3.00 &   6 &  40 &   0 &   1 &   4 \\ 
-13 & 1.00 &   3 &   9 &   0 &   0 &   1 \\ 
-14 & 0.00 &   0 &   1 &   0 &   0 &   0 \\ 
-15 & 0.00 &   2 &   2 &   0 &   0 &   0 \\ 
-16 & 11.00 &  20 &  37 &   1 &   2 &   4 \\ 
-18 & 0.00 &   0 &  18 &   0 &   0 &   2 \\ 
-19 & 0.00 &   0 &   3 &   0 &   0 &   0 \\ 
-20 & 18.00 &  76 & 152 &   2 &   7 &  15 \\ 
-21 & 1.00 &   1 &   3 &   0 &   0 &   0 \\ 
-22 & 0.00 &   0 &   2 &   0 &   0 &   0 \\ 
-23 & 0.00 &   0 &   2 &   0 &   0 &   0 \\ 
-24 & 6.00 &  15 &  52 &   1 &   1 &   5 \\ 
-25 & 310.00 & 310 & 710 &  30 &  30 &  70 \\ 
-30 & 1.00 &   1 &   1 &   0 &   0 &   0 \\ 
-34 & 0.00 &   0 &   3 &   0 &   0 &   0 \\ 
-37 & 11.00 &  12 &  28 &   1 &   1 &   3 \\ 
-50 & 0.00 &   0 &   1 &   0 &   0 &   0 \\ 
-53 & 0.00 &   0 &   1 &   0 &   0 &   0 \\ 
-66 & 1.00 &   1 &   3 &   0 &   0 &   0 \\ 
-88 & 0.00 &   2 &   2 &   0 &   0 &   0 \\ 
-116 & 0.00 &  2 &   7 &   0 &   0 &   1 \\ 
+1 & 24 &  49 & 211 &   2 &   5 &  21 \\ 
+2 & 39 &  44 & 140 &   4 &   4 &  14 \\ 
+3 & 167 & 434 & 618 &  16 &  43 &  61 \\ 
+4 & 416 & 921 & 932 &  41 &  90 &  91 \\ 
+5 & 1. &   5 &  14 &   0 &   0 &   1 \\ 
+6 & 9. &   9 &  58 &   1 &   1 &   6 \\ 
+8 & 0 &   0 &   4 &   0 &   0 &   0 \\ 
+9 & 2 &   3 &  12 &   0 &   0 &   1 \\ 
+10 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+11 & 0 &   0 &   4 &   0 &   0 &   0 \\ 
+12 & 3 &   6 &  40 &   0 &   1 &   4 \\ 
+13 & 1 &   3 &   9 &   0 &   0 &   1 \\ 
+14 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+15 & 0 &   2 &   2 &   0 &   0 &   0 \\ 
+16 & 11 &  20 &  37 &   1 &   2 &   4 \\ 
+18 & 0 &   0 &  18 &   0 &   0 &   2 \\ 
+19 & 0 &   0 &   3 &   0 &   0 &   0 \\ 
+20 & 18 &  76 & 152 &   2 &   7 &  15 \\ 
+21 & 1 &   1 &   3 &   0 &   0 &   0 \\ 
+22 & 0 &   0 &   2 &   0 &   0 &   0 \\ 
+23 & 0 &   0 &   2 &   0 &   0 &   0 \\ 
+24 & 6 &  15 &  52 &   1 &   1 &   5 \\ 
+25 & 310 & 310 & 710 &  30 &  30 &  70 \\ 
+30 & 1 &   1 &   1 &   0 &   0 &   0 \\ 
+34 & 0 &   0 &   3 &   0 &   0 &   0 \\ 
+37 & 11 &  12 &  28 &   1 &   1 &   3 \\ 
+50 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+53 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+66 & 1 &   1 &   3 &   0 &   0 &   0 \\ 
+88 & 0 &   2 &   2 &   0 &   0 &   0 \\ 
+116 & 0 &  2 &   7 &   0 &   0 &   1 \\ 
    \hline
 \end{tabular}
-\caption{Percentages of 1021 marker nodes found in AOC clusters. Clusters 3, 4, and 25 are in the 90th percentile of marker node concentration in AOC\_k clusters. Please note that the cluster numbering is arbitrary on account of the workflow that matches IKC to AOC\_m/k clusters and does not reflect the order in which IKC cores are extracted.}
+\caption{Percentages of 1021 marker nodes found in AOC clusters. Markers in clusters are shown both as actual counts (cols 2-4) and as percentages of 1021 (cols 5-7); Clusters 3, 4, and 25 are in the 90th percentile of marker node concentration in AOC\_k clusters. Data are shown for clusters with a non-zero value in the aoc\_k column. Please note that the cluster numbering is arbitrary on account of the workflow that matches IKC to AOC\_m/k clusters and does not reflect the order in which IKC cores are extracted. }
 \end{table}
 
 As the reviewer notes, around 41\% of the markers are found in cluster 4 in IKC clusters. To us, this suggests (i) that the method is constructing clusters of relevance to our interest
