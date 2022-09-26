@@ -34,16 +34,16 @@ The impact of the error is seen in 2 of 128 clusters  that we describe in our ma
  
 Specifically, clusters \#3 and \#4 after AOC\_k treatment of IKC10 clusters were previously of size 265,681 and 316,185 nodes respectively. After running the corrected code, these
 clusters reduce to 242,857 and 291,154 nodes respectively and the corrected clusters exhibit 8.6\% and 7.9\% reductions in size. These two clusters are of special interest because 
-they are  enriched in marker nodes. After running the corrected script, marker node concentration reduced as follows. 
-
+they are  enriched in marker nodes. After running the corrected script, marker node concentration in AOC\_k clusters reduced as follows. 
 
 \begin{itemize}
 \item Cluster 3: Previously contained 71.8 \% of 1021 markers and now contains 60.5\% of these markers.
 \item Cluster 4: Previously contained 94.6 \% of 1021 markers and now contains 91.3 \% of these markers. These differences do not change our results qualitatively, and our conclusions remain the same. 
 \end{itemize}
 
-\noindent The revised manuscript reflects corrected data. Please note that another author (Mr. Baqiao Liu) has been added to this work. Mr. Baqiao Liu is a graduate student who has performed verification and follow-up studies, and 
-has also refactored and tested our Python implementation of the AOC algorithm.
+\noindent A similar change was seenwith AOC\_m treatment of IKC10 clusters but the effect was restricted to a single cluster, \#4. The revised manuscript reflects corrected data derived from running the updated code. 
+No differences were noted with AOC\_k/m on IKC with $k=\{20,30,40, 50\}$.  Please note that another author (Mr. Baqiao Liu) has been added to this work. Mr. Baqiao Liu is a graduate student who 
+has performed verification and follow-up studies, and has also refactored and tested our Python implementation of the AOC algorithm.
 
 
 \subsection*{Reviewer 1} \emph{Interesting and well written paper. You should shortly discuss your data model (direct citations?). In contrast to the definition, you measure modularity of single communities. An expert understands that this is meaningful but a newcomer should get a sentence of explanation.  You could mention the recent paper by Havemann et al. about ``Communities as Well Separated Subgraphs With Cohesive Cores: Identification of Core-Periphery Structures in Link Communities". You refer to Suppl. Mat. but I have not found any. On page 6 in line 36: contains -> contain. Please, check the first sentence of 3.5 (page 16).}
@@ -51,10 +51,12 @@ has also refactored and tested our Python implementation of the AOC algorithm.
 \vspace{2 mm}
 Thank you. We have added a discussion of our data model. We have also clarified why we measure modularity of single clusters as opposed to globally maximizing modularity. Previously we had written, ``However, 
 IKC does not enforce global modularity maximization (Lancichinetti, 2011), which has theoretical limitations (such as the resolution limit)." We have added the recommended  Havemann reference to supplement 
-our citation of his other paper,``Topics as clusters of citation links to highly cited sources: The case of research on international relations." The approach is different from ours but the work is relevant.
+our citation of his other paper,``Topics as clusters of citation links to highly cited sources: The case of research on international relations." 
 
-The Supplementary Material link was lost during manuscript preparation. Our apologies for this oversight. It is now available (and the manuscript links to the supplementary materials). We have also enclosed a copy. We have corrected the the two typos identified
-above. Our regrets for these.
+The Supplementary Material link was lost during manuscript preparation. Our apologies for this oversight. The manuscript now links to supplementary materials on an updated
+Github site and and we have also enclosed a copy. We have corrected the the two typos identified above. Our regrets for these. \\
+
+https://bit.ly/3SvvgWe\\
 
 \clearpage
 
@@ -64,17 +66,17 @@ Thank you for this comment.
 
 \emph{The background is clearly formulated, and the methods are comprehensively described. However, I have one major concern about the paper. The results presented does not seem very reasonable and I doubt that the obtained clustering can be used for the intended purpose (identifying and characterizing research communities). I think that the authors need to show that this is the case.}
 
-We are not sure how to parse ``reasonable'' but the remark about ``how the obtained clustering can be used for the intended purpose (identifying and characterizing research communities)" is very pertinent so we thank the reviewer for raising it. We respond from multiple perspectives. 
+We are not sure how to parse ``reasonable'' but the remark about ``how the obtained clustering can be used for the intended purpose (identifying and characterizing research communities)" is very pertinent so we thank the reviewer for raising it. We respond from multiple perspectives.
 
-The reviewer seems to accept the motivation for this work but demands evidence that a research community can actually be found using IKC and AOC in tandem. 
+\subsubsection{}The reviewer seems to accept the motivation for this work but demands evidence that a research community can actually be found using IKC and AOC in tandem. In this manuscript, we restrict ourselves to discussing one component of an overarching vision for a scalable modular pipeline that supports identifying and characterizing research communities. Specifically, using AOC to inclusively identify the cores of core-periphery communities. Thus, conclusive determination of a research community seems out of scope for this manuscript but is certainly not to be ignored in the future. We would like to demonstrate value and are seeking collaborations with domain experts for more detailed studies but those findings would not appear in this manuscript. 
 
-If the reviewer does not agree that citation analysis can help identify and characterize research communities, then we respect her/his argument but respectfully disagree. If the concern is more nuanced, such as whether it is reasonable to equate a cluster of articles with a research community-  then we offer that we too do not believe that a cluster of articles is equivalent to a research community. Instead, such a cluster suggests that a group of researchers are citing each others work more than they cite other work in the scientific literature. We treat the authorship of the articles in the cluster is an approximation of the research community. These authors may also be members of other communities and the cluster may not capture all members of the community. 
+\subsubsection{} If the reviewer does not agree that citation analysis can help identify and characterize research communities, then we respect her/his argument but respectfully disagree. If the concern is more nuanced, such as whether it is reasonable to equate a cluster of articles with a research community-  then we offer that we too do not believe that a cluster of articles is equivalent to a research community. Instead, such a cluster suggests that a group of researchers are citing each others work more than they cite other work in the scientific literature. We treat the authorship of the articles in the cluster is an approximation of the research community. These authors may also be members of other communities and the cluster may not capture all members of the community. 
 
 We have tried to emphasize that citation density is not sufficient to conclusively identify a research community, specifically, ``We stress that citation density alone does not make a confirming argument for the existence of a research community. However, community finding techniques are valuable in being able to efficiently search large datasets for communities, reducing them to smaller units of data that can then be examined with complementary analytical techniques that include the use of human judgment.'' Finally, we do try to convey that `community' in a graph theoretic sense and `research community' are not the same thing although one can be used to search for the other.  In response, we have tried to bring greater clarity to our writing in the revision. 
 
-If the reviewer is indicting clustering methods in a more general sense, we agree that a simple ground truth does not exist but we submit that the scalable benefit of theory-supported clustering offers value when examining very large datasets that otherwise present a cognitive challenge to expert analysis and may account for the very substantial investment in clustering techniques across multiple disciplines. 
+\subsubsection{} If the reviewer is indicting clustering methods in a more general sense, we agree that a simple ground truth does not exist but we submit that the scalable benefit of theory-supported clustering offers value when examining very large datasets that otherwise present a cognitive challenge to expert analysis and may account for the very substantial investment in clustering techniques across multiple disciplines. 
 
-Last, if the reviewer demands that we should conclusively identify a research community to validate the AOC method- we would like to and we are seeking collaborations with domain experts for more detailed studies but not for this manuscript. We have added text in the Discussion to this effect.
+\vspace {4mm}
 
 In summary, we envision a multi-stage discovery pipeline for discovering and characterizing research communities. The pipeline begins with assembling a domain-relevant citation network (Stage 1) and terminates in expert interpretation (the endpoint). Stages 2-5 presently consist of core extraction; optional breaking of large cores; augmentation of cores with peripheral nodes; and identification of specific clusters using marker nodes that have been described in (Wedell et al. 2022, doi=10.1162/qss\_a\_00184) where we explicitly comment on the desirability of overlapping cluster options. This article is all about one such option- a theoretical basis for overlapping clusters. We see AOC as a new optional module in the pipeline but it also has the potential to be integrated with other clustering approaches. We do not assert that AOC alone would identify and characterize research communities.
 
@@ -147,7 +149,11 @@ to augmenting IKC clusters. We previously reported cluster breaking strategies i
 
 \emph{I do not understand the logic for using the exosome data set. This was constructed by a search for “exosome”, retrieving all publications from the search results and then adding all referenced work. Such a methodology creates a network where the publications retrieved from the search are likely to have many connections (all their references are included) while a long tail of records will have very few relations (publications that are peripheral to the field and not having their references included). Such properties are likely to have large impact on the clustering. Is there a particular reason to use a network with these characteristics for this study?}
 
-The reviewer expresses concern regarding the potential impact of our network construction on our clustering results.  This construction was intentional and intended to capture publications linked by citation to the results of the lexical search. Thus, even if an article does not contain the word exosome in its title, abstract of keywords it is likely to be included if it is linked by citation to an exosome article. We assume that by `referenced' work the reviewer is referring to articles that cite the seed set or are cited by the seed set. The approach expanded roughly 11,000 articles to just under 14 million articles. The resultant network is still smaller than all publications in the Dimensions database (currently at around 120 million) but is a large enough sample to capture articles of interest. The reviewer is correct in pointing out that the peripheral articles are less likely to have central roles in clusters- this is unavoidable since the most recently published papers by definition will have few citing publications and some of the early references will not have any cited publications. However, it is the collection of articles The term exosome is relatively specific so the search returns fewer false positives. Lastly, all the marker nodes were found in network before we curated it to remove retracted articles and high-referencing articles. Thus, we have some confidence that the network is adequately representative for this study.  
+The reviewer expresses concern regarding the potential impact of our network construction on our clustering results.  This construction was intentional and intended to capture publications linked by citation to the results of the lexical search. Thus, even if an article does not contain the word exosome in its title, abstract of keywords it is likely to be included if it is linked by citation to an exosome article. 
+
+We assume that by `referenced' work the reviewer is referring to articles that cite the seed set or are cited by the seed set. The approach expanded roughly 11,000 articles to just under 14 million articles. The resultant network is still smaller than all publications in the Dimensions database (currently at around 120 million) but is a large enough sample to capture articles of interest. The reviewer is correct in pointing out that the peripheral articles are less likely to have central roles in clusters- this is unavoidable since the most recently published papers by definition will have few citing publications and some of the early references will not have any cited publications. 
+
+The term exosome is relatively specific so the search returns fewer false positives. Lastly, all the marker nodes were found in the network before we curated it to remove retracted articles and high-referencing articles. Thus, we have some confidence that the network is adequately representative for this study.  
 
 Since the purpose of clustering was to identify exosome specific clusters, the anticipated impact that the reviewer refers to does not seem to be a disadvantage. Thus, clustering partitions this network into citation dense regions and markers help identify the subset of clusters that are of interest. 
 
