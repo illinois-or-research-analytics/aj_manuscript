@@ -40,9 +40,9 @@ they are  enriched in marker nodes. After running the corrected script, marker n
 \item Cluster 4: Previously contained 94.6 \% of 1021 markers and now contains 91.3 \% of these markers. These differences do not change our results qualitatively, and our conclusions remain the same. 
 \end{itemize}
 
-\noindent A similar change was seenwith AOC\_m treatment of IKC10 clusters but the effect was restricted to a single cluster, \#4. No differences were noted with AOC\_k/m on IKC with $k=\{20,30,40, 50\}$. 
+\noindent A similar change was seen with AOC\_m treatment of IKC10 clusters but the effect was restricted to a single cluster, \#4. No differences were noted with AOC\_k/m on IKC with $k=\{20,30,40, 50\}$. 
 The revised manuscript reflects corrected data derived from running the updated code. 
-Please note that another author (Mr. Baqiao Liu) has been added to this work. Mr. Baqiao Liu is a graduate student who 
+Please note that another author, Mr. Baqiao Liu, has been added to this work. Baqiao is a graduate student in computer science who
 has performed verification and follow-up studies, and has also refactored and tested our Python implementation of the AOC algorithm.
 
 
@@ -68,18 +68,18 @@ Thank you for this comment.
 
 We are not sure how to parse ``reasonable'' but the remark about ``how the obtained clustering can be used for the intended purpose (identifying and characterizing research communities)" is very pertinent so we thank the reviewer for raising it. We respond in several ways. 
 
-\subsubsection{}The reviewer seems to accept the motivation for this work but requests evidence that a research community can actually be found using IKC and AOC in tandem. In this manuscript, we are focused on one component of an overarching vision for a scalable modular pipeline that supports identifying and characterizing research communities. Specifically, using AOC to inclusively identify the cores of core-periphery communities. Thus, conclusive determination of a research community seems out of scope for this manuscript but is certainly not to be ignored in the future. This is made clear in the text of the revision. We would like to demonstrate value and are seeking collaborations with domain experts for more detailed studies but those findings would not appear in this manuscript. 
+\subsubsection{}The reviewer seems to accept the motivation for this work but requests evidence that a research community can actually be found using IKC and AOC in tandem. We reiterate that the nature of the ``communities" that we are seeking are communities of publications, not authors.  These publications are grouped together through the clustering method we use, which in turn is based on citations; these highly connected groups reflect research questions that tie the publications together.  While it is unavoidable that any clustering method will fail to completely and accurately find ``communities", our approach to community detection has, we assert, merit. 
 
-\subsubsection{} 
-We wish to note that, in this manuscript, the nature of the ``communities" that we are seeking are communities of publications, not authors.  These publications are grouped together through the clustering method we use, which in turn is based on citations; these highly connected groups reflect research questions that tie the publications together.  While it is unavoidable that any clustering method will fail to completely and accurately find ``communities", our approach to community detection has, we assert, merit. 
+In this manuscript, we are focused on one component of an overarching vision for a scalable modular pipeline that supports identifying and characterizing research communities. Specifically, using AOC to inclusively identify the cores of core-periphery communities. Our work is probably best assigned to the classes of descriptive and exploratory studies but would fall short of inferential, predictive, causal, or mechanistic studies \cite{leek2015question}. This is clarified in the text of the revision. Thus, conclusive determination of a research community seems out of scope for this manuscript but is certainly not to be ignored in the future.  Indeed, we would like to demonstrate value and are seeking collaborations with domain experts for more detailed studies but those findings would not appear in this manuscript.
 
-As for author communities, our prior work \cite{Chandrasekharan2021,Wedell2022}, we subsequently used publication communities to find author communities focused around the research questions described by these publication communities.  This approach has the benefit of acknowledging that authors can be members of multiple communities.  Finding author communities, however, is not the purpose of this article. 
+As for author communities, in prior work we subsequently used publication communities \cite{Chandrasekharan2021,Wedell2022} to find author communities focused around the research questions described by these publication communities.  This approach has the benefit of acknowledging that authors can be members of multiple communities.  Finding author communities, however, is not the purpose of this article. 
 
 Finally, we add that we have tried to emphasize that citation density is not sufficient to conclusively identify a research community, specifically, ``We stress that citation density alone does not make a confirming argument for the existence of a research community. However, community finding techniques are valuable in being able to efficiently search large datasets for communities, reducing them to smaller units of data that can then be examined with complementary analytical techniques that include the use of human judgment.'' We also try to convey that `community' in a graph theoretic sense and `research community' are not the same thing although one can be used to search for the other.  We have tried to bring greater clarity to our writing in the revision. 
 
 \subsubsection{} If the reviewer is indicting clustering methods in a more general sense, we agree that a simple ground truth does not exist but we submit that the scalable benefit of theory-supported clustering offers value when examining very large datasets that otherwise present a cognitive challenge to expert analysis and may account for the very substantial investment in clustering techniques across multiple disciplines. 
 
-\vspace {4mm}
+
+\subsubsection{}
 
 In summary, we envision a multi-stage discovery pipeline for discovering and characterizing research communities. The pipeline begins with assembling a domain-relevant citation network (Stage 1) and terminates in expert interpretation (the endpoint). Stages 2-5 presently consist of core extraction; optional breaking of large cores; augmentation of cores with peripheral nodes; and identification of specific clusters using marker nodes that have been described in Wedell et al. 2022 (above), where we explicitly comment on the desirability of overlapping cluster options. This article is all about one such option- a theoretical basis for overlapping clusters. We see AOC as a new optional module in the pipeline but it also has the potential to be integrated with other clustering approaches. We do not assert that AOC alone would identify and characterize research communities.
 
@@ -177,7 +177,7 @@ we hope to explore how the network grows each year,  and how the clustering outp
  
 \emph{I lack a clear presentation of the characteristics of the obtained cluster solution (after each step). For example, the distribution of cluster sizes. I think the authors should avoid using natural log scale, because it makes the interpretation more difficult. I also would like to see some statistic.}
 
-We now report descriptive statistics for the cluster data. The reason that a log scale is being used is because of the range of values encountered (Figs. 1-3). There is no special reason for using natural logs over any other log other than natural logs being the default in some statistical software and our preference for them. We have added copies of our figures using linear scales to the Supplementary Materials. We have edited the captions in the manuscript to provide original values as well. 
+We now report descriptive statistics for the cluster data in Supplementary Materials The reason that a log scale is being used is because of the range of values encountered (Figs. 1-3). There is no special reason for using natural logs over any other log other than natural logs being the default in some statistical software and our preference for them. We have edited the captions in the manuscript to provide map log values to original values as well. 
 
 \vspace{4 mm}
 
