@@ -1,0 +1,70 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex	
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{listings}
+
+%SetFonts
+
+%SetFonts
+
+
+\title{QSS-2022-0063: Response to First Review}
+\author{George Chacko}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\section*{}
+
+We thank the Editor for the opportunity to respond to a second round of critique. We thank both Reviewers  for their professional courtesy of evaluating our manuscript again and respond below. Reviewer 2 offers no comment and appears satisfied. Reviewer 1 expresses several  concerns. 
+
+ \emph{I thank the authors for considering my previous comments and for the extensive answers and clarifications. I have some comments, mostly regarding the empirical part of the paper.} 
+ 
+ \vspace{2 mm} 
+ The authors considered the reviewer's previous comments thoughtful and constructively critical.
+
+ \vspace{2 mm}  
+ \emph{The assignment of publications to the previously obtained clusters inevitably imply a trade-off between coverage and accuracy (similar to the trade-off between recall and precision in an information retrieval setting). Assigning more publications to a cluster and in addition assigning one publication to multiple clusters will lead to larger coverage of the clusters. In the paper, this is shown by the larger concentration of marker nodes in clusters after the AOC procedure. However, the larger coverage will likely also lead to irrelevant publications being assigned to clusters, making the clusters more hetrogenous. The empirical part of this paper does not address this trade-off. It can be noted that any methodology expanding cluster sizes by assigning publications to multiple clusters will likely lead to a higher cluster coverage of baseline publications, such as the marker nodes. The authors show the benefits of expanding the clusters in terms of marker node coverage in some clusters. However, the effect on the accuracy of clusters is not addressed. In my view, the trade-off between coverage and accuracy should be addressed to make it possible for the reader to judge whether AOC is successful or not.}
+
+\vspace{2 mm}  
+ Tandy...
+ 
+\vspace{2 mm}  
+\emph{It is not clear what to expect from the approach using the marker nodes. Are the marker nodes expected to be concentrated into one cluster for the clustering solution to be successful, or are the marker nodes delineated so that they represent different subareas? Preferably, this should have been made clear ex ante and the subareas explicated.}
+\vspace{2 mm}  
+
+\vspace{2 mm}  
+\emph{ I am surprised by the size of the clusters obtained, including a cluster with as much as 214,000 publications. The three clusters with most marker nodes (3,4 and 25) consist of almost 400,000 publications before AOC and 540,000 after AOC\_k. A search in PubMed on the MeSH-term “Extracellular Vesicles” renders about 23,000 publications (“Extracellular Vesicles”[mesh]). Dimensions have a wider coverage than PubMed but a search in titles and abstracts renders about the same number of publications. This is of course a rough estimate of the field. Nevertheless, it seems to me that the sizes of these clusters are unrealistic if they are supposed to correspond to subareas of the field of Extracellular Vesicles. Based on the large size of cluster 3 and 4 I suspect that the accuracy of these clusters is low. In addition, the sizes of these clusters do not correspond well with the previous literature on research communities, in particular research specialties (Boyack \& Klavans, 2014; Morris \& Van der Veer Martens, 2008; Scharnhorst et al., 2012; Sjögårde \& Ahlgren, 2020).}
+
+\vspace{2 mm} 
+ \emph{The caption of Figure 6 gives information about the increased coverage of marker nodes in cluster 4, from 40.7\% to 94.6\% for AOC\_k. This must mean that around 550 marker nodes have been added to cluster 4 by the procedure. From table 2 we get to know that about 76,000 records have been added to reach this larger coverage. So less than 1\% of the nodes added to the cluster are marker nodes. These figures suggest that the accuracy of AOC is low.}
+\vspace{2 mm} 
+
+\vspace{2 mm} 
+ \emph{ In my previous answer I had a comment about normalization. This comment seems to have been misinterpreted as field-normalization applied in evaluative bibliometrics. However, I am referring to normalization of edge weights in citation networks (E.g., see Ahlgren et al., 2003; Boyack et al., 2005; Waltman \& van Eck, 2012). Such normalization does not only normalize for differences between fields, but also for the highly skewed distribution of citations and temporality of citations. I agree that in some cases there are reasons to let highly cited publications have more influence on clustering (or the identification of cores) than publications with low citation counts. The reason I am mentioning normalization is to make the authors aware that the highly skewed distribution of cluster sizes and the problems I have raised above may be related to this issue. It seems to me that the full count approach leads to some very large clusters and low accuracy. This regards both the initial IKC and AOC. However, I do not impose any action from the authors regarding normalization.}
+
+\vspace{2 mm} 
+ \emph{In summary, my main point is that the empirical part of the paper does not make it possible for the reader to judge to what degree AOC is successful in terms of coverage and accuracy. Therefore, I think the paper should be revised.}  
+
+\vspace{2 mm} 
+ \emph{Some minor comments:p. 16 “After AOC m treatment of IKC clusters, clusters 3, 4, and 25 contained 30.4\%, 42.5\%, and 93.1\%, respectively, of all markers.” This seem to be incorrect. It does not align with p. 18 “After AOC m treatment of IKC clusters, clusters 3, 4, and 25 contained 42.5\%, 90.2\%, and 30.4\% respectively, of all markers.” p. 16-17 “After AOC k treatment of IKC clusters, clusters 3, 4, and 25 contained 69.5\%, 71.8\%, and 94.6\% of all markers respectively.” Also this seem to be incorrect.}
+
+\begin{itemize}
+\item Requirements for a cocitation similarity measure, with special reference to Pearson’s correlation coefficient. (Ahlgren, 2003)
+\item Creation of a highly detailed, dynamic, global model and map of science. Boyack and Klavans (2014)
+\item Mapping the backbone of science. (Boyack et al. 2005) 
+\item Mapping research specialties. (Morris and van der veer Martens 2008)
+\item Models of Science Dynamics. Springer Berlin Heidelberg. (Scharnhorst et al. 2012)
+\item Granularity of algorithmically constructed publication-level classifications of research publications: Identification of specialties. (Sjogarde and Ahlgren 2020)
+\item A new methodology for constructing a publication-level classification system of science. (waltman and van Eck 2012)
+\end{itemize}
+
+
+\end{document}

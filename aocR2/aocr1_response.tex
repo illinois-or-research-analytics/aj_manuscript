@@ -1,0 +1,191 @@
+\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage{color}
+
+%SetFonts
+
+%SetFonts
+
+
+\title{QSS-2022-0063: Response to First Review}
+\author{George Chacko}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+\section*{}
+
+We thank the Editor for the opportunity to respond to the comments offered by two reviewers and for inviting us to revise this manuscript. We thank the reviewers for the professional courtesy of evaluating our manuscript.We have attempted to address all the points raised by the reviewers.
+
+First, we regretfully report that after submitting this manuscript to QSS on Aug 5, 2022, we discovered a coding error. The error was discovered during a review,
+on \underline{Aug 17, 2022}  and we communicated this to the Editor and QSS journal on \underline{Aug 18, 2022}. 
+
+The error concerned a ``for loop" that was used to calculate modularity; we corrected the code in roughly 48 hours. All the authors are aware of this problem and 
+concur on remediating it. Our preprint on arXiv was updated on Aug 24 and 26 to reflect our corrections. 
+
+The impact of the error is seen in 2 of 128 clusters  that we describe in our manuscript and amounts to less than a 10\% change in size for these two.
+ 
+Specifically, clusters \#3 and \#4 after AOC\_k treatment of IKC10 clusters were previously of size 265,681 and 316,185 nodes respectively. After running the corrected code, these
+clusters reduce to 242,857 and 291,154 nodes respectively and the corrected clusters exhibit 8.6\% and 7.9\% reductions in size. These two clusters are of special interest because 
+they are  enriched in marker nodes. After running the corrected script, marker node concentration in AOC\_k clusters reduced as follows. 
+
+\begin{itemize}
+\item Cluster 3: Previously contained 71.8 \% of 1021 markers and now contains 60.5\% of these markers.
+\item Cluster 4: Previously contained 94.6 \% of 1021 markers and now contains 91.3 \% of these markers. These differences do not change our results qualitatively, and our conclusions remain the same. 
+\end{itemize}
+
+\noindent A similar change was seen with AOC\_m treatment of IKC10 clusters but the effect was restricted to a single cluster, \#4. No differences were noted with AOC\_k/m on IKC with $k=\{20,30,40, 50\}$. 
+The revised manuscript reflects corrected data derived from running the updated code. 
+Please note that another author, Mr. Baqiao Liu, has been added to this work. Baqiao is a graduate student in computer science who
+has performed verification and follow-up studies, and has also refactored and tested our Python implementation of the AOC algorithm.
+
+
+\subsection*{Reviewer 1} \emph{Interesting and well written paper. You should shortly discuss your data model (direct citations?). In contrast to the definition, you measure modularity of single communities. An expert understands that this is meaningful but a newcomer should get a sentence of explanation.  You could mention the recent paper by Havemann et al. about ``Communities as Well Separated Subgraphs With Cohesive Cores: Identification of Core-Periphery Structures in Link Communities". You refer to Suppl. Mat. but I have not found any. On page 6 in line 36: contains $->$contain. Please, check the first sentence of 3.5 (page 16).}
+
+\vspace{2 mm}
+Thank you. We have added a discussion of our data model. We have also clarified why we measure modularity of single clusters as opposed to globally maximizing modularity. Previously we had written, ``However, 
+IKC does not enforce global modularity maximization (Lancichinetti, 2011), which has theoretical limitations (such as the resolution limit)." We have added the recommended  Havemann reference to supplement 
+our citation of his other paper,``Topics as clusters of citation links to highly cited sources: The case of research on international relations." 
+
+The Supplementary Material link was lost during manuscript preparation. Our apologies for this oversight. The manuscript now links to supplementary materials on an updated
+Github site and and we have also enclosed a copy. We have corrected the the two typos identified above. Our regrets for these. \\
+
+https://bit.ly/3SvvgWe\\
+
+\clearpage
+
+\subsection*{Reviewer 2} \emph{The authors propose a new algorithm (AOC) to assign nodes in a network to previously obtained clusters (in particular from the previously proposed IKC approach). By the use of AOC we get overlapping clusters. Both IKC and AOC are based on the idea that each community is centralized around a set of core nodes in the network. IKC aims to identify such cores, while AOC uses a similar logic to assign nodes to all cores for which the nodes fulfill some inclusion criteria. I find this logic reasonable and well presented by the authors.} 
+
+Thank you for this comment.
+
+\emph{The background is clearly formulated, and the methods are comprehensively described. However, I have one major concern about the paper. The results presented does not seem very reasonable and I doubt that the obtained clustering can be used for the intended purpose (identifying and characterizing research communities). I think that the authors need to show that this is the case.}
+
+We are not sure how to parse ``reasonable'' but the remark about ``how the obtained clustering can be used for the intended purpose (identifying and characterizing research communities)" is very pertinent so we thank the reviewer for raising it. We try to respond from more than one perspective below.
+
+\subsubsection{}The reviewer seems to accept the motivation for this work but requests evidence that a research community can actually be found using IKC and AOC in tandem. We reiterate that the nature of the ``communities" that we are seeking are communities of publications, not authors.  These publications are grouped together through the clustering method we use, which in turn is based on citations; these highly connected groups reflect research questions that tie the publications together.  While it is unavoidable that any clustering method will fail to completely and accurately find ``communities", our approach to community detection has, we assert, merit. 
+
+As for author communities, in prior work we subsequently used publication communities \cite{Chandrasekharan2021,Wedell2022} to find author communities focused around the research questions described by these publication communities.  This approach has the benefit of acknowledging that authors can be members of multiple communities.  Finding author communities, however, is not the purpose of this article. 
+
+We are focused on one component of an overarching vision for a scalable modular pipeline that supports identifying and characterizing research communities. Specifically, using AOC to inclusively identify the cores of core-periphery communities. Our work is probably best assigned to the classes of descriptive and exploratory studies but would fall short of inferential, predictive, causal, or mechanistic studies \cite{leek2015question}. This is clarified in the text of the revision. Thus, conclusive determination of a research community seems out of scope for this manuscript. However, we would like to demonstrate value and are seeking collaborations with domain experts for more detailed studies but those findings would not appear in this manuscript.
+
+
+Finally, we add that we have tried to emphasize that citation density is not sufficient to conclusively identify a research community, specifically, ``We stress that citation density alone does not make a confirming argument for the existence of a research community. However, community finding techniques are valuable in being able to efficiently search large datasets for communities, reducing them to smaller units of data that can then be examined with complementary analytical techniques that include the use of human judgment.'' We also try to convey that `community' in a graph theoretic sense and `research community' are not the same thing although one can be used to search for the other.  We have tried to bring greater clarity to our writing in the revision. 
+
+\subsubsection{} If the reviewer is indicting clustering methods in a more general sense, we agree that a simple ground truth does not exist but we submit that the scalable benefit of theory-supported clustering offers value when examining very large datasets that otherwise present a cognitive challenge to expert analysis and may account for the very substantial investment in clustering techniques across multiple disciplines. 
+
+
+\subsubsection{}
+
+In summary, we envision a multi-stage discovery pipeline for discovering and characterizing research communities. The pipeline begins with assembling a domain-relevant citation network (Stage 1) and terminates in expert interpretation (the endpoint). Stages 2-5 presently consist of core extraction; optional breaking of large cores; augmentation of cores with peripheral nodes; and identification of specific clusters using marker nodes that have been described in Wedell et al. 2022 (above), where we explicitly comment on the desirability of overlapping cluster options. 
+
+This manuscript is all about one such option- a theoretical basis for overlapping clusters. We see AOC as a new optional module in the pipeline but it also has the potential to be integrated with other clustering approaches. We do not assert that AOC alone would identify and characterize research communities.
+
+We have qualitatively examined clusters from our pipeline. In Wedell, we qualitatively examined articles in marker-rich clusters and identified common themes of research in them indicative of research community behavior; for example, a small module exhibited center-periphery structure that addressed emerging research on extracellular vesicles in cancer. ``Cluster 1 involved 356 authors of which nine were authors of at least five articles in the cluster and one person was an author of 17 articles in the cluster. However, 301 authors (84.6\%) had contributed to only one article in the cluster" (Wedell et al. 2022, section on results from marker node analysis). These observations are consistent with Price and Beaver's 1966 description of the oxidative phosphorylation community. The difference between Price and Beaver's study and ours is that they began with a sample of a known community and characterized its citation behavior. We are using a core-periphery model to find new communities.
+
+We do not wish to recycle large amounts of Wedell into this manuscript but it appears that a little more reference to previous work may assist interpretation. We hope our revision achieves this purpose. 
+
+\emph{``From a set of about 14 million publications, only 128 cores are identified (using k=10). It is stated that the cores “range in size from 14 to 214,877, with a median core size of 79”. Around 40\% of the assigned nodes are in the same core. I find it likely that such distribution will make it difficult to identify and characterize research communities. If there are clear reasons for this distribution (e.g. if the distribution is reasonable given some knowledge of the field) the authors should discuss these reasons. The marker nodes are concentrated into 3 clusters; however, we do not get to know the size or scope of these clusters.''}
+
+The IKC method is selective. It identifies the meso-scale components of a network where the edge density (citation signal) is high. With citation data and its power law/lognormal distribution of edge density, coverage is expected to be small (128 cores covering 3.8\% of the network). If we relaxed the conditions by setting $k<10$, coverage would increase but the point is to discover dense cores.
+
+Our intent had been to focus on the big picture but we now provide additional descriptive statistics. We have added a table of data in the Supplementary Materials. The three clusters in question have the following characteristics. 
+
+
+
+\begin{itemize}
+\item Cluster 3: 170,413 nodes, mcd = 26, modularity +ve
+\item Cluster 4: 214,877 nodes, mcd = 14, modularity +ve
+\item Cluster 25: 1,869 nodes, mcd = 49, modularity +ve
+\end{itemize}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrrr}
+  \hline
+cluster\_id & ikc & aoc\_m & aoc\_k & ikc\_perc & aoc\_m\_perc & aoc\_k\_perc \\ 
+  \hline
+1 & 24 &  49 & 211 &   2 &   5 &  21 \\ 
+2 & 39 &  44 & 140 &   4 &   4 &  14 \\ 
+3 & 167 & 434 & 618 &  16 &  43 &  61 \\ 
+4 & 416 & 921 & 932 &  41 &  90 &  91 \\ 
+5 & 1. &   5 &  14 &   0 &   0 &   1 \\ 
+6 & 9. &   9 &  58 &   1 &   1 &   6 \\ 
+8 & 0 &   0 &   4 &   0 &   0 &   0 \\ 
+9 & 2 &   3 &  12 &   0 &   0 &   1 \\ 
+10 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+11 & 0 &   0 &   4 &   0 &   0 &   0 \\ 
+12 & 3 &   6 &  40 &   0 &   1 &   4 \\ 
+13 & 1 &   3 &   9 &   0 &   0 &   1 \\ 
+14 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+15 & 0 &   2 &   2 &   0 &   0 &   0 \\ 
+16 & 11 &  20 &  37 &   1 &   2 &   4 \\ 
+18 & 0 &   0 &  18 &   0 &   0 &   2 \\ 
+19 & 0 &   0 &   3 &   0 &   0 &   0 \\ 
+20 & 18 &  76 & 152 &   2 &   7 &  15 \\ 
+21 & 1 &   1 &   3 &   0 &   0 &   0 \\ 
+22 & 0 &   0 &   2 &   0 &   0 &   0 \\ 
+23 & 0 &   0 &   2 &   0 &   0 &   0 \\ 
+24 & 6 &  15 &  52 &   1 &   1 &   5 \\ 
+25 & 310 & 310 & 710 &  30 &  30 &  70 \\ 
+30 & 1 &   1 &   1 &   0 &   0 &   0 \\ 
+34 & 0 &   0 &   3 &   0 &   0 &   0 \\ 
+37 & 11 &  12 &  28 &   1 &   1 &   3 \\ 
+50 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+53 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+66 & 1 &   1 &   3 &   0 &   0 &   0 \\ 
+88 & 0 &   2 &   2 &   0 &   0 &   0 \\ 
+116 & 0 &  2 &   7 &   0 &   0 &   1 \\ 
+   \hline
+\end{tabular}
+\caption{Percentages of 1021 marker nodes found in AOC clusters. Markers in clusters are shown both as actual counts (cols 2-4) and as percentages of 1021 (cols 5-7); Clusters 3, 4, and 25 are in the 90th percentile of marker node concentration in AOC\_k clusters. Data are shown for clusters with a non-zero value in the aoc\_k column. Please note that the cluster numbering is arbitrary on account of the workflow that matches IKC to AOC\_m/k clusters and does not reflect the order in which IKC cores are extracted. }
+\end{table}
+
+As the reviewer notes, when running IKC, around 41\% of the markers are found in cluster 4 (see table at the end of this document). To us, this suggests (i) that the method is constructing clusters of relevance to our interest
+(ii) that of the 128 clusters, that numbers 3, 4, and 25 merit follow-up studies. Had the markers been uniformly distributed across the 128 clusters (at least by proportion) then we
+would have concluded that the clustering was not useful to us in identifying exosome-specific clusters. Whether the marker node concentration we see is a random effect cannot be formally excluded at present.
+
+We reiterate though, that we are focused on AOC, an element of a flexible modular pipeline of which IKC is one module and AOC is a second one. The study of AOC process in this paper has been restricted 
+to augmenting IKC clusters. We previously reported cluster breaking strategies in the IKC paper and those could be applied at the user's discretion to large clusters.
+
+\emph{I do not understand the logic for using the exosome data set. This was constructed by a search for “exosome”, retrieving all publications from the search results and then adding all referenced work. Such a methodology creates a network where the publications retrieved from the search are likely to have many connections (all their references are included) while a long tail of records will have very few relations (publications that are peripheral to the field and not having their references included). Such properties are likely to have large impact on the clustering. Is there a particular reason to use a network with these characteristics for this study?}
+
+The reviewer expresses concern regarding the potential impact of our network construction on our clustering results.  This construction was intentional and intended to capture publications linked by citation to the results of the lexical search. The term exosome is relatively specific so the lexical search is sensible. In terms of preceding and flanking research, if an article does not contain the word exosome in its title, abstract of keywords it is likely to be included in the network if it is linked by citation to an exosome article. 
+
+We assume that by `referenced' work the reviewer is referring to articles that either cite the seed set or are cited by the seed set. Our approach expanded roughly 11,000 articles to just under 14 million articles. The resultant network is still smaller than all publications in the Dimensions database (currently at around 120 million) but is a large enough sample to capture articles of interest. All the marker nodes were found in the network so we have some confidence that the network is suitable for this study.  
+
+The reviewer is correct in pointing out that peripheral articles are less likely to have central roles in clusters- this is unavoidable since the most recently published papers by definition will have few citing publications and some of the early references will not have any cited publications within the network. 
+
+
+
+Since the purpose of clustering was to identify exosome specific clusters, the anticipated impact that the reviewer refers to does not seem to be a disadvantage. Thus, clustering partitions this network into citation dense regions and markers help identify the subset of clusters that are of interest. 
+
+We finally comment on our choice of exosome biology, in case this was also of interest to the reviewer. We used exosomes (extracellular vesicles today) as a test case since they are an excellent example of a field that can be traced to a founder publication (two in this case) rooted in the larger discipline of cell biology and has seen spectacular growth after a short lag period and is still very active. Beyond personal preference for this case study, author Chacko has a background in biomedical research. Thus, while not claiming state of the art competence, we are able to make qualitative interpretations in this field with some level of facility.  
+
+\emph{The authors have not addressed a couple of important properties of citation networks. Dynamics being one of the properties and the other being the different citation density in different fields. No normalization of citation relations has been performed (full counts are used). This may be one of the reasons for the very large cluster created by the algorithm. Publications gain citations over time. This means that they are more likely to be assigned to cores if they are older. This is perhaps reasonable, given that they have had more impact on the community. However, they are also more likely to be assigned to several cores. For the purpose of identifying research communities, I find this property to be problematic. I also find the full counts approach problematic, for example given the above discussed properties of the exosome network.}
+
+The reviewer has raised some interesting points. \emph{Normalization.} Older publications are more likely to have high citation counts. This is particularly relevant when publications are being compared for `impact', which we are much less interested in. We are using citations to understand connections with other publications, i.e., exploring the communities that are implied by the citation patterns in these citation networks. In this second context, a publication with more citations also has greater potential to be assigned to a core (or multiple cores). To us, this is perfectly understandable since a key publication with many citations can act as a nidus for a community to form around and trimming its links would serve no purpose.  
+
+Field normalization is also relevant for citation counts but less relevant in this study since the network is dominated by cell biology and biochemistry research even where it drifts into areas like drug development. We are also less concerned about fields since we are building article level clusters. The combination of IKC followed by AOC\_m is, in a sense, using ``field normalization", since the definition of membership in the core is based on the local properties of the core, and not on any global property. This in particular allows cores to have varying criteria for membership, with the latter k-cores that are produced in the IKC extraction exhibiting much lower MCD values (and hence more permissive membership) compared to the earlier k-cores that are produced in IKC extraction. 
+
+The most likely reason for the large cluster is its lower MCD. The IKC process extracts cores beginning with the highest density cores first and the lowest density cores last. The inclusion criterion for the latter is less stringent so cores tend to be larger. There is a tradeoff between selecting for high density clusters, which are small and lower density clusters which tend to be large because of Granovetters `weak links' theory. Both are informative. Please note also that we have reported optional cluster-breaking strategies in Wedell et al. that also return k-valid clusters with positive modularity and we are extending that work in a separate study. The focus of this study is an overlapping cluster algorithm.
+
+\emph{Dynamics}. In our approach, we are using a snapshot of a field from a single point in time. This seems justifiable for the purpose of developing a clustering method. Studying the dynamics of network growth is of interest but sufficiently complex to be out of scope for this manuscript. Similarly in the case of studying the dynamics of cluster growth. Both are fascinating questions.  In future work,
+we hope to explore how the network grows each year,  and how the clustering output also changes. 
+ 
+\emph{I lack a clear presentation of the characteristics of the obtained cluster solution (after each step). For example, the distribution of cluster sizes. I think the authors should avoid using natural log scale, because it makes the interpretation more difficult. I also would like to see some statistic.}
+
+We now report descriptive statistics for the cluster data in Supplementary Materials The reason that a log scale is being used is because of the range of values encountered (Figs. 1-3). There is no special reason for using natural logs over any other log other than natural logs being the default in some statistical software and our preference for them. We have edited the captions in the manuscript to provide map log values to original values as well. 
+
+\vspace{4 mm}
+
+\bibliographystyle{apalike}
+\bibliography{akhil.bib}
+\end{document}  
+
+
