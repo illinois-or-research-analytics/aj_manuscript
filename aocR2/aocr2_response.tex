@@ -23,15 +23,20 @@
 \maketitle
 \section*{}
 
-We thank the Editor for the opportunity to respond to a second round of critique. We thank both Reviewers  for their professional courtesy of evaluating our manuscript again and respond below. Reviewer 2 offers no comment and appears satisfied. Reviewer 1 expresses several  concerns. 
+We thank the Editor for the opportunity to respond to a second round of critique. We thank both Reviewers for their professional courtesy of evaluating our manuscript again and respond below. Reviewer 2 offers no comment and appears satisfied. Reviewer 1 raises several points. In our second revision, which accompanies this response, we seek to offer greater clarity in terms of objectives and interpretation.
 
+ \vspace{2 mm} 
  \emph{I thank the authors for considering my previous comments and for the extensive answers and clarifications. I have some comments, mostly regarding the empirical part of the paper.} 
  
  \vspace{2 mm} 
- The authors considered the reviewer's previous comments thoughtful and constructively critical.
+The authors appreciated the the reviewer's previous comments, which were thoughtful and constructively critical. Since the discussion in this cycle of critique and response seems to have broadened in scope, we think it would be useful to summarize our objectives over original submission and two rounds of critique. 
 
+ \vspace{2 mm} In this manuscript, we seek to address the general, and often overlooked, limitation of disjoint clustering by presenting a method that post-processes an input clustering. We use Iterative K-core Clustering (IKC) as our test case for input clustering. The method, based on the well-known k-core concept, has already been published. The AOC method is principled and deterministic in its assignment of nodes to multiple clusters. The use of marker nodes is to identify the subset of clusters of interest in this case and not to evaluate cluster quality. The balance of effort in this manuscript is titled towards methods development over discovery.
+ 
  \vspace{2 mm}  
  \emph{The assignment of publications to the previously obtained clusters inevitably imply a trade-off between coverage and accuracy (similar to the trade-off between recall and precision in an information retrieval setting). Assigning more publications to a cluster and in addition assigning one publication to multiple clusters will lead to larger coverage of the clusters. In the paper, this is shown by the larger concentration of marker nodes in clusters after the AOC procedure. However, the larger coverage will likely also lead to irrelevant publications being assigned to clusters, making the clusters more hetrogenous. The empirical part of this paper does not address this trade-off. It can be noted that any methodology expanding cluster sizes by assigning publications to multiple clusters will likely lead to a higher cluster coverage of baseline publications, such as the marker nodes. The authors show the benefits of expanding the clusters in terms of marker node coverage in some clusters. However, the effect on the accuracy of clusters is not addressed. In my view, the trade-off between coverage and accuracy should be addressed to make it possible for the reader to judge whether AOC is successful or not.}
+
+\vspace{2 mm} The reviewer's concern seems to be that the multiple cluster assignments in AOC are somewhat indiscriminate. If so, we disagree. The criteria for assignment are the same as the criteria for clustering by IKC except that the limitation of disjoint clustering and effect of order in IKC is overcome. With respect to accuracy, the  use of marker nodes is to identify the subset of clusters of interest in this case and not to evaluate cluster quality. The question of irrelevant publications is unclear. These clusters are predicated on citation density, not keyword density or textual coherence for example, and they satisfy explicit criteria. Further, we do indicate in the manuscript that the ultimate determination of utility and quality should be qualitative. 
 
 \vspace{2 mm}  
 We hope the following information will be helpful in clarifying the intent of AOC.  Specifically, the input to the IKC algorithm is a network $N$ and a parameter $k$. The output of the IKC algorithm is a collection of clusters, each of which has two specific properties: (1) the cluster is connected and (2) every node in the cluster is adjacent to at least $k$ other nodes in the cluster.  
@@ -46,23 +51,42 @@ Thus, the expansion using AOC is not meant to ``improve accuracy" in the sense o
  
 \vspace{2 mm}  
 \emph{It is not clear what to expect from the approach using the marker nodes. Are the marker nodes expected to be concentrated into one cluster for the clustering solution to be successful, or are the marker nodes delineated so that they represent different subareas? Preferably, this should have been made clear ex ante and the subareas explicated.}
-\vspace{2 mm}  
 
 \vspace{2 mm}  
-\emph{ I am surprised by the size of the clusters obtained, including a cluster with as much as 214,000 publications. The three clusters with most marker nodes (3,4 and 25) consist of almost 400,000 publications before AOC and 540,000 after AOC\_k. A search in PubMed on the MeSH-term “Extracellular Vesicles” renders about 23,000 publications (“Extracellular Vesicles”[mesh]). Dimensions have a wider coverage than PubMed but a search in titles and abstracts renders about the same number of publications. This is of course a rough estimate of the field. Nevertheless, it seems to me that the sizes of these clusters are unrealistic if they are supposed to correspond to subareas of the field of Extracellular Vesicles. Based on the large size of cluster 3 and 4 I suspect that the accuracy of these clusters is low. In addition, the sizes of these clusters do not correspond well with the previous literature on research communities, in particular research specialties (Boyack \& Klavans, 2014; Morris \& Van der Veer Martens, 2008; Scharnhorst et al., 2012; Sjögårde \& Ahlgren, 2020).}
+As we mention above, the use of marker nodes is to identify the subset of clusters that are relevant. As we explained in some detail in our first response, the network is constructed by a lexical search, which is expanded by harvesting citing and cited references to favor the chance of including semantically relevant publications. This inclusive strategy results in a large network, and the markers help identify the subset of clusters of interest. The point about \emph{ex ante} specification is a very good one and we thank the reviewer for raising it. At this point, we are loath to start hypothesizing after results are known. Our conclusion is that this approach was useful in this case but high concentration of markers may not always occur for more than one reason.
+
+\vspace{2 mm}  
+\emph{ I am surprised by the size of the clusters obtained, including a cluster with as much as 214,000 publications. The three clusters with most marker nodes (3,4 and 25) consist of almost 400,000 publications before AOC and 540,000 after AOC\_k. A search in PubMed on the MeSH-term “Extracellular Vesicles” renders about 23,000 publications (“Extracellular Vesicles”[mesh]). Dimensions have a wider coverage than PubMed but a search in titles and abstracts renders about the same number of publications. This is of course a rough estimate of the field. Nevertheless, it seems to me that the sizes of these clusters are unrealistic if they are supposed to correspond to subareas of the field of Extracellular Vesicles. Based on the large size of cluster 3 and 4 I suspect that the accuracy of these clusters is low. In addition, the sizes of these clusters do not correspond well with the previous literature on research communities, in particular research specialties (Boyack \& Klavans, 2014; Morris \& Van der Veer Martens, 2008; Scharnhorst et al., 2012; Sjogarde \& Ahlgren, 2020).}
+
+\vspace{2 mm} 
+The network contains k-cores of varying density and size and AOC augments them to overcome the limitations of disjoint clustering. The cluster sizes reflect iterative discovery of k-cores by IKC in the input network, and indeed we compare the popular Leiden algorithm with IKC in Wedell et al. (2022). It's true that cluster sizes distributions vary across the studies mentioned. In some cases they are engineered by selecting parameter values or by agglomeration clustering. 
+
+ For example, Morris \& Van der Veer Martens, 2008/9 refer largely to historical studies; Price and Beaver (1966) studied a community of around 500 scientists consistent with Price's estimate of the research front being in the order of a `few hundred individuals'. Boyack and Klavans (2014) are more comparable but they used co-citations and bibliographic coupling, which measure different patterns of relationships. Sjogarde \& Ahlgren (2020) use a modularity optimization approach. Thus, they are informative but incommensurable for direct comparison.
 
 \vspace{2 mm} 
  \emph{The caption of Figure 6 gives information about the increased coverage of marker nodes in cluster 4, from 40.7\% to 94.6\% for AOC\_k. This must mean that around 550 marker nodes have been added to cluster 4 by the procedure. From table 2 we get to know that about 76,000 records have been added to reach this larger coverage. So less than 1\% of the nodes added to the cluster are marker nodes. These figures suggest that the accuracy of AOC is low.}
 \vspace{2 mm} 
 
 \vspace{2 mm} 
+We have stated the purpose of marker nodes above- for cluster identification and not for cluster quality evaluation.
+
+\vspace{2 mm} 
  \emph{ In my previous answer I had a comment about normalization. This comment seems to have been misinterpreted as field-normalization applied in evaluative bibliometrics. However, I am referring to normalization of edge weights in citation networks (E.g., see Ahlgren et al., 2003; Boyack et al., 2005; Waltman \& van Eck, 2012). Such normalization does not only normalize for differences between fields, but also for the highly skewed distribution of citations and temporality of citations. I agree that in some cases there are reasons to let highly cited publications have more influence on clustering (or the identification of cores) than publications with low citation counts. The reason I am mentioning normalization is to make the authors aware that the highly skewed distribution of cluster sizes and the problems I have raised above may be related to this issue. It seems to me that the full count approach leads to some very large clusters and low accuracy. This regards both the initial IKC and AOC. However, I do not impose any action from the authors regarding normalization.}
+ 
+ \vspace{2 mm} 
+ Thank you, this is relevant for our future work. 
 
 \vspace{2 mm} 
  \emph{In summary, my main point is that the empirical part of the paper does not make it possible for the reader to judge to what degree AOC is successful in terms of coverage and accuracy. Therefore, I think the paper should be revised.}  
+ 
+ \vspace{2 mm} 
+ We have made some revisions to address all the points raised by the reviewers and emphasize those already made in the manuscript.
 
 \vspace{2 mm} 
  \emph{Some minor comments:p. 16 “After AOC m treatment of IKC clusters, clusters 3, 4, and 25 contained 30.4\%, 42.5\%, and 93.1\%, respectively, of all markers.” This seem to be incorrect. It does not align with p. 18 “After AOC m treatment of IKC clusters, clusters 3, 4, and 25 contained 42.5\%, 90.2\%, and 30.4\% respectively, of all markers.” p. 16-17 “After AOC k treatment of IKC clusters, clusters 3, 4, and 25 contained 69.5\%, 71.8\%, and 94.6\% of all markers respectively.” Also this seem to be incorrect.}
+ 
+ \vspace{2 mm} 
+Nostra culpa. This has been corrected. 
 
 \begin{itemize}
 \item Requirements for a cocitation similarity measure, with special reference to Pearson’s correlation coefficient. (Ahlgren, 2003)
