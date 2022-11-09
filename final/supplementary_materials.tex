@@ -1,0 +1,237 @@
+\documentclass[12pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{textcomp}
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+\usepackage{caption}
+\usepackage{subcaption}								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\usepackage{natbib}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{authblk}
+\usepackage{amsmath}
+\hypersetup{
+    colorlinks=false,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdfpagemode=FullScreen,
+}
+\usepackage{float}
+\usepackage{rotating}
+\usepackage{adjustbox}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\usepackage{authblk}
+\title{Supplementary Material: AOC; Assembling Overlapping Clusters}
+\author[1]{Akhil Jakatdar}
+\author[1]{Baqiao Liu}
+\author[1]{Tandy Warnow\thanks{warnow@illinois.edu}}
+\author[1,2]{George Chacko\thanks{chackoge@illinois.edu}}
+\affil[1]{Department of Computer Science, University of Illinois Urbana-Champaign, Urbana, IL 61801}
+\affil[2]{Office of Research, Grainger College of Engineering, University of Illinois Urbana-Champaign, Urbana, IL 61801}
+
+% \setlength{\parindent}{0pt}
+%SetFonts
+
+\begin{document}
+\maketitle
+
+\clearpage
+
+\section{Line Graph Proof} 
+
+An analytical solution to calculate the size of a graph after line graph transformation of an input graph. The example used is the Curated Exosome Network (CEN), which has 
+13,989,436 vertices and 92,051,051 edges.
+
+\subsection{Derivation of Line Graph Nodes and Edges}
+
+In transforming any undirected graph $G(V, E)$ into its corresponding line graph $L(G(V', E'))$, the number of vertices $|V'| = |E|$ as all edges in the original graph are transformed into vertices in its corresponding line graph.
+
+We can also see that every edge $e' \in E'$ can be described as a set of 2 edges $\{e_1, e_2\}$ where $e_1,  e_2 \in E$ where both edges are adjacent to some common vertex $v \in V$.  
+Thus in order to find the total number of edges $e' \in E'$ for some fixed vertex $v \in V$, we formulate the number of edges as $d_v \choose 2$ where $d_v$ represents the degree of $v$. Thus summing over all vertices in $V$, we get the following:
+\begin{equation}
+    \begin{aligned}
+    |E'| &= \sum^{V}_{v} {d_v \choose 2}\\
+    &= \sum^{V}_{v} \frac{d_v(d_v - 1)}{2}\\
+    &= \sum^{V}_{v} \frac{{d_v}^2}{2} - \sum^{V}_{v} \frac{d_v}{2}\\
+    &= \frac{1}{2}\sum^{V}_{v} {d_v}^2 - \sum^{V}_{v} \frac{d_v}{2}
+    \end{aligned}
+\end{equation}
+The expression $\sum^{V}_{v} \frac{d_v}{2}$ can be simplified to $|E|$ as the sum of the degrees of all vertices in $G$ divided by 2 is equivalent to the total number of edges in $G$. Thus our closed form equation for $|E'|$ is as follows:
+\begin{equation}
+    \begin{aligned}
+    |E'| &= \frac{1}{2}\sum^{V}_{v} {d_v}^2 - |E|
+    \end{aligned}
+\end{equation}
+
+
+We can now use these two closed form solutions to identify the number of edges and vertices in the corresponding line graph to the Exosome Citation Network. Given that this network $N(V_n, E_n)$ has $|V_n| = 13989436$ vertices and $|E_n| = 92051051$, we can solve for $|V_n'| = 92051051$ and plug in the degree distribution of the network into our closed form solution for the number of edges to find the following:
+\begin{equation}
+    \begin{aligned}
+    |E_n'| &= \frac{1}{2}\sum^{V_n}_{v} {d_v}^2 - |E_n|\\
+    &= \frac{1}{2}(321041864344) - 92051051
+    &= 160428881121
+    \end{aligned}
+\end{equation}
+Thus, the corresponding line graph $L(G_n(V_n', E_n'))$ to our Exosome Citation Network will have $|V_n'| = 92,051,051$ and $|E_n'| = 160,428,881,121$. 
+
+\section{Commands for Assembling Overlapping Cluster} 
+
+After downloading \href{https://github.com/illinois-or-research-analytics/aocv2_plus/tree/main/v2_revisions}{our software} locally, the following command can be run to generate the set of overlapping clusters:
+
+ \lstset{
+  breaklines=true,
+  literate = {-}{-}1
+}
+\begin{lstlisting}[language=bash]
+python3 aoc.py
+--network-file [path_to_tsv_network_edgelist]
+--clustering [existing_cluster_by_ikc]
+--output-path [path_to_output_overlapping_clustering]
+--min-k-core [10, 20, 30, 40, 50]
+--inclusion-criterion [k|mcd]
+--candidate-file [path_to_candidate_file]
+\end{lstlisting}
+
+Shown below are some explanations for the parameters (for more information, see our README for the software):
+
+\begin{itemize}
+\item \textbf{network-file} - the path to the background graph, in edge-list format
+\item \textbf{clustering} - the path to an input disjoint clustering, each line contains an entry of format \path{cluster_id[\space]node_id}
+\item \textbf{output-path} - the path for the output clustering
+\item \textbf{min-k-core} - an integer defining the threshold for $k$ by which to add candidate nodes if using ``AOC\_k''. Not required if using ``AOC\_m''
+\item \textbf{inclusion-criterion} - use \texttt{k} (``AOC\_k'') or \texttt{mcd} (``AOC\_m'') as the inclusion criteria for adding a candidate node to a cluster
+\item \textbf{candidate-file} - the path to the candidate nodes. Not required and defaults to all nodes appearing in the input clustering
+\end{itemize}
+
+For example, given a network and clustering files produced by IKC\_k10, and assuming
+that we want the candidates to be all nodes that appear in one of the input non-singleton clusters, AOC\_k can be run as follows:
+\begin{lstlisting}[language=bash]
+python3 aoc.py --network-file [path_to_tsv_network_edgelist] --clustering [existing_cluster_by_ikc]
+    --output-path [output_path]
+    --min-k-core 10
+    --inclusion-criterion k
+\end{lstlisting}
+
+\begin{table}[ht]
+\centering
+\caption{Summary Statistics for Clusters generated by IKC, AOC\_m, and AOC\_k}
+\begin{tabular}{rlrrrrrrrrr}
+  \hline
+ & tag &  & nodes &  & & edges & &  & mcd &  \\ 
+  & & min & median & max & min & median & max & min & median & max   \\ 
+  \hline
+1 & ikc &  14 & 79.00 & 214,877 &  78 & 993.50 & 4,159,555 &  10 & 16.00 &  53 \\ 
+  2 & aoc\_m &  14 & 80.00 & 274,355 &  78 & 1090.00 & 6,550,067 &  10 & 16.00 &  53 \\ 
+  3 & aoc\_k &  14 & 93.50 & 291,154 &  78 & 1272.50 & 7,681,827 &  10 & 11.00 &  18 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Cluster statistics for marker-rich clusters (Fig 6 in Jakatdar et al.)The mapping of AOC cluster ids  (aoc\_cid)to the original clusters (ikc\_cid) generated by IKC is shown in the first and last columns. Whereas AOC\_m tends to preserve
+MCD, AOC\_k results in a decrease in the mcd of IKC clusters }
+\begin{tabular}{rrrrrll}
+  \hline
+ & ikc\_cid & node\_count & edge\_count & mcd & tag & aoc\_cid \\ 
+  \hline
+1 &   2 & 1,869 & 83,247 &  49 & ikc & 25\\ 
+2 &   2 & 1,871 & 83,411 &  49 & aoc\_m & 25\\ 
+3 &   2 & 9,241 & 347,263 &  10 & aoc\_k & 25\\ 
+\hline
+4 &  30 & 170,413 & 4,159,555 &  26 & ikc & 3\\ 
+5 &  30 & 190,427 & 6,369,455 &  26 & aoc\_m & 3 \\ 
+6 &  30 & 242,857 & 7,681,827 &  10 & aoc\_k & 3\\ 
+\hline
+7 &  72 & 214,877 & 2,724,699 &  14 & ikc  & 4\\ 
+8 &  72 & 274,355 & 6,550,067 &  14 & aoc\_m & 4 \\ 
+9 &  72 & 291,154 & 7,075,034 &  10 & aoc\_k & 4\\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\caption{Percentages of 1021 marker nodes found in AOC clusters. Markers in clusters are shown both as actual counts (cols 2-4) and as percentages of 1021 (cols 5-7); Clusters 3, 4, and 25 are in the 90th percentile of marker node concentration in AOC\_k clusters. Data are shown for clusters with a non-zero value in the aoc\_k column. Please note that the cluster numbering is arbitrary on account of the workflow that matches IKC to AOC\_m/k clusters and does not reflect the order in which IKC cores are extracted. }
+\begin{tabular}{rrrrrrrr}
+  \hline
+cluster\_id & ikc & aoc\_m & aoc\_k & ikc\_perc & aoc\_m\_perc & aoc\_k\_perc \\ 
+  \hline
+1 & 24 &  49 & 211 &   2 &   5 &  21 \\ 
+2 & 39 &  44 & 140 &   4 &   4 &  14 \\ 
+3 & 167 & 434 & 618 &  16 &  43 &  61 \\ 
+4 & 416 & 921 & 932 &  41 &  90 &  91 \\ 
+5 & 1. &   5 &  14 &   0 &   0 &   1 \\ 
+6 & 9. &   9 &  58 &   1 &   1 &   6 \\ 
+8 & 0 &   0 &   4 &   0 &   0 &   0 \\ 
+9 & 2 &   3 &  12 &   0 &   0 &   1 \\ 
+10 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+11 & 0 &   0 &   4 &   0 &   0 &   0 \\ 
+12 & 3 &   6 &  40 &   0 &   1 &   4 \\ 
+13 & 1 &   3 &   9 &   0 &   0 &   1 \\ 
+14 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+15 & 0 &   2 &   2 &   0 &   0 &   0 \\ 
+16 & 11 &  20 &  37 &   1 &   2 &   4 \\ 
+18 & 0 &   0 &  18 &   0 &   0 &   2 \\ 
+19 & 0 &   0 &   3 &   0 &   0 &   0 \\ 
+20 & 18 &  76 & 152 &   2 &   7 &  15 \\ 
+21 & 1 &   1 &   3 &   0 &   0 &   0 \\ 
+22 & 0 &   0 &   2 &   0 &   0 &   0 \\ 
+23 & 0 &   0 &   2 &   0 &   0 &   0 \\ 
+24 & 6 &  15 &  52 &   1 &   1 &   5 \\ 
+25 & 310 & 310 & 710 &  30 &  30 &  70 \\ 
+30 & 1 &   1 &   1 &   0 &   0 &   0 \\ 
+34 & 0 &   0 &   3 &   0 &   0 &   0 \\ 
+37 & 11 &  12 &  28 &   1 &   1 &   3 \\ 
+50 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+53 & 0 &   0 &   1 &   0 &   0 &   0 \\ 
+66 & 1 &   1 &   3 &   0 &   0 &   0 \\ 
+88 & 0 &   2 &   2 &   0 &   0 &   0 \\ 
+116 & 0 &  2 &   7 &   0 &   0 &   1 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+\bibliographystyle{apalike}
+\bibliography{akhil.bib}
+\end{document}
+
+
+
