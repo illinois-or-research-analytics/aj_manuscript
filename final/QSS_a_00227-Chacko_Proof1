@@ -1,0 +1,101 @@
+Questions from Publisher:
+
+1. Keywords:
+2. Running head is OK
+3. Author contributions
+
+Akhil Jakatdar: Formal analysis, Investigation, Methodology, Software, Writing—Original draft
+Baqiao Liu: Data curation, Formal analysis, Investigation, Methodology, Software, Validation,
+Writing—Review & editing.
+Tandy Warnow: Conceptualization, Investigation, Methodology, Project administration, Resources,
+Supervision, Writing—Original draft, Writing—Review & editing.
+George Chacko: Conceptualization, Data curation, Formal analysis, Funding acquisition, Investigation,
+Methodology, Project administration, Resources, Supervision, Validation, Visualization,
+Writing—Original draft, Writing—Review & editing.
+
+Other: 
+1)  Please list both Tandy Warnow (warnow@illinois.edu) and George Chacko (chackoge@illinois.edu)
+as corresponding authors.
+
+2)  ORCID IDs are shown only for Chacko. We provide ORCID IDs for all authors
+in our .tex file.
+
+% Akhil Jakatdar: 0000-0003-1580-010X
+% Baqiao Liu: 0000-0002-4210-8269
+% Tandy Warnow: 0000-0001-7717-3514
+% George Chacko: 0000-0002-2127-1892
+
+3)
+
+PAGE 2 TOP
+
+FROM
+An interesting two-step procedure has been proposed to enable overlapping clusters.
+TO
+In an interesting, two-step procedure for overlapping clusters, the input graph....
+
+END OF SAME PARAGRAPH
+FROM
+...160,428,888,121 edges, which presents a challenge to clustering software.
+TO
+...160,428,888,121 edges, presenting a challenge for clustering software.
+
+PARAGRAPH 3
+FROM
+...disjoint methods are also limited when sttudying citation networks...
+STRIKE OUT also
+
+BOTTOM PARAGRAPH
+FROM
+...graph is called its degeneracy...
+TO
+...graph is referred to as its degeneracy...
+
+PAGE 3
+TOP PARAGRAPH CONTINUED FROM PAGE 2
+FROM
+However, IKC does not enforce global modularity maximization (Lancichinetti & Frtunato, 2011), which suffers from the theoretical problem of the resolution limit that favors larger clusters that can contains smaller clusters within (Fortunato & Barthelemy, 2007). Instead we require only that each cluster exhibit positive modularity, a mild constraint on cluster quality.
+TO
+IKC requires that each cluster has positive modularity, a mild constraint on quality, and does not enforce
+global modularity maximization (Lancichinetti & Frtunato, 2011), which suffers from the theoretical problem
+of the resolution limit favoring larger clusters that can contain smaller clusters within (Fortunato &
+Barthelemy, 2007).
+
+PARAGRAPH 2
+FROM
+In this study, as in our prior work (Wedell et al. 2022}0, we are focused on the  problem of finding
+research communities of publications.
+TO
+In this study, as in our prior work (Wedell et al. 2022}0, we are focused on the  problem of finding
+communities of research publications.
+
+PAGE 5
+PARAGRAPH 2
+FROM
+The AOC technique we describe can be modified to suit the user's interests.
+TO
+The AOC technique can be modified to suit the user's interests.
+
+PAGE 6
+UNDER RESULTS AND DISCUSSION
+FROM
+As we explain in the preceding sections, AOC is a meta-method for overlapping communities that takes
+as input a network $N$ and a clustering of the network produced by IKC, and has user-specified
+parameters: (i) a set of candidate nodes for consideration of membership in multiple communities, and
+(ii) a parameter $k$ or $m$ that defines the criterion for membership (Materials and Methods). 
+TO
+As we explain in the preceding sections, AOC is a meta-method for overlapping communities that takes
+as input a network $N$, a clustering of the network produced by IKC,and user-specified
+parameters: a set of candidate nodes for consideration of membership in multiple communities, and
+a parameter $k$ or $m$ that defines the criterion for membership (Materials and Methods).
+
+TABLE 1
+The double spacing between rows is not aesthetic. Please could you reduce to single spaces?
+
+PAGE 10
+PARAGRAPH 1
+FROM
+number of clusters that a publication is a core member of.
+TO
+number of clusters that	a node is assigned to.
+
